@@ -172,7 +172,7 @@ simple trumpet. Ignore them for a plain torus — set them to a non-cutting laye
 cut only the black. `verify.js` already skips them, which is why it reports 20 contours rather than
 52.
 
-Part 10 says what every other file here is.
+[Part 10](#part-10--file-record) says what every other file here is.
 
 ## Before cutting the full sheet
 
