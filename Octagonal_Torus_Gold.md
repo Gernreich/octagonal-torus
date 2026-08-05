@@ -75,7 +75,7 @@ boxes.py — Part 12's formula and the inversion offset, both done for you.
 
 ---
 
-**18 pieces of material:** 2 plates + 8 outer panels + 8 inner panels. (That is 34 cut contours —
+**18 pieces of material:** 2 plates + 8 outer panels + 8 inner panels. (That is 20 cut contours —
 each plate is a rim plus a stitched hole — which is why Part 10 verifies 20.)
 
 Assembled: **25.000 mm radial × 25.000 mm axial**, 172.298 across the flats outside, 110.298 bore.
@@ -633,10 +633,8 @@ axial   = 31.200 − 3.1 − 3.1 = 25.000 ✓   (as-drawn; nominally 31.000 − 
 outside = 2 × 86.149 = 172.298
 bore    = 2 × 55.149 = 110.298
 phase   = interval pattern complementary to RunA2's disc ✓
-holes   = one stitched contour per plate (20 contours total, not 34)
+holes   = one stitched contour per plate
 ```
-
-Both holes are concentric with their plate to **0.000 mm**.
 
 ---
 
