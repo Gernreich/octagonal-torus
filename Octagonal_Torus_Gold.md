@@ -157,8 +157,7 @@ Cut it as-is.
 It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
 size or thickness use Route A, or Part 12 for the general formulas; none of the widths carry over.
 
-[`OctagonalTorusGold.svg`](OctagonalTorusGold.svg) is an earlier equivalent: same geometry, holes 0.090 mm off centre rather
-than 0.000. Part 10 says what every other file here is.
+Part 10 says what every other file here is.
 
 ## Before cutting the full sheet
 
@@ -629,8 +628,7 @@ phase   = interval pattern complementary to RunA2's disc ✓
 holes   = one stitched contour per plate (20 contours total, not 34)
 ```
 
-Both holes are concentric with their plate to **0.000 mm**. (`OctagonalTorusGold.svg` sits 0.090
-off — a tenth of the kerf, below what 3 mm ply notices, but there is no reason to accept it now.)
+Both holes are concentric with their plate to **0.000 mm**.
 
 ---
 
