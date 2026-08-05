@@ -41,14 +41,23 @@ It also prints the numbers, which makes it a calculator even when you do not wan
 
 ```
 $ node torus-geometry-diagram.js 120 30 6
-outer octagon  R 120       apothem 110.866   wall out to 116.866
-inner octagon  R 81.034    apothem 74.866    wall out to 80.866
+outer octagon  R 120      apothem 110.866   wall out to 116.866
+inner octagon  R 81.034   apothem 74.866    wall out to 80.866
+hole cutter    R 74.54    (run 3 — invert this disc; one thickness inside the inner octagon)
 ring           110.866 − 80.866 = 30
 outside flats  233.731   bore flats 149.731
 ```
 
-So a 120 mm octagon with a 30 mm ring in 6 mm material needs an inner octagon of **R 81.034** — the
-number you would type into boxes.py as run 2. That is Part 12's formula done for you.
+That gives you **both** radii the size change affects — run 1 is simply the outer radius you chose:
+
+| run | radius | from |
+|---|---|---|
+| 1 — outer tube | **120** | your choice |
+| 2 — inner panels | **81.034** | `R_outer − (ring + t) × sec(22.5°)` |
+| 3 — hole cutter | **74.540** | `R_inner − t × sec(22.5°)`, the §8a pre-compensation |
+
+So a 120 mm octagon with a 30 mm ring in 6 mm material needs those three numbers typed into
+boxes.py — Part 12's formula and the inversion offset, both done for you.
 
 **It draws a picture; it does not make cut files.** For parts, use Route A.
 

@@ -147,6 +147,8 @@ require('fs').writeFileSync(__dirname + '/torus-geometry-diagram.svg', s.join('\
 
 console.log('outer octagon  R ' + f(Ro) + '   apothem ' + f(aRim) + '   wall out to ' + f(aOut));
 console.log('inner octagon  R ' + f(Ri) + '   apothem ' + f(aBore) + '   wall out to ' + f(aRingIn));
+console.log('hole cutter    R ' + f(Ri - T * SEC) + '   (run 3 — invert this disc; ' +
+            'one thickness inside the inner octagon)');
 console.log('ring           ' + f(aRim) + ' − ' + f(aRingIn) + ' = ' + f(aRim - aRingIn));
 console.log('outside flats  ' + f(2 * aOut) + '   bore flats ' + f(2 * aBore));
 console.log('wrote torus-geometry-diagram.svg');

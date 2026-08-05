@@ -161,11 +161,14 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <p>Those three are what the whole build is defined by. Change any of them and the figure redraws for <em>your</em> geometry — the octagons resize, the shaded bands move, every dimension and the formula in the title recalculate.</p>
 <p>It also prints the numbers, which makes it a calculator even when you do not want the picture:</p>
 <pre><code>$ node torus-geometry-diagram.js 120 30 6
-outer octagon  R 120       apothem 110.866   wall out to 116.866
-inner octagon  R 81.034    apothem 74.866    wall out to 80.866
+outer octagon  R 120      apothem 110.866   wall out to 116.866
+inner octagon  R 81.034   apothem 74.866    wall out to 80.866
+hole cutter    R 74.54    (run 3 — invert this disc; one thickness inside the inner octagon)
 ring           110.866 − 80.866 = 30
 outside flats  233.731   bore flats 149.731</code></pre>
-<p>So a 120 mm octagon with a 30 mm ring in 6 mm material needs an inner octagon of <strong>R 81.034</strong> — the number you would type into boxes.py as run 2. That is Part 12's formula done for you.</p>
+<p>That gives you <strong>both</strong> radii the size change affects — run 1 is simply the outer radius you chose:</p>
+<div class='tw'><table><thead><tr><th>run</th><th>radius</th><th>from</th></tr></thead><tbody><tr><td>1 — outer tube</td><td><strong>120</strong></td><td>your choice</td></tr><tr><td>2 — inner panels</td><td><strong>81.034</strong></td><td><code>R_outer − (ring + t) × sec(22.5°)</code></td></tr><tr><td>3 — hole cutter</td><td><strong>74.540</strong></td><td><code>R_inner − t × sec(22.5°)</code>, the §8a pre-compensation</td></tr></tbody></table></div>
+<p>So a 120 mm octagon with a 30 mm ring in 6 mm material needs those three numbers typed into boxes.py — Part 12's formula and the inversion offset, both done for you.</p>
 <p><strong>It draws a picture; it does not make cut files.</strong> For parts, use Route A.</p>
 <hr>
 <h1 id="part-0-build-it">PART 0 — Build it</h1>
