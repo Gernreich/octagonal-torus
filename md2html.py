@@ -20,7 +20,9 @@ def inline(t):
 
     t = re.sub(r"`([^`]+)`", keep, t)
     t = re.sub(r"&lt;(https?://[^&\s]+)&gt;", r'<a href="\1">\1</a>', t)
-    t = re.sub(r"\[([^\]]+)\]\((https?://[^)]+)\)", r'<a href="\2">\1</a>', t)
+    # any link target, not just http(s) — relative paths point at files beside this page.
+    # (?<!!) so image syntax ![alt](src) is left for the block-level handler.
+    t = re.sub(r"(?<!!)\[([^\]]+)\]\(([^)\s]+)\)", r'<a href="\2">\1</a>', t)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     t = re.sub(r"(?<!\*)\*([^*\n]+?)\*(?!\*)", r"<em>\1</em>", t)
     t = re.sub(r"\x00(\d+)\x00", lambda m: f"<code>{stash[int(m.group(1))]}</code>", t)

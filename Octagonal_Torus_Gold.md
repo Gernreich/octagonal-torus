@@ -15,6 +15,16 @@ Regenerate the diagram at any size with `node torus-geometry-diagram.js <outerR>
 
 # PART 0 — Build it
 
+### Get the files
+
+- **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** — the cut file. On GitHub use the ⤓ *Download raw
+  file* button; clicking the name only previews it.
+- **[Everything as a ZIP](https://github.com/Gernreich/octagonal-torus/archive/refs/heads/main.zip)**
+  — cut file, this writeup, the diagram, the verification tools.
+- **[Repository](https://github.com/Gernreich/octagonal-torus)** — every file named below lives here.
+
+---
+
 **18 pieces of material:** 2 plates + 8 outer panels + 8 inner panels. (That is 34 cut contours —
 each plate is a rim plus an 8-segment hole — which is why Part 10 verifies 34.)
 
@@ -42,8 +52,9 @@ want the disc outline.)
 
 **Then:** invert that 56.446 disc and use it to cut the hole in each of the two outer discs.
 
-Verified example of exactly this: `RunA1_R90.svg`, `RunA2_R59Point693.svg`,
-`RunA3_R56Point446.svg`, assembled into **`BuildA1_90_25.svg`**. All three runs reproduced the
+Verified example of exactly this: [`RunA1_R90.svg`](RunA1_R90.svg),
+[`RunA2_R59Point693.svg`](RunA2_R59Point693.svg), [`RunA3_R56Point446.svg`](RunA3_R56Point446.svg),
+assembled into **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**. All three runs reproduced the
 pristine O90 / O59 / O56 files to the last digit — same boundary lines, same finger intervals.
 
 ### The three runs as links
@@ -70,14 +81,14 @@ Invert the 59.693 disc instead and it lands at 58.149 / 61.149 — a **22 mm** r
 
 ## Route B — shortcut, cut the finished file
 
-**`BuildA1_90_25.svg`** is those 18 pieces already laid out — assembled by exactly the Route A steps
+**[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** is those 18 pieces already laid out — assembled by exactly the Route A steps
 above, and verified: 34 contours, holes concentric to 0.000, joint phase complementary, no overlaps.
 Cut it as-is.
 
 It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
 size or thickness use Route A, or Part 12 for the general formulas; none of the widths carry over.
 
-`OctagonalTorusGold.svg` is an earlier equivalent: same geometry, holes 0.090 mm off centre rather
+[`OctagonalTorusGold.svg`](OctagonalTorusGold.svg) is an earlier equivalent: same geometry, holes 0.090 mm off centre rather
 than 0.000. Part 10 says what every other file here is.
 
 ## Before cutting the full sheet
@@ -104,7 +115,8 @@ has actually failed.
 
 ## Tooling
 
-Three scripts live beside this document. Everything they report has been derived and explained
+Three scripts live beside this document — [`verify.js`](verify.js), [`md2html.py`](md2html.py)
+and [`torus-geometry-diagram.js`](torus-geometry-diagram.js). Everything they report has been derived and explained
 below; they exist so a file can be checked in one command instead of by eye.
 
 ```
