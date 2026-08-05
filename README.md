@@ -75,7 +75,6 @@ panel is solid, which is a build that measures perfectly and cannot be assembled
 
 ```
 node torus-geometry-diagram.js 90 25 3        # redraw the figure at any size
-python3 md2html.py Octagonal_Torus_Gold.md Octagonal_Torus_Gold.html
 ```
 
 ## What else is here

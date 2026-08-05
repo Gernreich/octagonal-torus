@@ -192,9 +192,9 @@ has actually failed.
 
 ## Tooling
 
-Three scripts live beside this document — [`verify.js`](verify.js), [`md2html.py`](md2html.py)
-and [`torus-geometry-diagram.js`](torus-geometry-diagram.js). Everything they report has been derived and explained
-below; they exist so a file can be checked in one command instead of by eye.
+Two scripts live beside this document — [`verify.js`](verify.js) and
+[`torus-geometry-diagram.js`](torus-geometry-diagram.js). Everything they report has been derived
+and explained below; they exist so a file can be checked in one command instead of by eye.
 
 ```
 node verify.js BuildA1_90_25.svg RunA2_R59Point693.svg
@@ -207,13 +207,9 @@ Without it the phase pattern still prints but cannot be judged, so pass it. A **
 verdict is the check that would have caught the first failed build; run it after any edit, including
 ones you believe were only cosmetic.
 
-```
-python3 md2html.py Octagonal_Torus_Gold.md Octagonal_Torus_Gold.html
-```
-
-Regenerates the HTML from this markdown, inlining `torus-geometry-diagram.svg` so the page stays
-self-contained. **The markdown is the source — edits made directly to the HTML are lost on the next
-run.**
+**On the HTML:** `Octagonal_Torus_Gold.html` is generated from this markdown by a converter kept
+outside the repo, which inlines `torus-geometry-diagram.svg` so the page stays self-contained.
+**The markdown is the source — edits made directly to the HTML are overwritten on the next run.**
 
 ```
 node torus-geometry-diagram.js 90 25 3      # outer R, ring, thickness
