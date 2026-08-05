@@ -70,7 +70,17 @@ identical runs. The rest — `InnerRingInverted`, `InnerSidesInverted`, `O56_Rin
 investigation: the experiments that established what inverting actually does, and two builds that
 were wrong in instructive ways. Part 10 of the writeup says what each one is.
 
+## Licence
+
+Released under **[CC0 1.0](LICENSE)** — public domain, no strings. Cut it, modify it, sell what you
+make, no attribution required. A credit is always welcome but never owed.
+
+That dedication covers what is mine: the writeup, the diagram and its generator, and the tools. The
+part geometry itself comes from **[boxes.py](https://boxes.hackerspace-bamberg.de/)** by Hackerspace
+Bamberg — the SVGs carry its `dc:source` provenance in their metadata. Check boxes.py's own terms if
+you plan to redistribute generated output at scale.
+
 ## Credit
 
-Parts generated with [boxes.py](https://boxes.hackerspace-bamberg.de/) (Hackerspace Bamberg).
-Check its licence terms before redistributing generated output.
+Parts generated with [boxes.py](https://boxes.hackerspace-bamberg.de/) (Hackerspace Bamberg),
+generator **RegularBox**.
