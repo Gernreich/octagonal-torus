@@ -349,7 +349,7 @@ Settings used:
 
 | RegularBox | value | meaning |
 |---|---|---|
-| `radius_bottom` / `radius_top` | 90 or 59.693 | **inner radius of the box bottom, at the corners** |
+| `radius_bottom` / `radius_top` | **90**, **59.693** or **56.446** — one per run | **inner radius at the corners.** Set both to the same value; boxes.py's own labels read "inner radius of the box bottom / top (at the corners)" |
 | `h` | 25 | **inner** height in mm (`outside` unchecked) |
 | `n` | 8 | number of sides |
 | `top` / `bottom` | closed | solid discs top and bottom |
@@ -368,7 +368,12 @@ Settings used:
 | `surroundingspaces` | 1.0 | space at the start and end — **this is the phase control** |
 | `play` | 0.0 | extra clearance; raise if joints are too tight |
 
-Each run produces: **2 discs** (top and bottom) and **8 side panels**.
+Each run produces: **2 discs** (top and bottom) and **8 side panels**. Which of them you keep
+depends on the run — see Route A.
+
+"At the corners" is the detail that matters: `radius` is the **vertex** radius, not the apothem, and
+it describes the tube's **inner** surface. That is exactly the quantity `sec(22.5°)` operates on, so
+the number you type goes straight into the formula — Part 5 works this through.
 
 ---
 
