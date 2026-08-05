@@ -27,6 +27,9 @@ generator settings, every wrong turn, and how each number was verified against t
 Dry-fit one plate against one inner panel in cardboard before committing a sheet. The plate's tabs
 around the hole should drop into the panel's notches.
 
+**Cut the black lines only.** The red and green paths in the file mark possible cuts for making the
+simple trumpet, not the torus — move them to a non-cutting layer or delete them first.
+
 ## Build it at your own size
 
 Made with **[boxes.py](https://boxes.hackerspace-bamberg.de/)** by Hackerspace Bamberg — generator

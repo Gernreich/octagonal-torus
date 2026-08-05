@@ -166,6 +166,12 @@ Cut it as-is.
 It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
 size or thickness use Route A, or Part 12 for the general formulas; none of the widths carry over.
 
+**The red and green lines are not part of the torus.** The file carries 28 red paths and 4 green
+ones alongside the 20 black cut contours; they mark possible cuts for turning the torus into the
+simple trumpet. Ignore them for a plain torus — set them to a non-cutting layer, or delete them, and
+cut only the black. `verify.js` already skips them, which is why it reports 20 contours rather than
+52.
+
 Part 10 says what every other file here is.
 
 ## Before cutting the full sheet
