@@ -1,11 +1,25 @@
-# Octagonal_Torus — a 25 × 25 mm octagonal torus, derived from scratch
+# Octagonal_Torus — a 25 × 25 mm octagonal torus, derived from scratch and buildable at any size
 
 Complete record: the trigonometry, the generator, the corrections, and the verified cut list.
 
-**Result:** an octagonal torus with a 25.000 × 25.000 mm square cross-section, outer octagon at
-R 90, cut from 3 mm material. Verified cut file: **`BuildA1_90_25.svg`**, reproduced end to end
-from Route A. (`OctagonalTorusGold.svg` is the earlier equivalent — same geometry, holes 0.090 mm
-off centre instead of 0.000.)
+**Worked example:** an octagonal torus with a 25.000 × 25.000 mm square cross-section, outer octagon
+at R 90, cut from 3 mm material. Verified cut file: **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**,
+reproduced end to end from Route A. ([`OctagonalTorusGold.svg`](OctagonalTorusGold.svg) is the
+earlier equivalent — same geometry, holes 0.090 mm off centre instead of 0.000.)
+
+**Your own size.** Nothing here is fixed to 90 and 25. The whole object follows from **three
+numbers** you choose:
+
+| | this example | yours |
+|---|---|---|
+| Outer octagon radius, corner to centre | 90 | any |
+| Ring — the square cross-section | 25 | any |
+| Material thickness | 3 | any |
+
+Everything else is derived. `torus-geometry-diagram.js` computes the resulting dimensions for you
+(see below the figure), Part 12 gives the general formula, and Route A generates the parts. The
+worked numbers are a demonstration, not a constraint — so if you want a 300 mm ring in 6 mm ply, the
+method is unchanged and only the arithmetic differs.
 
 ![The verified geometry: a plan section through a plate showing the four octagon boundaries and the 25 mm ring, and a radial cross-section of the 25 × 25 cavity](torus-geometry-diagram.svg)
 
