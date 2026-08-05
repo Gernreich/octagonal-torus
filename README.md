@@ -80,11 +80,9 @@ python3 md2html.py Octagonal_Torus_Gold.md Octagonal_Torus_Gold.html
 
 ## What else is here
 
-`RunA1/2/3` are the three generator outputs from the links above, unmodified — run 2 doubles as the
-reference `verify.js` checks joint phase against. `InnerRingInverted.svg` and
-`InnerSidesInverted.svg` are a matched pair from the investigation: the same disc in opposite
-phase, which is what established that position and phase are independent. Part 10 of the writeup
-says what each one is.
+`RunA1/2/3` are the three generator outputs from the links above, unmodified. Run 2 doubles as the
+reference `verify.js` checks joint phase against, so keep it if you plan to verify your own files.
+Part 10 of the writeup says what each one is.
 
 ## Licence
 

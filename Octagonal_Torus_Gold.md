@@ -600,8 +600,6 @@ nonsense.
 
 | file | what it is | verdict |
 |---|---|---|
-| `InnerRingInverted.svg` | test | an inner disc with its castellation inverted |
-| `InnerSidesInverted.svg` | test | the same envelope, opposite phase — the pair that showed position and phase are independent |
 | `RunA1_R90.svg` | Route A run 1 | discs 83.149→86.149, panels 73.326 / 71.568 |
 | `RunA2_R59Point693.svg` | Route A run 2 | discs 55.149→58.149, panels 50.130 / 48.372 |
 | `RunA3_R56Point446.svg` | Route A run 3 | discs 52.149→55.149; only its disc is used, as the hole cutter |
