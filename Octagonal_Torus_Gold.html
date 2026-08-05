@@ -379,8 +379,19 @@ holes   = one stitched contour per plate</code></pre>
 <p>If you want a channel that is <em>not</em> square — say 25 wide and 40 tall — the procedure is unchanged: use 25 wherever <code>S</code> appears in the radius formulas, and enter 40 as <code>h</code>.</p>
 <p>For an octagon, <code>n = 8</code>.</p>
 <h3 id="1-get-your-three-radii">1. Get your three radii</h3>
-<pre><code>node torus-geometry-diagram.js &lt;R_outer&gt; &lt;S&gt; &lt;t&gt;</code></pre>
-<p>It prints them, labelled by run. Or compute them yourself:</p>
+<pre><code>node torus-geometry-diagram.js &lt;R_outer&gt; &lt;S&gt; &lt;t&gt;
+                               │         │   └─ material thickness
+                               │         └───── the ring you want, face to face
+                               └─────────────── outer octagon radius, corner to centre</code></pre>
+<p>It prints them, labelled by run. Worked through with this build's numbers:</p>
+<pre><code>$ node torus-geometry-diagram.js 90 25 3
+outer octagon  R 90       apothem 83.149   wall out to 86.149   (run 1)
+inner octagon  R 59.693   apothem 55.149   wall out to 58.149   (run 2)
+hole cutter    R 56.446   (run 3 — invert this disc)
+ring           83.149 − 58.149 = 25
+outside flats  172.298   bore flats 110.298</code></pre>
+<p>So <code>90 25 3</code> gives you <strong>90</strong>, <strong>59.693</strong> and <strong>56.446</strong> — the three radii to type into boxes.py in step 2. The last two lines are the finished object: 172.298 mm across the flats outside, 110.298 mm across the bore.</p>
+<p>Or compute them yourself:</p>
 <pre><code>R_inner = R_outer − (S + t) × sec(180°/n)      ← run 2
 R_hole  = R_inner − t × sec(180°/n)            ← run 3</code></pre>
 <p><code>sec(180°/n)</code>: square <strong>1.4142</strong> · hexagon <strong>1.1547</strong> · <strong>octagon 1.0824</strong> · decagon <strong>1.0515</strong> · dodecagon <strong>1.0353</strong>.</p>

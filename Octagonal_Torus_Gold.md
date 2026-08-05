@@ -720,9 +720,27 @@ For an octagon, `n = 8`.
 
 ```
 node torus-geometry-diagram.js <R_outer> <S> <t>
+                               │         │   └─ material thickness
+                               │         └───── the ring you want, face to face
+                               └─────────────── outer octagon radius, corner to centre
 ```
 
-It prints them, labelled by run. Or compute them yourself:
+It prints them, labelled by run. Worked through with this build's numbers:
+
+```
+$ node torus-geometry-diagram.js 90 25 3
+outer octagon  R 90       apothem 83.149   wall out to 86.149   (run 1)
+inner octagon  R 59.693   apothem 55.149   wall out to 58.149   (run 2)
+hole cutter    R 56.446   (run 3 — invert this disc)
+ring           83.149 − 58.149 = 25
+outside flats  172.298   bore flats 110.298
+```
+
+So `90 25 3` gives you **90**, **59.693** and **56.446** — the three radii to type into boxes.py in
+step 2. The last two lines are the finished object: 172.298 mm across the flats outside, 110.298 mm
+across the bore.
+
+Or compute them yourself:
 
 ```
 R_inner = R_outer − (S + t) × sec(180°/n)      ← run 2
