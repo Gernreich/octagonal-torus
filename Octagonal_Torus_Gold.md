@@ -563,8 +563,8 @@ is a nominal 83.149.
 
 **Cross-check.** All four cardinal faces (top / bottom / left / right) are measured independently.
 On plate rims they agreed to 0.001 mm in every file. On plate *holes* they spread by up to 0.17 mm,
-which is not measurement error — it is the hole sitting 0.090 mm off the rim's centre. Averaging the
-four is what recovers the true apothem; a single face would have been off by up to 0.09.
+which is not measurement error — it is a hole sitting fractionally off the rim's centre. Averaging
+the four is what recovers the true apothem; a single face can be off by half the spread.
 
 Three parsing pitfalls cost real time and are worth recording:
 
@@ -601,7 +601,7 @@ nonsense.
 | `O56_RingInvert.svg` | the ±3 mm experiment | proved inversion shifts by exactly one tab depth |
 | `OctagonalTorus.svg` | first attempt | correct parts, **hole phase wrong** — would not assemble |
 | `OctagonalTorus2.svg` † | second attempt | phase corrected, all 34 parts verified ✓ |
-| `OctagonalTorusGold.svg` | first verified build | 34 contours ✓, holes 0.090 off centre |
+| `OctagonalTorusGold.svg` | first verified build | 34 contours ✓, superseded by `BuildA1_90_25.svg` |
 | `RunA1_R90.svg` | Route A run 1 | discs 83.149→86.149, panels 73.326 / 71.568 — matches `O90.svg` ✓ |
 | `RunA2_R59Point693.svg` | Route A run 2 | discs 55.149→58.149, panels 50.130 / 48.372 — matches `O59.svg` ✓ |
 | `RunA3_R56Point446.svg` | Route A run 3 | discs 52.149→55.149 — matches `O56.svg` ✓; its panels are unused |
