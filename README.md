@@ -38,7 +38,13 @@ all as `RegularBox.svg`.
 2. **[Inner panels, R 59.693](https://boxes.hackerspace-bamberg.de/RegularBox?FingerJoint_style=rectangular&FingerJoint_surroundingspaces=1.0&FingerJoint_bottom_lip=0.0&FingerJoint_edge_width=1.0&FingerJoint_extra_length=0.0&FingerJoint_finger=2.0&FingerJoint_play=0.0&FingerJoint_space=2.0&FingerJoint_width=1.0&h=25&outside=0&radius_bottom=59.693&radius_top=59.693&n=8&top=closed&alignment_pins=1.0&bottom=closed&thickness=3.0&burn=0.1&format=svg&labels=0&labels=1&reference=100.0&tabs=0.0&qr_code=0&inner_corners=loop&spacing=0.5&debug=0&language=en&render=0)** — keep the 8 panels only
 3. **[Hole cutter, R 56.446](https://boxes.hackerspace-bamberg.de/RegularBox?FingerJoint_style=rectangular&FingerJoint_surroundingspaces=1.0&FingerJoint_bottom_lip=0.0&FingerJoint_edge_width=1.0&FingerJoint_extra_length=0.0&FingerJoint_finger=2.0&FingerJoint_play=0.0&FingerJoint_space=2.0&FingerJoint_width=1.0&h=25&outside=0&radius_bottom=56.446&radius_top=56.446&n=8&top=closed&alignment_pins=1.0&bottom=closed&thickness=3.0&burn=0.1&format=svg&labels=0&labels=1&reference=100.0&tabs=0.0&qr_code=0&inner_corners=loop&spacing=0.5&debug=0&language=en&render=0)** — keep one disc, invert it, cut the hole in both outer discs
 
-Run 3 uses a *smaller* radius on purpose: inverting a disc shifts it outward by one material
+**Inverting the disc:** in Inkscape, break the octagon outline into its eight segments — one per
+face — and flip each one. The flipped segments together are the hole; place them concentric on each
+outer disc and cut. **The video shows this step by step**, and
+[the writeup](Octagonal_Torus_Gold.md#how-the-inversion-was-done) explains what flipping does to the
+joint.
+
+Run 3 uses a *smaller* radius on purpose: flipping shifts the band outward by one material
 thickness. Type the radius 3 mm of apothem short of where the hole belongs and the inversion lands
 it exactly right. Details in Part 8a of the writeup.
 
