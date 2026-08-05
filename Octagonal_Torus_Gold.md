@@ -2,6 +2,8 @@
 
 Complete record: the trigonometry, the generator, the corrections, and the verified cut list.
 
+**All dimensions are millimetres.**
+
 **Worked example:** an octagonal torus with a 25.000 × 25.000 mm square cross-section, outer octagon
 at R 90, cut from 3 mm material. Verified cut file: **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**,
 reproduced end to end from Route A.
@@ -11,9 +13,9 @@ numbers** you choose:
 
 | | this example | yours |
 |---|---|---|
-| Outer octagon radius, corner to centre | 90 | any |
-| Ring — the square cross-section | 25 | any |
-| Material thickness | 3 | any |
+| Outer octagon radius, corner to centre | 90 mm | any |
+| Ring — the square cross-section | 25 mm | any |
+| Material thickness | 3 mm | any |
 
 Everything else is derived. The worked numbers are a demonstration, not a constraint — if you want
 a 300 mm ring in 6 mm ply the method is unchanged and only the arithmetic differs.
@@ -52,7 +54,7 @@ outside flats  233.731   bore flats 149.731
 
 That is all three runs — run 1 is simply the outer radius you chose, and the other two are derived:
 
-| run | radius | from |
+| run | radius (mm) | from |
 |---|---|---|
 | 1 — outer tube | **120** | your choice |
 | 2 — inner panels | **81.034** | `R_outer − (ring + t) × sec(22.5°)` |
@@ -274,7 +276,7 @@ tan(22.5°) = √2 − 1      = 0.414214
 **sec(22.5°) = 1.0824 is the number this entire project turns on.** It says the corners of an
 octagon sit **8.24 % further from centre** than the flats.
 
-| R | apothem | across flats | across corners | side |
+| R (mm) | apothem (mm) | across flats (mm) | across corners (mm) | side (mm) |
 |---|---|---|---|---|
 | 90.000 | 83.149 | 166.298 | 180.000 | 68.883 |
 | 62.940 | 58.149 | 116.298 | 125.880 | 48.172 |
@@ -331,7 +333,7 @@ face-to-face figure into a radius.** Two operations, two domains, in that order.
 Getting this backwards is the classic error. If you come up short and "scale up by the ratio you
 missed by", you leave a residual of `L²/(gap − L)`:
 
-| nominal gap | real ring (L = 3) | implied "ratio" | error if you scale by it |
+| nominal gap (mm) | real ring (mm, L = 3) | implied "ratio" | error if you scale by it (mm) |
 |---|---|---|---|
 | 10 | 7 | 1.4286 | +1.29 |
 | 25 | 22 | 1.1364 | +0.41 |
@@ -447,7 +449,7 @@ difference             = t(2 − √2)    = 1.757
 
 Check against every panel measured across all files:
 
-| R | apothem | side | long (+4.443) | short (+2.685) | matches file? |
+| R (mm) | apothem (mm) | side (mm) | long (mm) | short (mm) | matches file? |
 |---|---|---|---|---|---|
 | 90.000 | 83.149 | 68.883 | **73.326** | **71.568** | ✓ |
 | 59.693 | 55.149 | 45.687 | **50.130** | **48.372** | ✓ |
@@ -502,7 +504,7 @@ panel it is the 0.979 corner lap (§6b), for the short panel it is just the 0.10
 The two panel types are not a mistake either. Measured against the face at the wall's **outer**
 surface — the correct reference — both tubes behave identically:
 
-| tube | outer-surface face | long panel | short panel | long over | short over |
+| tube | outer-surface face (mm) | long panel (mm) | short panel (mm) | long over | short over |
 |---|---|---|---|---|---|
 | Outer (a = 86.149) | 71.368 | 73.326 | 71.568 | **+1.958** | **+0.200** |
 | Inner (a = 58.149) | 48.172 | 50.130 | 48.372 | **+1.958** | **+0.200** |
@@ -655,7 +657,7 @@ nonsense.
 
 ## Final verification, `BuildA1_90_25.svg`
 
-| feature | nominal | R |
+| feature | nominal apothem (mm) | R (mm) |
 |---|---|---|
 | Plate rim | 83.149 → 86.149 | 90.000 → 93.247 |
 | Plate hole | 55.149 → 58.149 | 59.693 → 62.940 |
@@ -701,9 +703,9 @@ Pick three numbers:
 
 | | | this build |
 |---|---|---|
-| `R_outer` | outer octagon radius, corner to centre | 90 |
-| `S` | the side of the square channel | 25 |
-| `t` | material thickness | 3 |
+| `R_outer` | outer octagon radius, corner to centre | 90 mm |
+| `S` | the side of the square channel | 25 mm |
+| `t` | material thickness | 3 mm |
 
 **`S` is one number used twice.** It sets the **radial** width of the ring, and it is also what you
 enter as `h`, the box height — so the channel comes out as tall as it is wide. This build used
