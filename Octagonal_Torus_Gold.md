@@ -375,6 +375,19 @@ depends on the run — see Route A.
 it describes the tube's **inner** surface. That is exactly the quantity `sec(22.5°)` operates on, so
 the number you type goes straight into the formula — Part 5 works this through.
 
+**Nothing in those tables names the side panels**, and there is no setting that does. The panels are
+*outputs*: RegularBox derives them from the same handful of inputs.
+
+| panel dimension | derived from | this build |
+|---|---|---|
+| height | `h` + two thicknesses | `25 + 3 + 3` = 31.000 (31.200 as drawn, with kerf) |
+| width | the octagon's side length at that radius, plus a corner allowance | 73.326 / 71.568 outer · 50.130 / 48.372 inner |
+
+So you cannot size a panel directly. Change `radius`, `n`, `h` or `thickness` and the panels follow;
+Part 6 derives both widths from first principles and checks them against every panel in the file.
+That is also why a panel set belongs to the run that produced it — mixing panels from one radius
+with discs from another is the error that broke an early build.
+
 ---
 
 # PART 5 — Mapping generator terms to the geometry
