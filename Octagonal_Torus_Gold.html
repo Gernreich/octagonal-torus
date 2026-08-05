@@ -181,6 +181,12 @@ outside flats  233.731   bore flats 149.731</code></pre>
 <p><strong>Run 2 — inner panels.</strong> Same settings, <code>radius = 59.693</code>. → Keep the <strong>8 panels</strong> only. Discard its discs.</p>
 <p><strong>Run 3 — the hole cutter.</strong> Same settings, <code>radius = 56.446</code>. (<code>h</code> is irrelevant here — you only want the disc outline.) → Keep <strong>one disc</strong>; it is the cutter for both plates. Discard everything else.</p>
 <p><strong>Then:</strong> invert that 56.446 disc and use it to cut the hole in each of the two outer discs.</p>
+<h3 id="how-the-inversion-was-done">How the inversion was done</h3>
+<p>In <strong>Inkscape</strong>: break the inner octagon outline into its <strong>eight segments</strong> — one per face — and flip each segment. The eight flipped segments together are the hole; place them concentric on each outer disc and cut.</p>
+<p>Flipping a segment does two things at once, and Part 8 is about both:</p>
+<ul><li>it <strong>mirrors the tab-and-notch pattern</strong>, which is the phase swap the joint needs (§8b), and</li><li>it <strong>lands the band one material thickness further out</strong>, which is the ±3 mm shift you pre-compensate for by generating run 3 at 56.446 rather than 59.693 (§8a).</li></ul>
+<p>That is also why the finished plates carry their hole as eight closed contours instead of a single loop — <code>verify.js</code> reports <code>plates: 2   hole segments: 16</code> for the pair, and the measurements in Part 10 confirm the result lands at 55.149 / 58.149 with the pattern complementary to the panels.</p>
+<p><strong>This process is demonstrated step by step in the video.</strong></p>
 <p>Verified example of exactly this: <a href="RunA1_R90.svg"><code>RunA1_R90.svg</code></a>, <a href="RunA2_R59Point693.svg"><code>RunA2_R59Point693.svg</code></a>, <a href="RunA3_R56Point446.svg"><code>RunA3_R56Point446.svg</code></a>, assembled into <strong><a href="BuildA1_90_25.svg"><code>BuildA1_90_25.svg</code></a></strong>. All three runs reproduced the pristine O90 / O59 / O56 files to the last digit — same boundary lines, same finger intervals.</p>
 <h3 id="the-three-runs-as-links">The three runs as links</h3>
 <p>Each carries every setting — <code>thickness=3.0</code>, <code>burn=0.1</code>, <code>finger=2.0</code>, <code>space=2.0</code>, <code>surroundingspaces=1.0</code>, <code>play=0.0</code> — so the form comes up fully populated. Recovered from the <code>dc:source</code> provenance that boxes.py embeds in each generated file.</p>

@@ -94,6 +94,24 @@ want the disc outline.)
 
 **Then:** invert that 56.446 disc and use it to cut the hole in each of the two outer discs.
 
+### How the inversion was done
+
+In **Inkscape**: break the inner octagon outline into its **eight segments** — one per face — and
+flip each segment. The eight flipped segments together are the hole; place them concentric on each
+outer disc and cut.
+
+Flipping a segment does two things at once, and Part 8 is about both:
+
+- it **mirrors the tab-and-notch pattern**, which is the phase swap the joint needs (§8b), and
+- it **lands the band one material thickness further out**, which is the ±3 mm shift you
+  pre-compensate for by generating run 3 at 56.446 rather than 59.693 (§8a).
+
+That is also why the finished plates carry their hole as eight closed contours instead of a single
+loop — `verify.js` reports `plates: 2   hole segments: 16` for the pair, and the measurements in
+Part 10 confirm the result lands at 55.149 / 58.149 with the pattern complementary to the panels.
+
+**This process is demonstrated step by step in the video.**
+
 Verified example of exactly this: [`RunA1_R90.svg`](RunA1_R90.svg),
 [`RunA2_R59Point693.svg`](RunA2_R59Point693.svg), [`RunA3_R56Point446.svg`](RunA3_R56Point446.svg),
 assembled into **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**. All three runs reproduced the
