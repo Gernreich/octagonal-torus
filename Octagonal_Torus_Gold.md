@@ -21,7 +21,7 @@ Everything else is derived. The worked numbers are a demonstration, not a constr
 a 300 mm ring in 6 mm ply the method is unchanged and only the arithmetic differs.
 
 **TL;DR** — **[Part 12 — Doing this at another size](#part-12--doing-this-at-another-size)** is a
-self-contained procedure for exactly that: three numbers in --magic--> a cut file out, no other
+self-contained procedure for exactly that: three numbers in ... (Magic) ... a cut file out, no other
 section required.
 
 ![The verified geometry: a plan section through a plate showing the four octagon boundaries and the 25 mm ring, and a radial cross-section of the 25 × 25 cavity](torus-geometry-diagram.svg)
