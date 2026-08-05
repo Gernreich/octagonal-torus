@@ -534,7 +534,6 @@ BuildA1 plate hole
 ```
 
 **Same intervals, opposite lines = complementary = the plate's tabs land in the panel's notches.**
-Byte for byte the same result as the known-good `OctagonalTorusGold.svg`.
 
 **Do not use point counts for this.** An earlier version of this document read phase off the number
 of points on each line, taking the minority line as the finger side. It is wrong: `RunA2`'s disc has
@@ -601,7 +600,6 @@ nonsense.
 | `O56_RingInvert.svg` | the ±3 mm experiment | proved inversion shifts by exactly one tab depth |
 | `OctagonalTorus.svg` | first attempt | correct parts, **hole phase wrong** — would not assemble |
 | `OctagonalTorus2.svg` † | second attempt | phase corrected, all 34 parts verified ✓ |
-| `OctagonalTorusGold.svg` | first verified build | 34 contours ✓, superseded by `BuildA1_90_25.svg` |
 | `RunA1_R90.svg` | Route A run 1 | discs 83.149→86.149, panels 73.326 / 71.568 — matches `O90.svg` ✓ |
 | `RunA2_R59Point693.svg` | Route A run 2 | discs 55.149→58.149, panels 50.130 / 48.372 — matches `O59.svg` ✓ |
 | `RunA3_R56Point446.svg` | Route A run 3 | discs 52.149→55.149 — matches `O56.svg` ✓; its panels are unused |

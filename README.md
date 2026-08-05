@@ -82,9 +82,9 @@ python3 md2html.py Octagonal_Torus_Gold.md Octagonal_Torus_Gold.html
 
 `RunA1/2/3` are the three generator outputs above, unmodified. `O56/O59/O90.svg` are earlier
 identical runs. The rest — `InnerRingInverted`, `InnerSidesInverted`, `O56_RingInvert`,
-`O90_O56point446_25mm`, `O90_O59point693_25mm`, `OctagonalTorus`, `OctagonalTorusGold` — are the
-investigation: the experiments that established what inverting actually does, and two builds that
-were wrong in instructive ways. Part 10 of the writeup says what each one is.
+`O90_O56point446_25mm`, `O90_O59point693_25mm`, `OctagonalTorus` — are the investigation: the
+experiments that established what inverting actually does, and a build that was wrong in an
+instructive way. Part 10 of the writeup says what each one is.
 
 ## Licence
 
