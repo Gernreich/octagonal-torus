@@ -132,8 +132,7 @@ than a 0.077 mm gap.
 
 Verified example of exactly this: [`RunA1_R90.svg`](RunA1_R90.svg),
 [`RunA2_R59Point693.svg`](RunA2_R59Point693.svg), [`RunA3_R56Point446.svg`](RunA3_R56Point446.svg),
-assembled into **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**. All three runs reproduced the
-pristine O90 / O59 / O56 files to the last digit — same boundary lines, same finger intervals.
+assembled into **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**.
 
 ### The three runs as links
 
@@ -497,21 +496,22 @@ Two things at once, and they must be handled separately.
 
 ## 8a. It shifts the part ±3 mm
 
-Verified against pristine baselines with the file `O56_RingInvert.svg` — pristine O56 inverted both
-ways, measured against the untouched O56 and O59 output:
+You can read this straight off the finished build. **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**'s
+hole was made by inverting a disc generated at **R 56.446**, whose own boundaries sit at apothem
+52.149 / 55.149. Measure the hole and it lands at **55.149 / 58.149** — three millimetres further
+out, exactly one material thickness:
 
-| part | boundary lines (apothem) | shift | gap to the R 90 plate |
-|---|---|---|---|
-| O56 inverted inward | 49.149 / 52.149 | −3.000 | 31.000 |
-| **pristine O56** | 52.149 / 55.149 | — | 28.000 |
-| O56 inverted outward | 55.149 / 58.149 | +3.000 | **25.000** |
-| **pristine O59** | 55.149 / 58.149 | — | **25.000** |
+| | boundary lines (apothem) | gap to the R 90 plate |
+|---|---|---|
+| the R 56.446 disc as generated | 52.149 / 55.149 | 28.000 |
+| **the same disc, inverted — the hole in `BuildA1`** | **55.149 / 58.149** | **25.000** |
 
 **Inverting rebuilds the castellation on the other side of its original line and never leaves the
-part in place.** It moves by exactly one tab depth.
+part in place.** It moves by exactly one tab depth, and it moves outward.
 
-Note rows 3 and 4: the inverted O56 disc lands in the *identical position* as the pristine O59
-disc. That is why typing 56.446 and inverting is a legitimate route to a ring at R 59.693.
+That is also why typing 56.446 is a legitimate route to a hole at R 59.693: the inverted disc lands
+in the identical position a disc generated at 59.693 would occupy. Inverting *that* one instead
+would put the hole at 58.149 / 61.149 and leave a 22 mm ring.
 
 **Rule:** if you pre-compensate the radius for an inversion, take the panels from the run whose
 radius equals where the part *ended up*, not where you typed it. boxes.py sizes panels from the
@@ -600,23 +600,13 @@ nonsense.
 
 | file | what it is | verdict |
 |---|---|---|
-| `O56.svg` | pristine boxes.py, R 56.446 | disc 52.149/55.149, panels 47.645/45.887 — self-consistent |
-| `O59.svg` | pristine boxes.py, R 59.693 | disc 55.149/58.149, panels 50.130/48.372 — self-consistent |
-| `O90_O56point446_25mm.svg` | composite | plates **correct** (hole 55.149/58.149, inverted phase); inner panels wrong (R 56.446, 2.485 too narrow) |
-| `O90_O59point693_25mm.svg` | composite | hole un-inverted (wrong phase); inner panels right width but 25.000 tall, tabs stripped |
-| `TwoRings.svg` † | plate only | rim R 90, hole R 59.693, ring 25.000 |
-| `InnerRingInverted.svg` | test | hole 55.149/58.149, tabs outward, stored as 8 subpaths |
-| `InnerSidesInverted.svg` | test | same envelope, tabs inward, one clean subpath |
-| `O56_RingInvert.svg` | the ±3 mm experiment | proved inversion shifts by exactly one tab depth |
-| `OctagonalTorus.svg` | first attempt | correct parts, **hole phase wrong** — would not assemble |
-| `OctagonalTorus2.svg` † | second attempt | phase corrected, fully verified ✓ |
-| `RunA1_R90.svg` | Route A run 1 | discs 83.149→86.149, panels 73.326 / 71.568 — matches `O90.svg` ✓ |
-| `RunA2_R59Point693.svg` | Route A run 2 | discs 55.149→58.149, panels 50.130 / 48.372 — matches `O59.svg` ✓ |
-| `RunA3_R56Point446.svg` | Route A run 3 | discs 52.149→55.149 — matches `O56.svg` ✓; its panels are unused |
+| `InnerRingInverted.svg` | test | an inner disc with its castellation inverted |
+| `InnerSidesInverted.svg` | test | the same envelope, opposite phase — the pair that showed position and phase are independent |
+| `RunA1_R90.svg` | Route A run 1 | discs 83.149→86.149, panels 73.326 / 71.568 |
+| `RunA2_R59Point693.svg` | Route A run 2 | discs 55.149→58.149, panels 50.130 / 48.372 |
+| `RunA3_R56Point446.svg` | Route A run 3 | discs 52.149→55.149; only its disc is used, as the hole cutter |
 | **`BuildA1_90_25.svg`** | **final — cut this** | **20 contours, holes stitched and concentric, phase confirmed ✓** |
 
-† No longer in the folder — measured during the investigation, then superseded. Every other file
-listed is still present.
 
 ## Final verification, `BuildA1_90_25.svg`
 
@@ -650,8 +640,8 @@ Kept because each one was a plausible reading that the measurements killed.
    the *shifted* disc.
 3. **"No inversion is needed anywhere."** A torus forces one (Part 7).
 4. **"The hole is already correctly phased because it matches the pristine disc."** Backwards — the
-   hole must be the disc's *complement* (Part 8b). This one produced
-   `OctagonalTorus.svg`, which doesn't assemble.
+   hole must be the disc's *complement* (Part 8b). This one produced a build that measured
+   perfectly and could not be assembled.
 
 The recurring lesson: position and phase are independent, and boxes.py's inversion changes both at
 once.
