@@ -384,11 +384,17 @@ This is the join between Parts 1–3 and the tool, and it is exact:
 | measured in the SVG | generator setting | relation |
 |---|---|---|
 | uniform +0.100 mm outset on every contour | `burn = 0.1` | direct |
-| disc body apothem 55.149 | `radius = 59.693` | `55.149 = 59.693 × cos 22.5°` |
-| disc body apothem 83.149 | `radius = 90` | `83.149 = 90 × cos 22.5°` |
+| disc body apothem 83.149 | `radius = 90` — run 1 | `83.149 = 90 × cos 22.5°` |
+| disc body apothem 55.149 | `radius = 59.693` — run 2 | `55.149 = 59.693 × cos 22.5°` |
+| disc body apothem 52.149 | `radius = 56.446` — run 3 | `52.149 = 56.446 × cos 22.5°` |
 | finger reach, +3.000 beyond the body | `thickness = 3.0` | direct |
 | panel height 31.200 | `h = 25` | `25 + 3 + 3 + 2 × 0.1` |
 | wall thickness 3.000 | `thickness = 3.0` | direct |
+
+Run 3's row is the one worth dwelling on. Its disc is generated at apothem **52.149** and its
+fingers reach to **55.149** — yet the hole it cuts, once inverted, measures **55.149 / 58.149**. The
+generator's arithmetic is untouched; the inversion moved the whole band outward by one thickness
+after the fact. Part 8a measures that on the shipped file.
 
 **`radius` is the vertex radius of the *inner* surface.** That is precisely the quantity the
 sec(22.5°) conversion in Part 3 operates on, so the number you type goes straight into the formula:
