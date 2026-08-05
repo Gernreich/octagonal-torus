@@ -67,7 +67,7 @@ number you would type into boxes.py as run 2. That is Part 12's formula done for
 ---
 
 **18 pieces of material:** 2 plates + 8 outer panels + 8 inner panels. (That is 34 cut contours —
-each plate is a rim plus an 8-segment hole — which is why Part 10 verifies 34.)
+each plate is a rim plus a stitched hole — which is why Part 10 verifies 20.)
 
 Assembled: **25.000 mm radial × 25.000 mm axial**, 172.298 across the flats outside, 110.298 bore.
 
@@ -151,7 +151,8 @@ Invert the 59.693 disc instead and it lands at 58.149 / 61.149 — a **22 mm** r
 ## Route B — shortcut, cut the finished file
 
 **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** is those 18 pieces already laid out — assembled by exactly the Route A steps
-above, and verified: 34 contours, holes concentric to 0.000, joint phase complementary, no overlaps.
+above, and verified: 20 contours, holes concentric with their plates, joint phase complementary,
+no overlaps.
 Cut it as-is.
 
 It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
@@ -599,11 +600,11 @@ nonsense.
 | `InnerSidesInverted.svg` | test | same envelope, tabs inward, one clean subpath |
 | `O56_RingInvert.svg` | the ±3 mm experiment | proved inversion shifts by exactly one tab depth |
 | `OctagonalTorus.svg` | first attempt | correct parts, **hole phase wrong** — would not assemble |
-| `OctagonalTorus2.svg` † | second attempt | phase corrected, all 34 parts verified ✓ |
+| `OctagonalTorus2.svg` † | second attempt | phase corrected, fully verified ✓ |
 | `RunA1_R90.svg` | Route A run 1 | discs 83.149→86.149, panels 73.326 / 71.568 — matches `O90.svg` ✓ |
 | `RunA2_R59Point693.svg` | Route A run 2 | discs 55.149→58.149, panels 50.130 / 48.372 — matches `O59.svg` ✓ |
 | `RunA3_R56Point446.svg` | Route A run 3 | discs 52.149→55.149 — matches `O56.svg` ✓; its panels are unused |
-| **`BuildA1_90_25.svg`** | **final — cut this** | **34 contours, holes dead centre (0.000), phase confirmed ✓** |
+| **`BuildA1_90_25.svg`** | **final — cut this** | **20 contours, holes stitched and concentric, phase confirmed ✓** |
 
 † No longer in the folder — measured during the investigation, then superseded. Every other file
 listed is still present.

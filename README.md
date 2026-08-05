@@ -14,7 +14,7 @@ generator settings, every wrong turn, and how each number was verified against t
 
 ## Just cut it
 
-**[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** — 18 pieces, 34 contours, verified.
+**[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** — 18 pieces, 20 contours, verified.
 
 | | |
 |---|---|
