@@ -1,7 +1,9 @@
-# Octagonal torus — 25 × 25 mm cross-section
+# Octagonal torus — 25 × 25 mm cross-section, buildable at any size
 
 A laser-cut octagonal torus: two nested octagonal tubes joined by annular plates, leaving a
-**square 25 × 25 mm channel** all the way round. Outer octagon R 90, 3 mm material.
+**square channel** all the way round. The cut file here is a 25 × 25 mm channel with an outer
+octagon of R 90 in 3 mm material — but those are three numbers you choose, and everything else
+derives from them. [Build it at your own size](#build-it-at-your-own-size).
 
 ![geometry](torus-geometry-diagram.svg)
 
