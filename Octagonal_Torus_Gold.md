@@ -41,9 +41,9 @@ It also prints the numbers, which makes it a calculator even when you do not wan
 
 ```
 $ node torus-geometry-diagram.js 120 30 6
-outer octagon  R 120      apothem 110.866   wall out to 116.866
-inner octagon  R 81.034   apothem 74.866    wall out to 80.866
-hole cutter    R 74.54    (run 3 — invert this disc; one thickness inside the inner octagon)
+outer octagon  R 120      apothem 110.866   wall out to 116.866   (run 1)
+inner octagon  R 81.034   apothem 74.866    wall out to 80.866    (run 2)
+hole cutter    R 74.54    (run 3 — invert this disc)
 ring           110.866 − 80.866 = 30
 outside flats  233.731   bore flats 149.731
 ```
