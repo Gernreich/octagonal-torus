@@ -9,7 +9,35 @@ off centre instead of 0.000.)
 
 ![The verified geometry: a plan section through a plate showing the four octagon boundaries and the 25 mm ring, and a radial cross-section of the 25 × 25 cavity](torus-geometry-diagram.svg)
 
-Regenerate the diagram at any size with `node torus-geometry-diagram.js <outerR> <ring> <thickness>`.
+**That figure is generated, not drawn.** `torus-geometry-diagram.js` computes every line, label and
+dimension from three numbers, so it always agrees with the arithmetic in this document instead of
+being an artist's impression of it.
+
+```
+node torus-geometry-diagram.js 90 25 3
+                               │  │  └─ material thickness
+                               │  └──── the ring you want, face to face
+                               └─────── outer octagon radius, corner to centre
+```
+
+Those three are what the whole build is defined by. Change any of them and the figure redraws for
+*your* geometry — the octagons resize, the shaded bands move, every dimension and the formula in the
+title recalculate.
+
+It also prints the numbers, which makes it a calculator even when you do not want the picture:
+
+```
+$ node torus-geometry-diagram.js 120 30 6
+outer octagon  R 120       apothem 110.866   wall out to 116.866
+inner octagon  R 81.034    apothem 74.866    wall out to 80.866
+ring           110.866 − 80.866 = 30
+outside flats  233.731   bore flats 149.731
+```
+
+So a 120 mm octagon with a 30 mm ring in 6 mm material needs an inner octagon of **R 81.034** — the
+number you would type into boxes.py as run 2. That is Part 12's formula done for you.
+
+**It draws a picture; it does not make cut files.** For parts, use Route A.
 
 ---
 
@@ -142,8 +170,9 @@ run.**
 node torus-geometry-diagram.js 90 25 3      # outer R, ring, thickness
 ```
 
-Redraws the figure above. Every label, dimension and shaded band recomputes, so it stays correct at
-any size — then regenerate the HTML to pick it up.
+Redraws the figure at the top of this document and prints the resulting dimensions — see the note
+under the figure for what the three arguments mean. Regenerate the HTML afterwards to pick up the
+new drawing.
 
 Everything below is why.
 
