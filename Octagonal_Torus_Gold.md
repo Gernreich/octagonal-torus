@@ -184,8 +184,24 @@ into the panel's notches.
   half-pitch is 6 mm)
 - Too tight → set `play` to 0.05–0.1
 
-Coordinates can prove every dimension here but not this registration, and it is the one thing that
-has actually failed.
+**What the dry-fit is actually for.** Registration *is* provable from coordinates — that is exactly
+what `verify.js`'s phase check does, and a `COMPLEMENTARY ✓` means the tabs and notches are in the
+right places relative to each other. Both failures this project actually had were caught that way:
+a hole in the wrong phase, and a panel set of 5/3/2/6 where an octagon needs 4/4/4/4.
+
+What no measurement of the file can tell you is whether the joint fits **your material on your
+machine**:
+
+- **Material thickness.** Every width here assumes exactly 3.000 mm. Nominal 3 mm ply is commonly
+  2.7–3.2 mm, and the finger joints are cut for the nominal figure. Thin stock gives sloppy joints,
+  thick stock gives joints that will not close.
+- **Your kerf.** `burn = 0.1` is baked into the geometry. If your beam removes 0.15 mm every joint
+  is 0.05 loose; if it removes 0.08 they are tight. Across eight corners and two tubes that adds up.
+- **Assembly force.** A joint can be dimensionally perfect and still be unassemblable — too tight to
+  push home without splitting a finger, or loose enough to need glue to hold alignment.
+
+None of that is in the coordinates, and all of it is in a 30-second cardboard test. The geometry is
+settled; the fit is not.
 
 ## Check before cutting
 
