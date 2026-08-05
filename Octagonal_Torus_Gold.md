@@ -20,7 +20,7 @@ numbers** you choose:
 Everything else is derived. The worked numbers are a demonstration, not a constraint — if you want
 a 300 mm ring in 6 mm ply the method is unchanged and only the arithmetic differs.
 
-→ **[Part 12 — Doing this at another size](#part-12--doing-this-at-another-size)** is a
+**TL;DR** — **[Part 12 — Doing this at another size](#part-12--doing-this-at-another-size)** is a
 self-contained procedure for exactly that: three numbers in, a cut file out, no other section
 required.
 
