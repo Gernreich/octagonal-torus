@@ -4,8 +4,7 @@ Complete record: the trigonometry, the generator, the corrections, and the verif
 
 **Worked example:** an octagonal torus with a 25.000 × 25.000 mm square cross-section, outer octagon
 at R 90, cut from 3 mm material. Verified cut file: **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**,
-reproduced end to end from Route A. ([`OctagonalTorusGold.svg`](OctagonalTorusGold.svg) is the
-earlier equivalent — same geometry, holes 0.090 mm off centre instead of 0.000.)
+reproduced end to end from Route A.
 
 **Your own size.** Nothing here is fixed to 90 and 25. The whole object follows from **three
 numbers** you choose:
