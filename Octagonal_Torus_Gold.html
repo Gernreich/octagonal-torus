@@ -76,7 +76,8 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <p><strong>Worked example:</strong> an octagonal torus with a 25.000 × 25.000 mm square cross-section, outer octagon at R 90, cut from 3 mm material. Verified cut file: <strong><a href="BuildA1_90_25.svg"><code>BuildA1_90_25.svg</code></a></strong>, reproduced end to end from Route A.</p>
 <p><strong>Your own size.</strong> Nothing here is fixed to 90 and 25. The whole object follows from <strong>three numbers</strong> you choose:</p>
 <div class='tw'><table><thead><tr><th></th><th>this example</th><th>yours</th></tr></thead><tbody><tr><td>Outer octagon radius, corner to centre</td><td>90</td><td>any</td></tr><tr><td>Ring — the square cross-section</td><td>25</td><td>any</td></tr><tr><td>Material thickness</td><td>3</td><td>any</td></tr></tbody></table></div>
-<p>Everything else is derived. <code>torus-geometry-diagram.js</code> computes the resulting dimensions for you (see below the figure), Part 12 gives the general formula, and Route A generates the parts. The worked numbers are a demonstration, not a constraint — so if you want a 300 mm ring in 6 mm ply, the method is unchanged and only the arithmetic differs.</p>
+<p>Everything else is derived. The worked numbers are a demonstration, not a constraint — if you want a 300 mm ring in 6 mm ply the method is unchanged and only the arithmetic differs.</p>
+<p>→ <strong><a href="#part-12--doing-this-at-another-size">Part 12 — Doing this at another size</a></strong> is a self-contained procedure for exactly that: three numbers in, a cut file out, no other section required.</p>
 <figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="1000" height="600" role="img" aria-label="Verified geometry of the 25 by 25 millimetre octagonal torus: a plan section through a plate, and a radial cross-section of the cavity">
 <rect width="500" height="300" fill="#fbfcfd"/>
 <g font-family="ui-sans-serif,system-ui,Helvetica,Arial,sans-serif">
@@ -370,15 +371,30 @@ holes   = one stitched contour per plate</code></pre>
 <p>The recurring lesson: position and phase are independent, and boxes.py's inversion changes both at once.</p>
 <hr>
 <h1 id="part-12--doing-this-at-another-size">PART 12 — Doing this at another size</h1>
-<pre><code>R_inner = R_outer − (ring + thickness) × sec(180°/n)
-h       = the axial dimension, entered directly</code></pre>
-<p>For a square cross-section of side S in n-sided material of thickness t, <strong>three runs</strong>:</p>
-<div class='tw'><table><thead><tr><th>run</th><th>radius</th><th>keep</th></tr></thead><tbody><tr><td>1 — outer tube</td><td><code>R_outer</code> (your choice)</td><td>both discs + n panels</td></tr><tr><td>2 — inner panels</td><td><code>R_inner = R_outer − (S + t) × sec(180°/n)</code></td><td>n panels only</td></tr><tr><td>3 — hole cutter</td><td><code>R_hole = R_inner − t × sec(180°/n)</code></td><td>one disc only</td></tr></tbody></table></div>
-<p><code>h = S</code> on runs 1 and 2; run 3's <code>h</code> does not matter, since only its disc outline is used.</p>
-<p>Then invert run 3's disc and cut the hole in each of run 1's discs with it. Dry-fit one plate against one inner panel before committing the sheet.</p>
-<p><strong>Run 3 is not optional and it is not the same as run 2.</strong> Inverting shifts a disc outward by one tab depth, so the cutter must be generated one thickness <em>inside</em> where the hole belongs. For this build: <code>59.693 − 3 × 1.082392 = 56.446</code>. Invert run 2's disc instead and the hole lands 3 mm out, giving a ring of <code>S − t</code> instead of <code>S</code>.</p>
-<p><code>sec(180°/n)</code> for other shapes:</p>
-<div class='tw'><table><thead><tr><th>shape</th><th>n</th><th>sec(180°/n)</th></tr></thead><tbody><tr><td>square</td><td>4</td><td>1.4142</td></tr><tr><td>hexagon</td><td>6</td><td>1.1547</td></tr><tr><td><strong>octagon</strong></td><td><strong>8</strong></td><td><strong>1.0824</strong></td></tr><tr><td>decagon</td><td>10</td><td>1.0515</td></tr><tr><td>dodecagon</td><td>12</td><td>1.0353</td></tr></tbody></table></div>
+<p><strong>Self-contained.</strong> Everything you need is here; nothing above is required reading.</p>
+<p>Pick three numbers: the <strong>outer radius</strong> <code>R_outer</code> (corner to centre), the <strong>ring</strong> <code>S</code> you want the square channel to be, and your <strong>material thickness</strong> <code>t</code>. For an octagon, <code>n = 8</code>.</p>
+<h3 id="1-get-your-three-radii">1. Get your three radii</h3>
+<pre><code>node torus-geometry-diagram.js &lt;R_outer&gt; &lt;S&gt; &lt;t&gt;</code></pre>
+<p>It prints them, labelled by run. Or compute them yourself:</p>
+<pre><code>R_inner = R_outer − (S + t) × sec(180°/n)      ← run 2
+R_hole  = R_inner − t × sec(180°/n)            ← run 3</code></pre>
+<p><code>sec(180°/n)</code>: square <strong>1.4142</strong> · hexagon <strong>1.1547</strong> · <strong>octagon 1.0824</strong> · decagon <strong>1.0515</strong> · dodecagon <strong>1.0353</strong>.</p>
+<h3 id="2-generate-three-boxespy-runs">2. Generate three boxes.py runs</h3>
+<p>At <strong><a href="https://boxes.hackerspace-bamberg.de/">https://boxes.hackerspace-bamberg.de/</a></strong>, generator <strong>RegularBox</strong>. Identical settings each time except the radius:</p>
+<div class='tw'><table><thead><tr><th></th><th><code>radius_bottom</code> = <code>radius_top</code></th><th><code>h</code></th><th>keep</th></tr></thead><tbody><tr><td><strong>run 1</strong> — outer tube</td><td><code>R_outer</code></td><td><code>S</code></td><td>both discs <strong>and</strong> all n panels</td></tr><tr><td><strong>run 2</strong> — inner panels</td><td><code>R_inner</code></td><td><code>S</code></td><td>the n panels only</td></tr><tr><td><strong>run 3</strong> — hole cutter</td><td><code>R_hole</code></td><td>anything</td><td><strong>one disc</strong>; discard the rest</td></tr></tbody></table></div>
+<p>Everything else: <code>n</code> = your polygon, <code>top</code> and <code>bottom</code> = closed, <code>outside</code> <strong>unchecked</strong>, <code>thickness</code> = <code>t</code>, <code>burn</code> = your kerf. Leave the finger-joint settings alone unless step 5 says otherwise.</p>
+<h3 id="3-invert-run-3s-disc">3. Invert run 3's disc</h3>
+<p>In Inkscape, break its octagon outline into its <code>n</code> segments — one per face — and flip each one. The flipped segments together are the hole.</p>
+<h3 id="4-build-the-plates">4. Build the plates</h3>
+<p>Place the inverted hole concentric on each of run 1's two discs and cut it out. Those two annular plates are the torus's top and bottom faces.</p>
+<h3 id="5-dry-fit-before-cutting-the-sheet">5. Dry-fit before cutting the sheet</h3>
+<p>One plate against one inner panel, in cardboard. The plate's tabs should drop into the panel's notches.</p>
+<ul><li>Land between the notches → change <code>surroundingspaces</code> and regenerate</li><li>Too tight → raise <code>play</code> to 0.05–0.1</li></ul>
+<h3 id="parts-you-end-up-with">Parts you end up with</h3>
+<p>2 plates · n outer panels · n inner panels. Run 3's panels and run 2's discs are unused.</p>
+<h3 id="two-things-that-will-bite-you">Two things that will bite you</h3>
+<p><strong>Run 3 is not optional, and it is not run 2.</strong> Inverting shifts a disc outward by one thickness, so the cutter must be generated one thickness <em>inside</em> where the hole belongs. Invert run 2's disc instead and you get a ring of <code>S − t</code>. Part 8a measures this.</p>
+<p><strong>A panel set belongs to the run that made it.</strong> boxes.py sizes panels from the radius you type, and nothing tells them a disc was later moved. Run 2's panels go with the hole that run 3 produced — they are not interchangeable with run 1's or run 3's. Part 6 derives the widths.</p>
 <hr>
 <h1 id="the-two-rules">The two rules</h1>
 <ol><li><strong>Wall allowances ADD</strong>, in face-to-face units, once per wall growing into the gap.</li><li><strong>sec(22.5°) = 1.0824 MULTIPLIES</strong>, only to turn a face-to-face figure into a radius.</li></ol>
