@@ -48,7 +48,7 @@ ring           110.866 − 80.866 = 30
 outside flats  233.731   bore flats 149.731
 ```
 
-That gives you **both** radii the size change affects — run 1 is simply the outer radius you chose:
+That is all three runs — run 1 is simply the outer radius you chose, and the other two are derived:
 
 | run | radius | from |
 |---|---|---|
@@ -451,8 +451,9 @@ Check against every panel measured across all files:
 | 59.693 | 55.149 | 45.687 | **50.130** | **48.372** | ✓ |
 | 56.446 | 52.149 | 43.202 | **47.645** | **45.887** | ✓ |
 
-Exact to the last digit in every case. **This is the diagnostic that caught the defect:** given a
-panel width you can invert the formula and recover the radius it was generated from.
+Exact to the last digit in every case. **This is the diagnostic that catches a mismatched panel
+set:** given a panel width you can invert the formula and recover the radius it was generated from.
+That is how an early build was caught carrying panels cut for R 56.446 against a hole at R 59.693.
 
 The two closed forms were matched to the measured widths, not read out of boxes.py's source. Both
 have a sensible reading at a 135° corner — `t√2` is a thickness cut at 45°, `2t·tan(22.5°)` is the
@@ -480,7 +481,8 @@ at the wall's outside, apothem 58.149: 2 × 58.149 × tan(22.5°) = 48.172
 difference = 2t·tan(22.5°)                                     =  2.485
 ```
 
-The hole's straight segment measures **45.688** — it spans the face at the **bore**. The panel is
+Measured across one face, the hole's boundary spans **45.688** at its inner line — the face at the
+**bore**. The panel is
 cut to the face at the wall's **outer surface**, 48.172. So laying one on the other compares a
 panel to the short end of the trapezoid:
 
@@ -588,11 +590,12 @@ BuildA1 plate hole
 **Same intervals, opposite lines = complementary = the plate's tabs land in the panel's notches.**
 
 **Do not use point counts for this.** An earlier version of this document read phase off the number
-of points on each line, taking the minority line as the finger side. It is wrong: `RunA2`'s disc has
-48 points where pristine `O59`'s has 96 — the originals carry duplicate nodes from having been
-opened and re-saved in Inkscape — so the heuristic calls two geometrically **identical** discs
-opposite in phase. Counts depend on edit history and clustering tolerance. Intervals depend only on
-the geometry.
+of points on each line, taking the minority line as the finger side. It is wrong, and two things
+here disprove it. A file that has been opened and re-saved in Inkscape carries duplicate nodes, so
+two geometrically **identical** discs can report 48 points against 96 and the heuristic calls them
+opposite in phase. And stitching this build's hole segments into one loop took its inner line from
+80 points to 97 without moving a single coordinate. Counts depend on edit history and on your
+clustering tolerance; intervals depend only on the geometry.
 
 If a build comes out a half-pitch out of register, the fix is `surroundingspaces`, not geometry.
 With a 12 mm pitch, half a pitch is 6 mm.
@@ -613,11 +616,12 @@ values reveals the boundary lines directly.
 is a nominal 83.149.
 
 **Cross-check.** All four cardinal faces (top / bottom / left / right) are measured independently.
-On plate rims they agreed to 0.001 mm in every file. On plate *holes* they spread by up to 0.17 mm,
-which is not measurement error — it is a hole sitting fractionally off the rim's centre. Averaging
-the four is what recovers the true apothem; a single face can be off by half the spread.
+On plate rims they agreed to 0.001 mm in every file. A hole sitting slightly off its rim's centre
+shows up as a spread across the four — up to 0.17 mm in one earlier file, and zero in the shipped
+one. That spread is the eccentricity, not measurement error: averaging the four recovers the true
+apothem, while a single face can be off by half of it.
 
-Three parsing pitfalls cost real time and are worth recording:
+Four parsing pitfalls cost real time and are worth recording:
 
 1. **Relative subpaths.** Splitting a `d` attribute on `M`/`m` and parsing each fragment
    independently breaks relative (`m`) subpaths — the running point resets to 0,0 and pieces
@@ -626,7 +630,6 @@ Three parsing pitfalls cost real time and are worth recording:
    bounding boxes then span the whole sheet; per-subpath is right for those.
 3. **Multi-subpath outlines.** Conversely, some panels are drawn as four separate edge subpaths
    (top / bottom / left / right), where only the *union* is the part. Both groupings are needed.
-
 4. **Group transforms.** Every `<g transform>` on the path's ancestor chain must be composed and
    applied, `translate()` included. Skipping them does not fail loudly — it silently reports parts
    at their pre-transform coordinates. Here it produced a confident, wrong claim that a correctly
