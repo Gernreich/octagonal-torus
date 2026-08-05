@@ -68,24 +68,17 @@ invert  →  lands at 55.149 / 58.149   ✓ exactly where the hole belongs
 
 Invert the 59.693 disc instead and it lands at 58.149 / 61.149 — a **22 mm** ring.
 
-## Route B — shortcut, from files that already exist
+## Route B — shortcut, cut the finished file
 
-These are the already-generated files **for this build specifically** — R 90 outer, 25 × 25 mm
-cross-section, 3 mm material. At any other size or thickness, ignore this section and use Route A
-(or Part 12 for the general formulas); none of the widths below carry over.
+**`BuildA1_90_25.svg`** is those 18 pieces already laid out — assembled by exactly the Route A steps
+above, and verified: 34 contours, holes concentric to 0.000, joint phase complementary, no overlaps.
+Cut it as-is.
 
-Cut **`BuildA1_90_25.svg`** (or `OctagonalTorusGold.svg`). Either is exactly these 18 pieces,
-laid out and verified.
+It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
+size or thickness use Route A, or Part 12 for the general formulas; none of the widths carry over.
 
-Or assemble the same set by hand:
-
-| from | take |
-|---|---|
-| `O90_O56point446_25mm.svg` | the **2 plates** (with their 8-segment holes) and the **8 outer panels** — 4 × 73.326 and 4 × 71.568, all 31.200 tall |
-| `O59.svg` | the **8 inner panels** — 4 × 50.130 and 4 × 48.372, all 31.200 tall |
-
-**Leave behind:** that file's small panels (47.645 / 45.887 — wrong size) and `O59.svg`'s 2 discs.
-**Skip entirely:** `O90_O59point693_25mm.svg`, `OctagonalTorus.svg`.
+`OctagonalTorusGold.svg` is an earlier equivalent: same geometry, holes 0.090 mm off centre rather
+than 0.000. Part 10 says what every other file here is.
 
 ## Before cutting the full sheet
 
