@@ -44,6 +44,12 @@ outer disc and cut. **The video shows this step by step**, and
 [the writeup](Octagonal_Torus_Gold.md#how-the-inversion-was-done) explains what flipping does to the
 joint.
 
+The eight segments in `BuildA1_90_25.svg` have been stitched into one closed loop per plate, but
+that is **probably unnecessary** — the gaps between segments measured 0.077 mm against a 0.1 mm
+kerf, so the cuts overlap anyway. It only matters if your laser software applies its own kerf
+compensation, which needs closed paths — and if it does, switch it off, because `burn = 0.1` is
+already baked into these files.
+
 Run 3 uses a *smaller* radius on purpose: flipping shifts the band outward by one material
 thickness. Type the radius 3 mm of apothem short of where the hole belongs and the inversion lands
 it exactly right. Details in Part 8a of the writeup.

@@ -185,7 +185,9 @@ outside flats  233.731   bore flats 149.731</code></pre>
 <p>In <strong>Inkscape</strong>: break the inner octagon outline into its <strong>eight segments</strong> — one per face — and flip each segment. The eight flipped segments together are the hole; place them concentric on each outer disc and cut.</p>
 <p>Flipping a segment does two things at once, and Part 8 is about both:</p>
 <ul><li>it <strong>mirrors the tab-and-notch pattern</strong>, which is the phase swap the joint needs (§8b), and</li><li>it <strong>lands the band one material thickness further out</strong>, which is the ±3 mm shift you pre-compensate for by generating run 3 at 56.446 rather than 59.693 (§8a).</li></ul>
-<p>That is also why the finished plates carry their hole as eight closed contours instead of a single loop — <code>verify.js</code> reports <code>plates: 2   hole segments: 16</code> for the pair, and the measurements in Part 10 confirm the result lands at 55.149 / 58.149 with the pattern complementary to the panels.</p>
+<p>The eight flipped segments come out as eight separate contours, so the hole starts life as eight open polylines rather than one closed outline.</p>
+<p><strong>Stitching them back together — optional.</strong> In <code>BuildA1_90_25.svg</code> the eight were joined into a single closed loop per plate, which is why <code>verify.js</code> reports <code>hole contours: 2  (1 per plate)</code> rather than 16. <strong>This is probably unnecessary.</strong> Measured before stitching, the largest gap between one segment's endpoint and its neighbour's was <strong>0.077 mm</strong> — smaller than the 0.1 mm <code>burn</code>, and smaller still than a real beam, so the cuts overlap and the waste drops out regardless.</p>
+<p>Stitch anyway if your laser software applies its <em>own</em> kerf compensation, since offsetting needs closed paths to know which side is inside. But if it does, turn that off: <code>burn = 0.1</code> is already in the geometry, and compensating twice loosens every joint by another 0.1–0.2 mm — a far worse problem than a 0.077 mm gap.</p>
 <p><strong>This process is demonstrated step by step in the video.</strong></p>
 <p>Verified example of exactly this: <a href="RunA1_R90.svg"><code>RunA1_R90.svg</code></a>, <a href="RunA2_R59Point693.svg"><code>RunA2_R59Point693.svg</code></a>, <a href="RunA3_R56Point446.svg"><code>RunA3_R56Point446.svg</code></a>, assembled into <strong><a href="BuildA1_90_25.svg"><code>BuildA1_90_25.svg</code></a></strong>. All three runs reproduced the pristine O90 / O59 / O56 files to the last digit — same boundary lines, same finger intervals.</p>
 <h3 id="the-three-runs-as-links">The three runs as links</h3>
@@ -350,7 +352,8 @@ BuildA1 plate hole
 axial   = 31.200 − 3.1 − 3.1 = 25.000 ✓   (as-drawn; nominally 31.000 − 3.0 − 3.0)
 outside = 2 × 86.149 = 172.298
 bore    = 2 × 55.149 = 110.298
-phase   = interval pattern complementary to RunA2's disc ✓</code></pre>
+phase   = interval pattern complementary to RunA2's disc ✓
+holes   = one stitched contour per plate (20 contours total, not 34)</code></pre>
 <p>Both holes are concentric with their plate to <strong>0.000 mm</strong>. (<code>OctagonalTorusGold.svg</code> sits 0.090 off — a tenth of the kerf, below what 3 mm ply notices, but there is no reason to accept it now.)</p>
 <hr>
 <h1 id="part-11-wrong-turns-recorded">PART 11 — Wrong turns, recorded</h1>

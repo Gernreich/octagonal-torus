@@ -109,8 +109,9 @@ Object.keys(agg).sort(function(a,b){return parseFloat(b)-parseFloat(a);}).forEac
 });
 
 var plates = P.filter(function(p){ return p.w>160 && Math.abs(p.w-p.h)<1; });
-var segs = P.filter(function(p){ return p.w<60 && p.h<60 && !(p.w>40 && p.h>28); });
-console.log('\n  plates: ' + plates.length + '   hole segments: ' + segs.length);
+var holeCount = plates.reduce(function (t, pl) { return t + holePartsFor(pl, P).length; }, 0);
+console.log('\n  plates: ' + plates.length + '   hole contours: ' + holeCount +
+            (plates.length ? '  (' + (holeCount / plates.length) + ' per plate — 8 if segmented, 1 if stitched)' : ''));
 
 plates.forEach(function (PL, i) {
   var near = holePartsFor(PL, P);
@@ -206,7 +207,7 @@ if (plates.length) {
 // ─── nesting clearances ───────────────────────────────────────────────────────
 // Bounding boxes are useless here: the plates have a 110 mm hole and panels are legitimately
 // nested in that waste. Classify each panel by the octagon support function instead.
-var panels = P.filter(function (p) { return p.w > 40 && p.h > 28 && p.w < 160; });
+var panels = P.filter(isPanel);   // strictly ~31.2 mm tall rectangles — not hole loops
 if (plates.length && panels.length) {
   var bad = 0, tight = 1e9, tightWho = '';
   panels.forEach(function (pn) {

@@ -106,9 +106,19 @@ Flipping a segment does two things at once, and Part 8 is about both:
 - it **lands the band one material thickness further out**, which is the ±3 mm shift you
   pre-compensate for by generating run 3 at 56.446 rather than 59.693 (§8a).
 
-That is also why the finished plates carry their hole as eight closed contours instead of a single
-loop — `verify.js` reports `plates: 2   hole segments: 16` for the pair, and the measurements in
-Part 10 confirm the result lands at 55.149 / 58.149 with the pattern complementary to the panels.
+The eight flipped segments come out as eight separate contours, so the hole starts life as eight
+open polylines rather than one closed outline.
+
+**Stitching them back together — optional.** In `BuildA1_90_25.svg` the eight were joined into a
+single closed loop per plate, which is why `verify.js` reports `hole contours: 2  (1 per plate)`
+rather than 16. **This is probably unnecessary.** Measured before stitching, the largest gap between
+one segment's endpoint and its neighbour's was **0.077 mm** — smaller than the 0.1 mm `burn`, and
+smaller still than a real beam, so the cuts overlap and the waste drops out regardless.
+
+Stitch anyway if your laser software applies its *own* kerf compensation, since offsetting needs
+closed paths to know which side is inside. But if it does, turn that off: `burn = 0.1` is already in
+the geometry, and compensating twice loosens every joint by another 0.1–0.2 mm — a far worse problem
+than a 0.077 mm gap.
 
 **This process is demonstrated step by step in the video.**
 
@@ -617,6 +627,7 @@ axial   = 31.200 − 3.1 − 3.1 = 25.000 ✓   (as-drawn; nominally 31.000 − 
 outside = 2 × 86.149 = 172.298
 bore    = 2 × 55.149 = 110.298
 phase   = interval pattern complementary to RunA2's disc ✓
+holes   = one stitched contour per plate (20 contours total, not 34)
 ```
 
 Both holes are concentric with their plate to **0.000 mm**. (`OctagonalTorusGold.svg` sits 0.090
