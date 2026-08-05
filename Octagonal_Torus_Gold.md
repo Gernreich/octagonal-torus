@@ -22,7 +22,7 @@ method is unchanged and only the arithmetic differs.
 
 ![The verified geometry: a plan section through a plate showing the four octagon boundaries and the 25 mm ring, and a radial cross-section of the 25 × 25 cavity](torus-geometry-diagram.svg)
 
-**That figure is generated, not drawn.** `torus-geometry-diagram.js` computes every line, label and
+**The above figure is generated, not drawn.** `torus-geometry-diagram.js` computes every line, label and
 dimension from three numbers, so it always agrees with the arithmetic in this document instead of
 being an artist's impression of it.
 
