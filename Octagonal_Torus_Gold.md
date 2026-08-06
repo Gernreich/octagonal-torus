@@ -1,4 +1,4 @@
-# Octagonal_Torus — a 90mm radius octagonal torus with a 25 × 25 mm cross section, parametric
+# Octagonal_Torus — parametric, 90 mm radius, 25 × 25 mm cross-section
 
 Complete record: the trigonometry, the generator, the corrections, and the verified cut list.
 
