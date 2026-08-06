@@ -1,6 +1,6 @@
 # Octagonal_Torus — parametric, 90 mm radius, 25 × 25 mm cross-section
 
-Complete record: the trigonometry, the generator, the corrections, and the verified cut list.
+Complete record: the trigonometry, the generator, and the verified cut list.
 
 **All dimensions are millimetres.**
 
@@ -20,7 +20,7 @@ numbers** you choose:
 Everything else is derived. The worked numbers are a demonstration, not a constraint — if you want
 a 300 mm ring in 6 mm ply the method is unchanged and only the arithmetic differs.
 
-**TL;DR** — **[Part 12 — Another size](#part-12--another-size)** - A self-contained
+**TL;DR** — **[Part 11 — Another size](#part-11--another-size)** - A self-contained
 procedure for three numbers in ... (Magic) ... a cut file out, no other section required.
 
 ![The verified geometry: a plan section through a plate showing the four octagon boundaries and the 25 mm ring, and a radial cross-section of the 25 × 25 cavity](torus-geometry-diagram.svg)
@@ -60,7 +60,7 @@ That is all three runs — run 1 is simply the outer radius you chose, and the o
 | 3 — hole cutter | **74.540** | `R_inner − t × sec(22.5°)`, the §8a pre-compensation |
 
 So a 120 mm octagon with a 30 mm ring in 6 mm material needs those three numbers typed into
-boxes.py — Part 12's formula and the inversion offset, both done for you.
+boxes.py — Part 11's formula and the inversion offset, both done for you.
 
 **It draws a picture; it does not make cut files.** For parts, use Route A.
 
@@ -167,7 +167,7 @@ no overlaps.
 Cut it as-is.
 
 It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
-size or thickness use Route A, or Part 12 for the general formulas; none of the widths carry over.
+size or thickness use Route A, or Part 11 for the general formulas; none of the widths carry over.
 
 **The red and green lines are not part of the torus.** The file carries 28 red paths and 4 green
 ones alongside the 20 black cut contours; they mark possible cuts for turning the torus into the
@@ -674,27 +674,7 @@ holes   = one stitched contour per plate
 
 ---
 
-# PART 11 — Wrong turns, recorded
-
-Kept because each one was a plausible reading that the measurements killed.
-
-1. **"Two walls eat the gap, so nominal = 31."** True only if R 90 were the *outside* of the outer
-   tube. boxes.py's `radius` is an inner surface, so R 90 is the inside and only one wall intrudes:
-   nominal = 28.
-2. **"The inner panels don't follow the outer tube's width rule."** They do — Part 6's formula fits
-   every panel in every file. They were sized from the *typed* radius, which had stopped matching
-   the *shifted* disc.
-3. **"No inversion is needed anywhere."** A torus forces one (Part 7).
-4. **"The hole is already correctly phased because it matches the pristine disc."** Backwards — the
-   hole must be the disc's *complement* (Part 8b). This one produced a build that measured
-   perfectly and could not be assembled.
-
-The recurring lesson: position and phase are independent, and boxes.py's inversion changes both at
-once.
-
----
-
-# PART 12 — Another size
+# PART 11 — Another size
 
 **Self-contained.** Everything you need is here; nothing above is required reading.
 
