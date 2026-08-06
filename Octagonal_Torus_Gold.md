@@ -104,9 +104,10 @@ boxes.py — Part 11's formula and the inversion offset, both done for you.
 
 ## The video
 
-**Not published yet — the link will appear here.** It walks through the inversion: breaking the
-octagon outline into its eight segments and flipping each one, which is the step hardest to convey
-in text.
+**Not published yet.** It will appear on
+**[LaserMadeMusic](https://www.youtube.com/@LaserMadeMusic)**, which is where every *video* link on
+this page points until it is up. It walks through the inversion: breaking the octagon outline into
+its eight segments and flipping each one, which is the step hardest to convey in text.
 
 ---
 
@@ -166,7 +167,7 @@ closed paths to know which side is inside. But if it does, turn that off: `burn 
 the geometry, and compensating twice loosens every joint by another 0.1–0.2 mm — a far worse problem
 than a 0.077 mm gap.
 
-**This process is demonstrated step by step in the [video](#the-video).**
+**This process is demonstrated step by step in the [video](https://www.youtube.com/@LaserMadeMusic).**
 
 Verified example of exactly this: [`RunA1_R90.svg`](RunA1_R90.svg),
 [`RunA2_R59Point693.svg`](RunA2_R59Point693.svg), [`RunA3_R56Point446.svg`](RunA3_R56Point446.svg),
