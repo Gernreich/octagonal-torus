@@ -29,6 +29,9 @@ Below it the hole-cutter radius comes out zero or negative and there is no inner
 ring in 6 mm needs more than **77.932 mm**. A 500 mm ring would need an outer radius past 547 mm —
 ask for it at R 10 and the arithmetic simply has nowhere to put the bore.
 
+You will not get this wrong quietly: `torus-geometry-diagram.js` checks the floor before it draws
+anything and refuses, naming the minimum for your ring and thickness.
+
 Very small inner octagons have a softer limit too: a short face may not fit a finger joint, and
 boxes.py's own advice there is to reduce `finger` and `surroundingspaces`.
 
@@ -256,9 +259,11 @@ outside the repo, which inlines `torus-geometry-diagram.svg` so the page stays s
 node torus-geometry-diagram.js 90 25 3      # outer R, ring, thickness
 ```
 
-Redraws the figure at the top of this document and prints the resulting dimensions — see the note
-under the figure for what the three arguments mean. Regenerate the HTML afterwards to pick up the
-new drawing.
+Redraws the figure at the top of this document and prints the resulting dimensions, labelled by
+generator run — see the note under the figure for what the three arguments mean. It refuses, without
+writing anything, if the numbers do not describe a torus (`R_outer` below
+`(ring + 2 × thickness) × sec(180°/n)`) or if any argument is not a positive number. Regenerate the
+HTML afterwards to pick up the new drawing.
 
 Everything below is why.
 
