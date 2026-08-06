@@ -181,9 +181,9 @@ Invert the 59.693 disc instead and it lands at 58.149 / 61.149 — a **22 mm** r
 
 ## Route B — shortcut, cut the finished file
 
-**[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** is those 18 pieces already laid out — assembled by exactly the Route A steps
-above, and verified: 20 contours, holes concentric with their plates, joint phase complementary,
-no overlaps.
+**[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** is those 18 pieces already laid out — assembled by
+exactly the Route A steps above, and verified: 20 contours, holes concentric with their plates,
+joint phase complementary, no overlaps, and a cut order that never frees a part before it is cut.
 Cut it as-is.
 
 It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
@@ -196,6 +196,8 @@ cut contours; they mark possible cuts for turning the torus into the simple trum
 a plain torus — set them to a non-cutting layer, or delete them. `verify.js` skips exactly these two
 colours, which is why it reports 20 contours rather than 52.
 
+↩ [back to the top](#octagonaltorus--parametric-90-mm-radius-25--25-mm-cross-section)
+
 ### Colour is the cut order
 
 **Everything that is not red or green is a cut**, and the colour says *when*:
@@ -204,8 +206,14 @@ colours, which is why it reports 20 contours rather than 52.
 |---|---|---|---|
 | 1 | blue `#0000ff` | 6 | the panels nested **inside the plate holes** |
 | 2 | orange `#ff8000` | 2 | the plate holes — frees the waste centre |
-| 3 | black | 2 | the plate rims — frees the plates |
+| 3 | black — see below | 2 | the plate rims — frees the plates |
 | 4 | cyan `#00ffff` | 10 | the remaining panels, out on the open sheet |
+
+**The rims are not tagged black; they carry no stroke colour at all**, and render black by default.
+Select-same-colour will not find them and a colour-keyed job may not list them. Locate them by size
+instead — they are the two largest contours, 172.5 mm across — and assign them the third operation.
+`verify.js` treats an unset stroke and an explicit `#000000` as the same thing, so tagging them
+black explicitly is safe if that suits your software better.
 
 Six of the sixteen panels are nested in the middle of the plate holes, where they would otherwise be
 waste. That is what forces the sequence: **cut a part while its material is still held.** Cut the
@@ -228,8 +236,6 @@ hole it sits in, or a hole after its rim:
     4. cyan   x10  panels on the open sheet
     6 nested panels cut before their hole ✓   holes before rims ✓
 ```
-
-↩ [back to the top](#octagonaltorus--parametric-90-mm-radius-25--25-mm-cross-section)
 
 [Part 10](#part-10--file-record) says what every other file here is.
 
@@ -286,9 +292,11 @@ and explained below; they exist so a file can be checked in one command instead 
 node verify.js BuildA1_90_25.svg RunA2_R59Point693.svg
 ```
 
-Checks a cut file end to end: contour inventory with each panel's implied radius, plate and hole
-count, hole eccentricity, every boundary line as apothem / R / across-flats, the **joint phase**,
-nesting clearances, and whether all content sits inside the viewBox. The second argument is the R 59.693 run — the disc the inner panels key to.
+Checks a cut file end to end: the stroke **palette**, with each colour marked counted or ignored;
+contour inventory with each panel's implied radius; plate and hole count; hole eccentricity; every
+boundary line as apothem / R / across-flats; the **joint phase**; the **cut order**, including
+whether any part is freed before it is cut; nesting clearances; and whether all content sits inside
+the viewBox. The second argument is the R 59.693 run — the disc the inner panels key to.
 Without it the phase pattern still prints but cannot be judged, so pass it. A **COMPLEMENTARY ✓**
 verdict is the check that would have caught the first failed build; run it after any edit, including
 ones you believe were only cosmetic.
@@ -688,7 +696,7 @@ shows up as a spread across the four — up to 0.17 mm in one earlier file, and 
 one. That spread is the eccentricity, not measurement error: averaging the four recovers the true
 apothem, while a single face can be off by half of it.
 
-Four parsing pitfalls cost real time and are worth recording:
+Five pitfalls cost real time and are worth recording:
 
 1. **Relative subpaths.** Splitting a `d` attribute on `M`/`m` and parsing each fragment
    independently breaks relative (`m`) subpaths — the running point resets to 0,0 and pieces
@@ -702,6 +710,13 @@ Four parsing pitfalls cost real time and are worth recording:
    at their pre-transform coordinates. Here it produced a confident, wrong claim that a correctly
    centred hole sat 98 mm off its plate. If a part looks displaced by a round number, suspect the
    measuring tool before the file.
+5. **Filtering by colour.** `verify.js` skips the trumpet lines by stroke colour, and its ignore
+   list once included blue. When the cut contours were recoloured for cutting order, six intact
+   panels became blue and the tool reported 14 contours instead of 20 — a correct file looking like
+   a broken one, from a file whose geometry had not changed at all. A filter that drops geometry
+   must name what it dropped: the palette is now printed with every colour marked counted or
+   ignored, so the same recolour is visible rather than silent. Same lesson as pitfall 4, from the
+   other direction — the tool, not the file.
 
 Plus: `id="..."` contains the substring `d="..."`, so a naive regex will match it and parse
 nonsense.

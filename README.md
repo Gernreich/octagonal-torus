@@ -77,9 +77,10 @@ R_inner = R_outer − (ring + thickness) × sec(22.5°)
 node verify.js BuildA1_90_25.svg RunA2_R59Point693.svg
 ```
 
-Reports contours, plate and hole geometry, hole concentricity, **joint phase**, and nesting
-clearances. The phase check is the one that matters — it catches a hole whose tabs land where the
-panel is solid, which is a build that measures perfectly and cannot be assembled.
+Reports the stroke palette, contours, plate and hole geometry, hole concentricity, **joint phase**,
+**cut order**, nesting clearances, and whether everything sits inside the viewBox. The phase check
+is the one that matters — it catches a hole whose tabs land where the panel is solid, which is a
+build that measures perfectly and cannot be assembled.
 
 ```
 node torus-geometry-diagram.js 90 25 3        # redraw the figure at any size
