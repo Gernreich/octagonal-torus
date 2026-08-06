@@ -13,8 +13,7 @@ reproduced end to end from Route A —
 
 **Placeholder — photograph to come.** The finished torus, assembled from
 [`BuildA1_90_25.svg`](BuildA1_90_25.svg) and then cut along the
-[green lines](#note--the-red-and-green-lines) that turn it into the simple trumpet. Replacing
-`photo-sliced-torus.svg` with the photograph is the only change needed.
+[green lines](#note--the-red-and-green-lines) that turn it into the simple trumpet.
 
 **Your own size.** Nothing here is fixed to 90, 25 or 3 mm material. The whole object follows from
 **three numbers** you choose:
