@@ -437,7 +437,7 @@ Settings used:
 | `style` | rectangular | |
 | `finger` | 2.0 | finger width in multiples of thickness → **6 mm** |
 | `space` | 2.0 | gap between fingers → **6 mm** (so a **12 mm pitch**) |
-| `surroundingspaces` | 1.0 | space at the start and end — **this is the phase control** |
+| `surroundingspaces` | 1.0 | space at the start and end, in multiples of the normal space — so 1.0 is one 6 mm space — **this is the phase control** |
 | `play` | 0.0 | extra clearance; raise if joints are too tight |
 
 Each run produces: **2 discs** (top and bottom) and **8 side panels**. Which of them you keep

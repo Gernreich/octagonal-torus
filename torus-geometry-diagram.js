@@ -173,9 +173,16 @@ s.push('</g></svg>');
 
 require('fs').writeFileSync(__dirname + '/torus-geometry-diagram.svg', s.join('\n') + '\n');
 
-console.log('outer octagon  R ' + f(Ro) + '   apothem ' + f(aRim) + '   wall out to ' + f(aOut) + '   (run 1)');
-console.log('inner octagon  R ' + f(Ri) + '   apothem ' + f(aBore) + '   wall out to ' + f(aRingIn) + '   (run 2)');
-console.log('hole cutter    R ' + f(Rhole) + '   (run 3 — invert this disc)');
+// Pad the three columns to a common width. "R 90" against "R 59.693" is the common
+// case and reads badly ragged, and the widths are what the writeup quotes verbatim.
+function col(v, w) { var t = String(f(v)); return t + Array(Math.max(1, w - t.length + 1)).join(' '); }
+var wR = Math.max(String(f(Ro)).length, String(f(Ri)).length, String(f(Rhole)).length);
+var wA = Math.max(String(f(aRim)).length, String(f(aBore)).length);
+var wW = Math.max(String(f(aOut)).length, String(f(aRingIn)).length);
+
+console.log('outer octagon  R ' + col(Ro, wR) + '   apothem ' + col(aRim, wA) + '   wall out to ' + col(aOut, wW) + '   (run 1)');
+console.log('inner octagon  R ' + col(Ri, wR) + '   apothem ' + col(aBore, wA) + '   wall out to ' + col(aRingIn, wW) + '   (run 2)');
+console.log('hole cutter    R ' + col(Rhole, wR) + '   (run 3 — invert this disc)');
 console.log('ring           ' + f(aRim) + ' − ' + f(aRingIn) + ' = ' + f(aRim - aRingIn));
 console.log('outside flats  ' + f(2 * aOut) + '   bore flats ' + f(2 * aBore));
 console.log('wrote torus-geometry-diagram.svg');
