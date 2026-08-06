@@ -437,6 +437,7 @@ hole cutter    R 56.446   (run 3 — invert this disc)
 ring           83.149 − 58.149 = 25
 outside flats  172.298   bore flats 110.298</code></pre>
 <p>So <code>90 25 3</code> gives you <strong>90</strong>, <strong>59.693</strong> and <strong>56.446</strong> — the three radii to type into boxes.py in step 2. The last two lines are the finished object: 172.298 mm across the flats outside, 110.298 mm across the bore.</p>
+<p><strong>It also rewrites the figure.</strong> Every successful run overwrites <code>torus-geometry-diagram.svg</code> — the drawing at the top of this document — with your geometry, and it writes to the script's own directory whatever directory you run it from. That is the point if you are documenting your own build, and a nuisance if you only wanted the numbers. <code>git checkout torus-geometry-diagram.svg</code> puts the shipped one back.</p>
 <p>Or compute them yourself:</p>
 <pre><code>R_inner = R_outer − (S + t) × sec(180°/n)      ← run 2
 R_hole  = R_inner − t × sec(180°/n)            ← run 3</code></pre>

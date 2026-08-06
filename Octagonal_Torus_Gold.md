@@ -884,6 +884,12 @@ So `90 25 3` gives you **90**, **59.693** and **56.446** — the three radii to 
 step 2. The last two lines are the finished object: 172.298 mm across the flats outside, 110.298 mm
 across the bore.
 
+**It also rewrites the figure.** Every successful run overwrites `torus-geometry-diagram.svg` — the
+drawing at the top of this document — with your geometry, and it writes to the script's own
+directory whatever directory you run it from. That is the point if you are documenting your own
+build, and a nuisance if you only wanted the numbers.
+`git checkout torus-geometry-diagram.svg` puts the shipped one back.
+
 Or compute them yourself:
 
 ```
