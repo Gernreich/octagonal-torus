@@ -130,12 +130,13 @@ Three runs, because the plate hole and the inner panels come from **different ra
 
 → Keep **both discs** and all **8 panels**.
 
-**Run 2 — inner panels.** Same settings, `radius = 59.693`.
+**Run 2 — inner panels.** Same settings, `radius_bottom = radius_top = 59.693`. (There is no field
+called `radius`; set both, or you get a taper.)
 
 → Keep the **8 panels** only. Discard its discs.
 
-**Run 3 — the hole cutter.** Same settings, `radius = 56.446`. (`h` is irrelevant here — you only
-want the disc outline.)
+**Run 3 — the hole cutter.** Same settings, `radius_bottom = radius_top = 56.446`. (`h` is
+irrelevant here — you only want the disc outline.)
 
 → Keep **one disc**; it is the cutter for both plates. Discard everything else.
 
@@ -267,9 +268,10 @@ Dry-fit **one plate and one inner panel** in cardboard. The plate's tabs around 
 into the panel's notches.
 
 - Line up → cut everything
-- Land between the notches → change `surroundingspaces` from 1.0 and regenerate (12 mm pitch, so a
-  half-pitch is 6 mm)
-- Too tight → set `play` to 0.05–0.1
+- Land between the notches → change run 3's `surroundingspaces` and regenerate, but not by the value
+  you would guess: it is a staircase, not a dial, and everything from 1.0 to 2.5 redraws the same
+  face. [If the phase comes out wrong](#if-the-phase-comes-out-wrong) measures it
+- Too tight → set `play` to 0.05–0.1 — **multiples of thickness**, so 0.15–0.30 mm at t = 3
 
 **What the dry-fit is actually for.** Registration *is* provable from coordinates — that is exactly
 what `verify.js`'s phase check does, and a `COMPLEMENTARY ✓` means the tabs and notches are in the
@@ -341,8 +343,10 @@ node torus-geometry-diagram.js 90 25 3      # outer R, ring, thickness
 Redraws the figure at the top of this document and prints the resulting dimensions, labelled by
 generator run — see the note under the figure for what the three arguments mean. It refuses, without
 writing anything, if the numbers do not describe a torus (`R_outer` below
-`(ring + 2 × thickness) × sec(22.5°)` — it assumes an octagon) or if any argument is not a positive
-number. Regenerate the
+`(ring + 2 × thickness) × sec(22.5°)` — it assumes an octagon), if any argument is not a positive
+number, or if you give it one or two arguments instead of three. That last one matters: a missing
+thickness would otherwise be filled in from this build's 3 mm and answer confidently for the wrong
+material. Give all three or none. Regenerate the
 HTML afterwards to pick up the new drawing.
 
 Everything below is why.
@@ -470,7 +474,7 @@ Settings used:
 | `finger` | 2.0 | finger width in multiples of thickness → **6 mm** |
 | `space` | 2.0 | gap between fingers → **6 mm** (so a **12 mm pitch**) |
 | `surroundingspaces` | 1.0 | space at the start and end, in multiples of the normal space — so 1.0 is one 6 mm space — **this is the phase control** |
-| `play` | 0.0 | extra clearance; raise if joints are too tight |
+| `play` | 0.0 | extra clearance, **in multiples of thickness** like `finger` and `space` — so 0.1 is 0.3 mm, not 0.1 mm; raise if joints are too tight |
 
 Each run produces: **2 discs** (top and bottom) and **8 side panels**. Which of them you keep
 depends on the run — see Route A.
@@ -569,8 +573,11 @@ Part 6b measures the same panels against the **outer** surface instead. Both are
 same widths; they differ by the wall's projection, `2t·tan(22.5°) = 2.485`:
 
 ```
-4.443 = 2.485 + 1.958        2.685 = 2.485 + 0.200
+4.4426 = 2.4853 + 1.9574     2.6853 = 2.4853 + 0.2000
 ```
+
+(Four decimals here because the parts of a sum, rounded separately to three, stop adding up — see
+the rounding note in Part 9.)
 
 ## 6a. Why a panel looks too wide for its octagon
 
@@ -592,7 +599,7 @@ panel to the short end of the trapezoid:
 
 | | vs the hole segment (45.687) | per end |
 |---|---|---|
-| long panel 50.130 | +4.443 | **2.222** |
+| long panel 50.130 | +4.443 | **2.221** |
 | short panel 48.372 | +2.685 | **1.343** |
 
 Those are Part 6's two corner allowances, 4.443 and 2.685, arriving from the other direction.
@@ -607,8 +614,8 @@ surface — the correct reference — both tubes behave identically:
 
 | tube | outer-surface face (mm) | long panel (mm) | short panel (mm) | long over | short over |
 |---|---|---|---|---|---|
-| Outer (a = 86.149) | 71.368 | 73.326 | 71.568 | **+1.958** | **+0.200** |
-| Inner (a = 58.149) | 48.172 | 50.130 | 48.372 | **+1.958** | **+0.200** |
+| Outer (a = 86.149) | 71.368 | 73.326 | 71.568 | **+1.957** | **+0.200** |
+| Inner (a = 58.149) | 48.172 | 50.130 | 48.372 | **+1.957** | **+0.200** |
 
 Short panels sit flush on the face (+0.100 per end, kerf only). Long panels stand **0.979 per end**
 proud — `t(1 − 1/√2) + burn` — and lap over the short panel next to them. That is how boxes.py
@@ -702,8 +709,34 @@ opposite in phase. And stitching this build's hole segments into one loop took i
 80 points to 97 without moving a single coordinate. Counts depend on edit history and on your
 clustering tolerance; intervals depend only on the geometry.
 
-If a build comes out a half-pitch out of register, the fix is `surroundingspaces`, not geometry.
-With a 12 mm pitch, half a pitch is 6 mm.
+### If the phase comes out wrong
+
+The fix is `surroundingspaces`, not geometry — but not in the way the name suggests. **It does not
+slide the pattern along the face.** boxes.py centres the fingers on each face and keeps them
+centred; the parameter changes only **how many fit**. So it moves the phase in one way alone: by
+changing the finger count by one. An odd number of notches puts a notch at the face centre, an even
+number puts a finger there.
+
+That makes it a staircase, not a dial. Measured on run 2's disc at R 59.693:
+
+| `surroundingspaces` | notches across the face | at the face centre |
+|---|---|---|
+| 0.0 – 0.5 | 4 | finger |
+| **1.0 – 2.5** | **3** | **notch** ← this build |
+| 3.0 | 2 | finger |
+
+Everything from 1.0 to 2.5 is one tread of that staircase and regenerates an identical face —
+including **2.0**, which is exactly what "the pitch is 12 mm, so half a pitch is 6 mm" tempts you
+into typing, since the parameter counts in 6 mm spaces. To move the joint at all you have to step
+off the tread: **0.5 or below, or 3.0**.
+
+Where the treads fall depends on the face length, so one value does not act on all three runs alike.
+At R 60 / 25 / 3, dropping to 0.5 adds a finger to run 2's disc and leaves run 3's untouched — which
+is the mismatch, arriving by the route meant to cure it.
+
+So **change it on run 3**, the hole cutter. That moves the hole and leaves the panels it has to mate
+with where they are. Regenerate, re-invert, and confirm with `verify.js` rather than by eye: a
+`COMPLEMENTARY ✓` is the whole test, and it costs nothing next to a sheet of ply.
 
 ---
 
@@ -719,6 +752,13 @@ values reveals the boundary lines directly.
 **Kerf.** Every contour is outset by `burn = 0.1`, so measured values run 0.1 high per edge and
 0.2 high across a full width. All nominal figures here have that backed out. A measured 83.249
 is a nominal 83.149.
+
+**Rounding.** Every figure is the exact value rounded to 0.001 mm, and every sum, difference and
+halving was computed at full precision before rounding. So a decomposition can disagree with its own
+displayed parts in the last digit — the long panel stands 1.957 proud of its face and 0.979 per end,
+and 0.979 doubled looks like 1.958. Nothing is wrong; 0.001 mm is four times finer than a laser
+holds anyway. Where a printed identity would visibly fail to add up, it is given to four decimals
+instead.
 
 **Cross-check.** All four cardinal faces (top / bottom / left / right) are measured independently.
 On plate rims they agreed to 0.001 mm in every file. A hole sitting slightly off its rim's centre
@@ -774,6 +814,7 @@ Nothing else in the repository is a part:
 | `Octagonal_Torus_Gold.html` | the generated page — edits to it are overwritten |
 | `README.md` · `index.html` | repository front page, and the redirect that serves it on Pages |
 | `LICENSE` | CC0 1.0 |
+| `.gitignore` | keeps `.DS_Store` and `*.tmp` out of the repository |
 
 ## Final verification, `BuildA1_90_25.svg`
 
@@ -877,6 +918,11 @@ otherwise.
 In Inkscape, break its octagon outline into its `n` segments — one per face — and flip each one. The
 flipped segments together are the hole.
 
+This is the one step better watched than read: the **[video](https://www.youtube.com/@LaserMadeMusic)**
+demonstrates it, and [How the inversion was done](#how-the-inversion-was-done) walks through it.
+Expect `n` separate open polylines rather than one closed outline — stitching them back into a loop
+is optional, and that section says when it is worth doing.
+
 ## 4. Build the plates
 
 Place the inverted hole concentric on each of run 1's two discs and cut it out. Those two annular
@@ -887,8 +933,10 @@ plates are the torus's top and bottom faces.
 One plate against one inner panel, in cardboard. The plate's tabs should drop into the panel's
 notches.
 
-- Land between the notches → change `surroundingspaces` and regenerate
-- Too tight → raise `play` to 0.05–0.1
+- Land between the notches → change **run 3's** `surroundingspaces` and regenerate. It changes how
+  many fingers fit on a face, not where they sit, so small nudges do nothing at all — from 1.0 you
+  have to reach 0.5 or 3.0. [Part 8b](#if-the-phase-comes-out-wrong) measures it
+- Too tight → raise `play` to 0.05–0.1 — **multiples of thickness**, so 0.15–0.30 mm at t = 3
 
 ## Parts you end up with
 

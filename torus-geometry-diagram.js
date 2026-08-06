@@ -6,9 +6,23 @@
 //
 // Every coordinate is computed; nothing is typed by hand.
 
-var Ro = Number(process.argv[2] || 90);      // outer octagon, vertex radius (boxes.py `radius`)
-var RING = Number(process.argv[3] || 25);    // clear annulus, face to face
-var T = Number(process.argv[4] || 3);        // material thickness
+// All three or none. Filling a missing argument from the defaults would answer a question
+// nobody asked: `... 200 60` would silently compute in 3 mm and print a plausible, wrong
+// R_inner of 131.809 instead of 128.562.
+var given = process.argv.slice(2);
+if (given.length !== 0 && given.length !== 3) {
+  console.error('REFUSING: give all three numbers, or none for the ' +
+                'defaults (90 25 3). Got ' + given.length + ': ' + given.join(' '));
+  console.error('\n  node torus-geometry-diagram.js <outerR> <ring> <thickness>');
+  console.error('                                  │        │      └─ material thickness');
+  console.error('                                  │        └──────── ring, face to face');
+  console.error('                                  └───────────────── outer radius, corner to centre');
+  process.exit(1);
+}
+
+var Ro = Number(given[0] || 90);             // outer octagon, vertex radius (boxes.py `radius`)
+var RING = Number(given[1] || 25);           // clear annulus, face to face
+var T = Number(given[2] || 3);               // material thickness
 
 var COS = Math.cos(Math.PI / 8), SEC = 1 / COS;
 var Ri = Ro - (RING + T) * SEC;              // inner octagon = the bore
