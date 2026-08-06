@@ -8,8 +8,8 @@ Complete record: the trigonometry, the generator, and the verified cut list.
 at R 90, cut from 3 mm material. Verified cut file: **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**,
 reproduced end to end from Route A.
 
-**Your own size.** Nothing here is fixed to 90 and 25. The whole object follows from **three
-numbers** you choose:
+**Your own size.** Nothing here is fixed to 90, 25 or 3 mm material. The whole object follows from
+**three numbers** you choose:
 
 | | this example | yours |
 |---|---|---|
