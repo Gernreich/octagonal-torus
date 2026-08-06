@@ -9,6 +9,13 @@ at R 90, cut from 3 mm material. Verified cut file: **[`BuildA1_90_25.svg`](Buil
 reproduced end to end from Route A —
 [note on the red and green lines in it](#note--the-red-and-green-lines).
 
+![Placeholder for a photograph of the assembled octagonal torus, sliced along the green lines](photo-sliced-torus.svg)
+
+**Placeholder — photograph to come.** The finished torus, assembled from
+[`BuildA1_90_25.svg`](BuildA1_90_25.svg) and then cut along the
+[green lines](#note--the-red-and-green-lines) that turn it into the simple trumpet. Replacing
+`photo-sliced-torus.svg` with the photograph is the only change needed.
+
 **Your own size.** Nothing here is fixed to 90, 25 or 3 mm material. The whole object follows from
 **three numbers** you choose:
 
