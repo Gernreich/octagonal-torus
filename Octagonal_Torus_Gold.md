@@ -1,4 +1,4 @@
-# Octagonal_Torus — a 25 × 25 mm octagonal torus, derived from scratch and buildable at any size
+# Octagonal_Torus — a 90mm radius octagonal torus with a 25 × 25 mm cross section, parametric
 
 Complete record: the trigonometry, the generator, the corrections, and the verified cut list.
 
