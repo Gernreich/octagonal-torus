@@ -20,7 +20,7 @@ numbers** you choose:
 Everything else is derived. The worked numbers are a demonstration, not a constraint — if you want
 a 300 mm ring in 6 mm ply the method is unchanged and only the arithmetic differs.
 
-**TL;DR** — **[Part 12 — Another size](#part-12--doing-this-at-another-size)** - A self-contained
+**TL;DR** — **[Part 12 — Another size](#part-12--another-size)** - A self-contained
 procedure for three numbers in ... (Magic) ... a cut file out, no other section required.
 
 ![The verified geometry: a plan section through a plate showing the four octagon boundaries and the 25 mm ring, and a radial cross-section of the 25 × 25 cavity](torus-geometry-diagram.svg)
@@ -694,7 +694,7 @@ once.
 
 ---
 
-# PART 12 — Doing this at another size
+# PART 12 — Another size
 
 **Self-contained.** Everything you need is here; nothing above is required reading.
 
