@@ -48,7 +48,7 @@ all as `RegularBox.svg`.
 
 **Inverting the disc:** in Inkscape, break the octagon outline into its eight segments — one per
 face — and flip each one. The flipped segments together are the hole; place them concentric on each
-outer disc and cut. **The video shows this step by step**, and
+outer disc and cut. **The [video](Octagonal_Torus_Gold.md#the-video) shows this step by step**, and
 [the writeup](Octagonal_Torus_Gold.md#how-the-inversion-was-done) explains what flipping does to the
 joint.
 
