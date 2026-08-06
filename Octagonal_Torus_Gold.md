@@ -6,7 +6,8 @@ Complete record: the trigonometry, the generator, and the verified cut list.
 
 **Worked example:** an octagonal torus with a 25.000 × 25.000 mm square cross-section, outer octagon
 at R 90, cut from 3 mm material. Verified cut file: **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**,
-reproduced end to end from Route A.
+reproduced end to end from Route A —
+[note on the red and green lines in it](#note--the-red-and-green-lines).
 
 **Your own size.** Nothing here is fixed to 90, 25 or 3 mm material. The whole object follows from
 **three numbers** you choose:
@@ -188,11 +189,14 @@ Cut it as-is.
 It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
 size or thickness use Route A, or Part 11 for the general formulas; none of the widths carry over.
 
-**The red and green lines are not part of the torus.** The file carries 28 red paths and 4 green
-ones alongside the 20 black cut contours; they mark possible cuts for turning the torus into the
-simple trumpet. Ignore them for a plain torus — set them to a non-cutting layer, or delete them, and
-cut only the black. `verify.js` already skips them, which is why it reports 20 contours rather than
-52.
+### Note — the red and green lines
+
+**They are not part of the torus.** The file carries 28 red paths and 4 green ones alongside the 20
+black cut contours; they mark possible cuts for turning the torus into the simple trumpet. Ignore
+them for a plain torus — set them to a non-cutting layer, or delete them, and cut only the black.
+`verify.js` already skips them, which is why it reports 20 contours rather than 52.
+
+↩ [back to the top](#octagonaltorus--parametric-90-mm-radius-25--25-mm-cross-section)
 
 [Part 10](#part-10--file-record) says what every other file here is.
 
