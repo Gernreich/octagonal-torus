@@ -114,13 +114,16 @@ Three runs, because the plate hole and the inner panels come from **different ra
 
 **Run 1 — outer tube.** RegularBox: `radius_bottom = radius_top = 90`, `h = 25`, `n = 8`,
 `thickness = 3`, `burn = 0.1`, `top`/`bottom` = closed, `outside` unchecked.
+
 → Keep **both discs** and all **8 panels**.
 
 **Run 2 — inner panels.** Same settings, `radius = 59.693`.
+
 → Keep the **8 panels** only. Discard its discs.
 
 **Run 3 — the hole cutter.** Same settings, `radius = 56.446`. (`h` is irrelevant here — you only
 want the disc outline.)
+
 → Keep **one disc**; it is the cutter for both plates. Discard everything else.
 
 **Then:** invert that 56.446 disc and use it to cut the hole in each of the two outer discs.
@@ -199,7 +202,7 @@ colours, which is why it reports 20 contours rather than 52.
 
 ↩ [back to the top](#octagonaltorus--parametric-90-mm-radius-25--25-mm-cross-section)
 
-### Colour is the cut order
+## Colour is the cut order
 
 **Everything that is not red or green is a cut**, and the colour says *when*:
 
