@@ -17,8 +17,9 @@ numbers** you choose:
 | Ring — the square cross-section | 25 mm | any |
 | Material thickness | 3 mm | any |
 
-Everything else is derived. The worked numbers are a demonstration, not a constraint — if you want
-a 300 mm ring in 6 mm ply the method is unchanged and only the arithmetic differs.
+Everything else is derived. The worked numbers are a demonstration, not a constraint — an R 500 mm
+torus with a 300 mm ring in 6 mm ply follows the same method, and only the arithmetic differs (that
+one comes out at R 168.788 inner, 935.88 across the flats).
 
 **TL;DR** — **[Part 11 — Another size](#part-11--another-size)** - A self-contained
 procedure for three numbers in ... (Magic) ... a cut file out, no other section required.
