@@ -210,9 +210,7 @@ colours, which is why it reports 20 contours rather than 52.
 | 4 | cyan `#00ffff` | 10 | the remaining panels, out on the open sheet |
 
 All four are explicit stroke colours, so select-same-colour finds each group and a colour-keyed job
-lists all four. (Earlier copies of this file left the rims with no stroke property at all — they
-rendered black but would not have been selectable that way. `verify.js` treats an unset stroke and
-an explicit `#000000` as the same operation, so a file of either vintage passes.)
+lists all four.
 
 Six of the sixteen panels are nested in the middle of the plate holes, where they would otherwise be
 waste. That is what forces the sequence: **cut a part while its material is still held.** Cut the
