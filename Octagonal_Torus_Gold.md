@@ -83,7 +83,7 @@ That is all three runs — run 1 is simply the outer radius you chose, and the o
 |---|---|---|
 | 1 — outer tube | **120** | your choice |
 | 2 — inner panels | **81.034** | `R_outer − (ring + t) × sec(22.5°)` |
-| 3 — hole cutter | **74.540** | `R_inner − t × sec(22.5°)`, the §8a pre-compensation |
+| 3 — hole cutter | **74.540** | `R_inner − t × sec(22.5°)` — the pre-compensation of Part 8a |
 
 So a 120 mm octagon with a 30 mm ring in 6 mm material needs those three numbers typed into
 boxes.py — Part 11's formula and the inversion offset, both done for you.
@@ -112,7 +112,7 @@ Assembled: **25.000 mm radial × 25.000 mm axial**, 172.298 across the flats out
 **What the parts are.** The two plates are the torus's top and bottom faces — annular, 25 mm wide.
 The 8 outer panels form its outside wall, the 8 inner panels its bore wall. Each set of 8 is
 **4 long + 4 short, alternating**, because that is how a polygon tube closes with rectangular
-fingers (§6b).
+fingers (Part 6b).
 
 ## The video
 
@@ -149,9 +149,9 @@ outer disc and cut.
 
 Flipping a segment does two things at once, and Part 8 is about both:
 
-- it **mirrors the tab-and-notch pattern**, which is the phase swap the joint needs (§8b), and
+- it **mirrors the tab-and-notch pattern**, which is the phase swap the joint needs (Part 8b), and
 - it **lands the band one material thickness further out**, which is the ±3 mm shift you
-  pre-compensate for by generating run 3 at 56.446 rather than 59.693 (§8a).
+  pre-compensate for by generating run 3 at 56.446 rather than 59.693 (Part 8a).
 
 The eight flipped segments come out as eight separate contours, so the hole starts life as eight
 open polylines rather than one closed outline.
@@ -304,7 +304,7 @@ takes 0.1 off each edge. Neither is an error — they are the same part before a
 | inner panels, long / short — 4 of each | **50.130** / **48.372** × 31.200 | 49.930 / 48.172 × 31.000 |
 
 The bold figures are the ones quoted elsewhere in this document: octagon geometry is given nominal
-(§9), panel widths as drawn, since that is what boxes.py emits and what `verify.js` reports.
+(Part 9), panel widths as drawn, since that is what boxes.py emits and what `verify.js` reports.
 
 ## Tooling
 
@@ -559,7 +559,7 @@ wall's double offset — but treat them as a fitted rule that holds across every
 proven generator behaviour.
 
 Note the `a` above is the apothem of the **inner** surface — the apothem of the radius you typed.
-§6b measures the same panels against the **outer** surface instead. Both are correct and give the
+Part 6b measures the same panels against the **outer** surface instead. Both are correct and give the
 same widths; they differ by the wall's projection, `2t·tan(22.5°) = 2.485`:
 
 ```
@@ -592,7 +592,7 @@ panel to the short end of the trapezoid:
 Those are Part 6's two corner allowances, 4.443 and 2.685, arriving from the other direction.
 **1.243 per end is common to both** — the wall projecting outward as the face grows from bore radius
 to outer radius, `t·tan(22.5°)`. What remains differs by panel type: for the long panel the 0.979
-corner lap (§6b), for the short panel just the 0.100 kerf.
+corner lap (Part 6b), for the short panel just the 0.100 kerf.
 
 ## 6b. The corner lap
 
