@@ -13,9 +13,24 @@ reproduced end to end from Route A.
 
 | | this example | yours |
 |---|---|---|
-| Outer octagon radius, corner to centre | 90 mm | any |
-| Ring — the square cross-section | 25 mm | any |
-| Material thickness | 3 mm | any |
+| Outer octagon radius, corner to centre | 90 mm | your choice |
+| Ring — the square cross-section | 25 mm | your choice |
+| Material thickness | 3 mm | whatever you are cutting |
+
+They are not independent, though. The ring and the two walls have to fit inside the outer octagon,
+which puts a floor under the radius:
+
+```
+R_outer  >  (ring + 2 × thickness) × sec(180°/n)
+```
+
+Below it the hole-cutter radius comes out zero or negative and there is no inner tube at all. For a
+25 mm ring in 3 mm that floor is **33.554 mm**, so this build's 90 is comfortably clear; a 60 mm
+ring in 6 mm needs more than **77.932 mm**. A 500 mm ring would need an outer radius past 547 mm —
+ask for it at R 10 and the arithmetic simply has nowhere to put the bore.
+
+Very small inner octagons have a softer limit too: a short face may not fit a finger joint, and
+boxes.py's own advice there is to reduce `finger` and `surroundingspaces`.
 
 Everything else is derived. The worked numbers are a demonstration, not a constraint — an R 200 mm
 torus with a 60 mm ring in 6 mm ply follows the same method, and only the arithmetic differs (that
@@ -729,6 +744,10 @@ R_hole  = R_inner − t × sec(180°/n)            ← run 3
 
 `sec(180°/n)`: square **1.4142** · hexagon **1.1547** · **octagon 1.0824** · decagon **1.0515** ·
 dodecagon **1.0353**.
+
+**Sanity check your three numbers first:** `R_outer` must exceed `(S + 2t) × sec(180°/n)`, or
+`R_hole` comes out zero or negative and there is no inner tube. The script prints a negative radius
+rather than warning you.
 
 ### 2. Generate three boxes.py runs
 
