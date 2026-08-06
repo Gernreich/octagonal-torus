@@ -8,7 +8,7 @@ derives from them. [Build it at your own size](#build-it-at-your-own-size).
 ![geometry](torus-geometry-diagram.svg)
 
 **Full writeup:** [`Octagonal_Torus_Gold.md`](Octagonal_Torus_Gold.md) — the trigonometry, the
-generator settings, every wrong turn, and how each number was verified against the cut files.
+generator settings, and how each number was verified against the cut files.
 
 ---
 
