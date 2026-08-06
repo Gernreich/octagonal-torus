@@ -196,12 +196,38 @@ cut contours; they mark possible cuts for turning the torus into the simple trum
 a plain torus — set them to a non-cutting layer, or delete them. `verify.js` skips exactly these two
 colours, which is why it reports 20 contours rather than 52.
 
-**Everything that is not red or green is a cut.** The 20 cut contours are not all one colour — the
-rims are black, the plate holes orange, the panels blue and cyan. Nothing is implied by that split;
-it is there for organising the job on the machine. Set **every** non-red, non-green colour to a
-cutting operation, or you will lose whichever ones your software leaves unassigned. `verify.js`
-prints the palette at the top of its report, with each colour marked counted or ignored, so you can
-check that against the operations you have set up.
+### Colour is the cut order
+
+**Everything that is not red or green is a cut**, and the colour says *when*:
+
+| | colour | contours | what, and why there |
+|---|---|---|---|
+| 1 | blue `#0000ff` | 6 | the panels nested **inside the plate holes** |
+| 2 | orange `#ff8000` | 2 | the plate holes — frees the waste centre |
+| 3 | black | 2 | the plate rims — frees the plates |
+| 4 | cyan `#00ffff` | 10 | the remaining panels, out on the open sheet |
+
+Six of the sixteen panels are nested in the middle of the plate holes, where they would otherwise be
+waste. That is what forces the sequence: **cut a part while its material is still held.** Cut the
+orange hole first and the whole centre drops away, taking three uncut panels per plate with it —
+into the machine, if you are unlucky. Holes before rims for the same reason: once the black rim is
+through, the plate is loose and anything still to be cut in it will move.
+
+So set your laser to run **blue → orange → black → cyan**, and give every one of those four a
+cutting operation. A job set up per-colour silently skips any colour you leave unmapped.
+
+`verify.js` checks all of this. It prints the palette, marks each colour counted or ignored, lists
+the four in order with what each one is, and fails loudly if a nested panel is scheduled after the
+hole it sits in, or a hole after its rim:
+
+```
+  CUT ORDER
+    1. blue   x6   panels nested in the plate holes — cut before the waste is freed
+    2. orange x2   plate holes
+    3. black  x2   plate rims — frees the plates
+    4. cyan   x10  panels on the open sheet
+    6 nested panels cut before their hole ✓   holes before rims ✓
+```
 
 ↩ [back to the top](#octagonaltorus--parametric-90-mm-radius-25--25-mm-cross-section)
 

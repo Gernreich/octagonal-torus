@@ -28,9 +28,12 @@ Dry-fit one plate against one inner panel in cardboard before committing a sheet
 around the hole should drop into the panel's notches.
 
 **Cut everything except the red and green.** Those paths in the file mark possible cuts for making
-the simple trumpet, not the torus — move them to a non-cutting layer or delete them first. The 20
-cut contours use several colours (black, orange, blue, cyan); assign a cutting operation to all of
-them.
+the simple trumpet, not the torus — move them to a non-cutting layer or delete them first.
+
+**Colour is the cut order: blue → orange → black → cyan.** Six panels are nested inside the plate
+holes, so they have to be cut before the hole that frees that waste; the holes have to be cut before
+the rims that free the plates. Give all four colours a cutting operation and run them in that order.
+`verify.js` checks the sequence and will tell you if it is wrong.
 
 ## Build it at your own size
 

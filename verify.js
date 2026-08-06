@@ -58,9 +58,13 @@ function apo(dx, dy) {
 var IGNORE = { '#ff0000': 'red — trumpet cut lines', '#00ff00': 'green — trumpet cut lines' };
 var palette = {};   // every stroke colour seen -> { n, ignored }
 
+// An explicit #000000 and no stroke at all are the same operation on the machine,
+// so they must collapse to one key or the cut order sees an unknown colour.
 function strokeOf(attrs) {
   var m = /stroke:\s*(#[0-9a-fA-F]{6})/.exec(attrs);
-  return m ? m[1].toLowerCase() : 'none/black';
+  if (!m) return 'black';
+  var c = m[1].toLowerCase();
+  return c === '#000000' ? 'black' : c;
 }
 function collect(file) {
   var src = fs.readFileSync(file, 'utf8'), stack = [[1,0,0,1,0,0]], parts = [];
@@ -78,7 +82,7 @@ function collect(file) {
     var dm = /(?:^|\s)d="([^"]+)"/.exec(attrs);
     if (!dm) continue;
     var col = strokeOf(attrs);
-    if (col === 'none/black' && /fill:\s*#00ff00/i.test(attrs)) col = '#00ff00';
+    if (col === 'black' && /fill:\s*#00ff00/i.test(attrs)) col = '#00ff00';
     var ign = Object.prototype.hasOwnProperty.call(IGNORE, col);
     if (!palette[col]) palette[col] = { n: 0, ignored: ign };
     palette[col].n++;
@@ -264,6 +268,78 @@ if (plates.length && panels.length) {
   console.log('    panel-to-panel overlaps        : ' + ov + (ov ? '  ✗' : '  ✓'));
   console.log('    tightest panel↔plate margin    : ' + f(tight) + ' mm   (' + tightWho + ')');
   console.log('    tightest panel↔panel gap       : ' + f(mg) + ' mm   (' + mgWho + ')');
+}
+
+// ─── cut order ────────────────────────────────────────────────────────────────
+// Colour is the cut sequence. The rule a laser job must respect is that a contour
+// is cut while its material is still held: anything nested inside a piece of waste
+// goes before the cut that frees that waste. Here that means the panels sitting in
+// the plate holes precede the holes, and the holes precede the rims.
+var CUT_ORDER = ['#0000ff', '#ff8000', 'black', '#00ffff'];
+var CUT_NAME = { '#0000ff': 'blue', '#ff8000': 'orange', 'black': 'black', '#00ffff': 'cyan' };
+
+if (plates.length) {
+  console.log('\n  CUT ORDER');
+  var known = P.filter(function (p) { return CUT_ORDER.indexOf(p.col) >= 0; });
+  if (known.length !== P.length) {
+    var odd = {};
+    P.forEach(function (p) { if (CUT_ORDER.indexOf(p.col) < 0) odd[p.col] = (odd[p.col] || 0) + 1; });
+    Object.keys(odd).forEach(function (c) {
+      console.log('    *** ' + c + ' (x' + odd[c] + ') is not in the cut order — sequence unknown for it');
+    });
+  }
+  var rank = {}; CUT_ORDER.forEach(function (c, i) { rank[c] = i; });
+
+  // which panels sit inside a plate's hole, and therefore drop out with the waste?
+  var nested = [];
+  plates.forEach(function (pl, pi) {
+    P.forEach(function (p) {
+      if (!isPanel(p)) return;
+      var allIn = true;
+      p.pts.forEach(function (q) { if (apo(q[0] - pl.cx, q[1] - pl.cy) > A_HOLE_IN) allIn = false; });
+      if (allIn) nested.push({ part: p, plate: pi });
+    });
+  });
+
+  CUT_ORDER.forEach(function (c, i) {
+    var g = P.filter(function (p) { return p.col === c; });
+    if (!g.length) return;
+    var nPan = g.filter(function (p) { return isPanel(p); }).length;
+    var nRim = g.filter(function (p) { return p.w > 160 && Math.abs(p.w - p.h) < 1; }).length;
+    var nHole = g.length - nPan - nRim;
+    var role;
+    if (nPan === g.length) {
+      role = g.every(function (p) { return nested.some(function (nn) { return nn.part === p; }); })
+        ? 'panels nested in the plate holes — cut before the waste is freed'
+        : (nested.some(function (nn) { return nn.part.col === c; })
+            ? 'panels, some nested in the holes and some on the open sheet'
+            : 'panels on the open sheet');
+    } else if (nRim === g.length) role = 'plate rims — frees the plates';
+    else if (nHole === g.length) role = 'plate holes';
+    else role = 'mixed — ' + nPan + ' panel(s), ' + nHole + ' hole(s), ' + nRim + ' rim(s)';
+    console.log('    ' + (i + 1) + '. ' + CUT_NAME[c].padEnd(7) + 'x' + String(g.length).padEnd(4) + role);
+  });
+
+  var viol = 0;
+  var holeCol = null, rimCol = null;
+  P.forEach(function (p) {
+    if (p.w > 160 && Math.abs(p.w - p.h) < 1) rimCol = p.col;
+    else if (!isPanel(p) && p.w > 100) holeCol = p.col;
+  });
+  nested.forEach(function (nn) {
+    if (holeCol !== null && rank[nn.part.col] > rank[holeCol]) {
+      viol++;
+      console.log('    *** ' + f(nn.part.w) + ' panel sits inside plate ' + nn.plate + "'s hole but is cut " +
+                  CUT_NAME[nn.part.col] + ', AFTER the ' + CUT_NAME[holeCol] + ' hole — it would drop with the waste');
+    }
+  });
+  if (holeCol !== null && rimCol !== null && rank[holeCol] > rank[rimCol]) {
+    viol++;
+    console.log('    *** holes (' + CUT_NAME[holeCol] + ') are cut after rims (' + CUT_NAME[rimCol] +
+                ') — the plate is loose before its hole is made');
+  }
+  console.log('    ' + (viol ? '*** ' + viol + ' ordering problem(s) ***'
+                             : nested.length + ' nested panels cut before their hole ✓   holes before rims ✓'));
 }
 
 // ─── sheet bounds ─────────────────────────────────────────────────────────────
