@@ -17,6 +17,34 @@ var aRim = Ro * COS;                         // plate rim / outer tube inner sur
 var aOut = aRim + T;                         // outer tube outer surface
 var aBore = Ri * COS;                        // bore
 var aRingIn = aBore + T;                     // ring inner bound = inner tube wall, outer face
+var Rhole = Ri - T * SEC;                    // run 3 — the pre-compensated hole cutter
+
+// NaN fails every comparison, so a non-numeric argument would slip past the check below and
+// produce an SVG full of NaN coordinates. Reject it here.
+[['outer radius', Ro], ['ring', RING], ['thickness', T]].forEach(function (p) {
+  if (!isFinite(p[1]) || p[1] <= 0) {
+    console.error('REFUSING: ' + p[0] + ' must be a positive number, got "' + p[1] + '"');
+    console.error('\n  node torus-geometry-diagram.js <outerR> <ring> <thickness>');
+    process.exit(1);
+  }
+});
+
+// The three inputs are not independent: the ring and both walls have to fit inside the outer
+// octagon. Below the floor there is no inner tube, and every number after this is nonsense.
+if (Rhole <= 0) {
+  var floor = (RING + 2 * T) * SEC;
+  console.error('REFUSING: these numbers do not describe a torus.\n');
+  console.error('  outer radius   ' + Math.round(Ro * 1000) / 1000);
+  console.error('  ring           ' + RING);
+  console.error('  thickness      ' + T);
+  console.error('  hole cutter    ' + Math.round(Rhole * 1000) / 1000 + '   ← must be positive\n');
+  console.error('R_outer must exceed (ring + 2 x thickness) x sec(180/n)');
+  console.error('  = (' + RING + ' + 2 x ' + T + ') x ' + (Math.round(SEC * 1000000) / 1000000) +
+                ' = ' + (Math.round(floor * 1000) / 1000) + '\n');
+  console.error('Raise the outer radius above ' + (Math.round(floor * 1000) / 1000) +
+                ', or reduce the ring or the thickness.');
+  process.exit(1);
+}
 
 function f(x) { return Math.round(x * 1000) / 1000; }
 function pt(r, deg) { var a = deg * Math.PI / 180; return [f(r * Math.cos(a)), f(-r * Math.sin(a))]; }
@@ -147,7 +175,7 @@ require('fs').writeFileSync(__dirname + '/torus-geometry-diagram.svg', s.join('\
 
 console.log('outer octagon  R ' + f(Ro) + '   apothem ' + f(aRim) + '   wall out to ' + f(aOut) + '   (run 1)');
 console.log('inner octagon  R ' + f(Ri) + '   apothem ' + f(aBore) + '   wall out to ' + f(aRingIn) + '   (run 2)');
-console.log('hole cutter    R ' + f(Ri - T * SEC) + '   (run 3 — invert this disc)');
+console.log('hole cutter    R ' + f(Rhole) + '   (run 3 — invert this disc)');
 console.log('ring           ' + f(aRim) + ' − ' + f(aRingIn) + ' = ' + f(aRim - aRingIn));
 console.log('outside flats  ' + f(2 * aOut) + '   bore flats ' + f(2 * aBore));
 console.log('wrote torus-geometry-diagram.svg');

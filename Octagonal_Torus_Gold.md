@@ -745,9 +745,9 @@ R_hole  = R_inner − t × sec(180°/n)            ← run 3
 `sec(180°/n)`: square **1.4142** · hexagon **1.1547** · **octagon 1.0824** · decagon **1.0515** ·
 dodecagon **1.0353**.
 
-**Sanity check your three numbers first:** `R_outer` must exceed `(S + 2t) × sec(180°/n)`, or
-`R_hole` comes out zero or negative and there is no inner tube. The script prints a negative radius
-rather than warning you.
+**The three numbers are not independent:** `R_outer` must exceed `(S + 2t) × sec(180°/n)`, or
+`R_hole` comes out zero or negative and there is no inner tube. The script checks this and refuses,
+telling you the floor for your ring and thickness, rather than drawing something impossible.
 
 ### 2. Generate three boxes.py runs
 
