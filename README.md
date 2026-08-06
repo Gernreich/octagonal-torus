@@ -1,11 +1,11 @@
-# Octagonal torus — 25 × 25 mm cross-section, buildable at any size
+# Octagonal torus — parametric, 90 mm radius, 25 × 25 mm cross-section
 
 A laser-cut octagonal torus: two nested octagonal tubes joined by annular plates, leaving a
 **square channel** all the way round. The cut file here is a 25 × 25 mm channel with an outer
 octagon of R 90 in 3 mm material — but those are three numbers you choose, and everything else
-derives from them. [Build it at your own size](#build-it-at-your-own-size).
+derives from them, within one constraint. [Build it at your own size](#build-it-at-your-own-size).
 
-![geometry](torus-geometry-diagram.svg)
+![Plan section through a plate showing the four octagon boundaries and the 25 mm ring, with a radial cross-section of the 25 × 25 mm cavity](torus-geometry-diagram.svg)
 
 **Full writeup:** [`Octagonal_Torus_Gold.md`](Octagonal_Torus_Gold.md) — the trigonometry, the
 generator settings, and how each number was verified against the cut files.
@@ -59,8 +59,9 @@ compensation, which needs closed paths — and if it does, switch it off, becaus
 already baked into these files.
 
 Run 3 uses a *smaller* radius on purpose: flipping shifts the band outward by one material
-thickness. Type the radius 3 mm of apothem short of where the hole belongs and the inversion lands
-it exactly right. Details in Part 8a of the writeup.
+thickness. So you type the radius whose *apothem* is 3 mm short of where the band should land —
+3.247 smaller in radius, since 3 mm of apothem is 3 × sec(22.5°) — and the inversion carries it
+exactly into place. Details in Part 8a of the writeup.
 
 The size relationship is fixed by one constant:
 
@@ -70,6 +71,18 @@ R_inner = R_outer − (ring + thickness) × sec(22.5°)
 ```
 
 `sec(22.5°) = 1.0824` — an octagon's corners sit 8.24 % further out than its flats.
+
+**The three numbers are not independent.** The ring and both walls have to fit inside the outer
+octagon, which puts a floor under the radius:
+
+```
+R_outer  >  (ring + 2 × thickness) × sec(180°/n)
+```
+
+For a 25 mm ring in 3 mm that floor is 33.554 mm, so R 90 is comfortably clear. Below it the hole
+cutter comes out zero or negative and there is no bore at all — ask for a 500 mm ring at R 10 and
+the arithmetic has nowhere to put it. `torus-geometry-diagram.js` checks this before it draws
+anything and refuses, naming the minimum for your ring and thickness.
 
 ## Check your own file
 
