@@ -191,12 +191,12 @@ outside flats  233.731   bore flats 149.731</code></pre>
 <h1 id="part-0--build-it">PART 0 — Build it</h1>
 <h3 id="get-the-files">Get the files</h3>
 <ul><li><strong><a href="BuildA1_90_25.svg"><code>BuildA1_90_25.svg</code></a></strong> — the cut file. On GitHub use the ⤓ <em>Download raw file</em> button; clicking the name only previews it.</li><li><strong><a href="https://github.com/Gernreich/octagonal-torus/archive/refs/heads/main.zip">Everything as a ZIP</a></strong> — cut file, this writeup, the diagram, the verification tools.</li><li><strong><a href="https://github.com/Gernreich/octagonal-torus">Repository</a></strong> — every file named below lives here.</li></ul>
-<h2 id="the-video">The video</h2>
-<p><strong>Not published yet.</strong> It will appear on <strong><a href="https://www.youtube.com/@LaserMadeMusic">LaserMadeMusic</a></strong>, which is where every <em>video</em> link on this page points until it is up. It walks through the inversion: breaking the octagon outline into its eight segments and flipping each one, which is the step hardest to convey in text.</p>
 <hr>
 <p><strong>18 pieces of material:</strong> 2 plates + 8 outer panels + 8 inner panels. (That is 20 cut contours — each plate is a rim plus a stitched hole — which is why Part 10 verifies 20.)</p>
 <p>Assembled: <strong>25.000 mm radial × 25.000 mm axial</strong>, 172.298 across the flats outside, 110.298 bore.</p>
 <p><strong>What the parts are.</strong> The two plates are the torus's top and bottom faces — annular, 25 mm wide. The 8 outer panels form its outside wall, the 8 inner panels its bore wall. Each set of 8 is <strong>4 long + 4 short, alternating</strong>, because that is how a polygon tube closes with rectangular fingers (§6b).</p>
+<h2 id="the-video">The video</h2>
+<p><strong>Not published yet.</strong> It will appear on <strong><a href="https://www.youtube.com/@LaserMadeMusic">LaserMadeMusic</a></strong>, which is where every <em>video</em> link on this page points until it is up. It walks through the inversion: breaking the octagon outline into its eight segments and flipping each one, which is the step hardest to convey in text.</p>
 <h2 id="route-a--generate-from-scratch-at-boxeshackerspace-bambergde">Route A — generate from scratch at boxes.hackerspace-bamberg.de</h2>
 <p>Three runs, because the plate hole and the inner panels come from <strong>different radii</strong>.</p>
 <p><strong>Run 1 — outer tube.</strong> RegularBox: <code>radius_bottom = radius_top = 90</code>, <code>h = 25</code>, <code>n = 8</code>, <code>thickness = 3</code>, <code>burn = 0.1</code>, <code>top</code>/<code>bottom</code> = closed, <code>outside</code> unchecked.</p>

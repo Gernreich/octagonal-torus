@@ -102,13 +102,6 @@ boxes.py — Part 11's formula and the inversion offset, both done for you.
   — cut file, this writeup, the diagram, the verification tools.
 - **[Repository](https://github.com/Gernreich/octagonal-torus)** — every file named below lives here.
 
-## The video
-
-**Not published yet.** It will appear on
-**[LaserMadeMusic](https://www.youtube.com/@LaserMadeMusic)**, which is where every *video* link on
-this page points until it is up. It walks through the inversion: breaking the octagon outline into
-its eight segments and flipping each one, which is the step hardest to convey in text.
-
 ---
 
 **18 pieces of material:** 2 plates + 8 outer panels + 8 inner panels. (That is 20 cut contours —
@@ -120,6 +113,13 @@ Assembled: **25.000 mm radial × 25.000 mm axial**, 172.298 across the flats out
 The 8 outer panels form its outside wall, the 8 inner panels its bore wall. Each set of 8 is
 **4 long + 4 short, alternating**, because that is how a polygon tube closes with rectangular
 fingers (§6b).
+
+## The video
+
+**Not published yet.** It will appear on
+**[LaserMadeMusic](https://www.youtube.com/@LaserMadeMusic)**, which is where every *video* link on
+this page points until it is up. It walks through the inversion: breaking the octagon outline into
+its eight segments and flipping each one, which is the step hardest to convey in text.
 
 ## Route A — generate from scratch at boxes.hackerspace-bamberg.de
 
