@@ -51,6 +51,17 @@ function apo(dx, dy) {
   for (var k = 0; k < 8; k++) { var t=k*Math.PI/4, v=dx*Math.cos(t)+dy*Math.sin(t); if (v>m) m=v; }
   return m;
 }
+// Only these two are documented as non-cut geometry: the trumpet lines in
+// BuildA1_90_25.svg. Everything else is treated as a cut contour and counted.
+// Widening this list is how a recolour silently loses parts — an earlier
+// version skipped #0000ff too, and reported 14 contours for an intact file.
+var IGNORE = { '#ff0000': 'red — trumpet cut lines', '#00ff00': 'green — trumpet cut lines' };
+var palette = {};   // every stroke colour seen -> { n, ignored }
+
+function strokeOf(attrs) {
+  var m = /stroke:\s*(#[0-9a-fA-F]{6})/.exec(attrs);
+  return m ? m[1].toLowerCase() : 'none/black';
+}
 function collect(file) {
   var src = fs.readFileSync(file, 'utf8'), stack = [[1,0,0,1,0,0]], parts = [];
   var re = /<(\/?)(g|path)\b([^>]*?)(\/?)>/g, m;
@@ -64,9 +75,14 @@ function collect(file) {
       continue;
     }
     if (close) continue;
-    if (/stroke:\s*#(ff0000|0000ff|00ff00)|fill:\s*#00ff00/i.test(attrs)) continue;
     var dm = /(?:^|\s)d="([^"]+)"/.exec(attrs);
     if (!dm) continue;
+    var col = strokeOf(attrs);
+    if (col === 'none/black' && /fill:\s*#00ff00/i.test(attrs)) col = '#00ff00';
+    var ign = Object.prototype.hasOwnProperty.call(IGNORE, col);
+    if (!palette[col]) palette[col] = { n: 0, ignored: ign };
+    palette[col].n++;
+    if (ign) continue;
     var pm = /transform="([^"]+)"/.exec(attrs);
     var M = pm ? mul(stack[stack.length-1], parseT(pm[1])) : stack[stack.length-1];
     var p = pts_(dm[1]).map(function (q) { return apply(M, q); });
@@ -74,7 +90,7 @@ function collect(file) {
     var xs=p.map(function(q){return q[0];}), ys=p.map(function(q){return q[1];});
     var x0=Math.min.apply(null,xs), x1=Math.max.apply(null,xs);
     var y0=Math.min.apply(null,ys), y1=Math.max.apply(null,ys);
-    parts.push({ pts:p, w:x1-x0, h:y1-y0, cx:(x0+x1)/2, cy:(y0+y1)/2 });
+    parts.push({ pts:p, w:x1-x0, h:y1-y0, cx:(x0+x1)/2, cy:(y0+y1)/2, col:col });
   }
   return parts;
 }
@@ -95,6 +111,19 @@ function holePartsFor(plate, all) {
 var file = process.argv[2];
 var P = collect(file);
 console.log('\n════ ' + file.split('/').pop() + '   contours: ' + P.length);
+
+// Print the palette before anything else. Stroke colour decides what gets counted,
+// so a recolour must be visible here rather than showing up as a mystery contour count.
+var cols = Object.keys(palette).sort(function (a, b) { return palette[b].n - palette[a].n; });
+console.log('\n  colours (stroke)');
+cols.forEach(function (c) {
+  console.log('    ' + c.padEnd(12) + 'x' + String(palette[c].n).padEnd(4) +
+              (palette[c].ignored ? 'IGNORED — ' + IGNORE[c] : 'counted as cut geometry'));
+});
+if (cols.filter(function (c) { return !palette[c].ignored; }).length > 2) {
+  console.log('    note: cut contours span several colours. All are counted; make sure your');
+  console.log('          laser software assigns every one of them a cutting operation.');
+}
 
 var agg = {};
 P.forEach(function (p) { var k=f(p.w)+' x '+f(p.h); agg[k]=(agg[k]||0)+1; });

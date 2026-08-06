@@ -27,8 +27,10 @@ generator settings, and how each number was verified against the cut files.
 Dry-fit one plate against one inner panel in cardboard before committing a sheet. The plate's tabs
 around the hole should drop into the panel's notches.
 
-**Cut the black lines only.** The red and green paths in the file mark possible cuts for making the
-simple trumpet, not the torus — move them to a non-cutting layer or delete them first.
+**Cut everything except the red and green.** Those paths in the file mark possible cuts for making
+the simple trumpet, not the torus — move them to a non-cutting layer or delete them first. The 20
+cut contours use several colours (black, orange, blue, cyan); assign a cutting operation to all of
+them.
 
 ## Build it at your own size
 

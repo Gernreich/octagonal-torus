@@ -192,9 +192,16 @@ size or thickness use Route A, or Part 11 for the general formulas; none of the 
 ### Note — the red and green lines
 
 **They are not part of the torus.** The file carries 28 red paths and 4 green ones alongside the 20
-black cut contours; they mark possible cuts for turning the torus into the simple trumpet. Ignore
-them for a plain torus — set them to a non-cutting layer, or delete them, and cut only the black.
-`verify.js` already skips them, which is why it reports 20 contours rather than 52.
+cut contours; they mark possible cuts for turning the torus into the simple trumpet. Ignore them for
+a plain torus — set them to a non-cutting layer, or delete them. `verify.js` skips exactly these two
+colours, which is why it reports 20 contours rather than 52.
+
+**Everything that is not red or green is a cut.** The 20 cut contours are not all one colour — the
+rims are black, the plate holes orange, the panels blue and cyan. Nothing is implied by that split;
+it is there for organising the job on the machine. Set **every** non-red, non-green colour to a
+cutting operation, or you will lose whichever ones your software leaves unassigned. `verify.js`
+prints the palette at the top of its report, with each colour marked counted or ignored, so you can
+check that against the operations you have set up.
 
 ↩ [back to the top](#octagonaltorus--parametric-90-mm-radius-25--25-mm-cross-section)
 
