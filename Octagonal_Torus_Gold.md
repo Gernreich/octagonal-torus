@@ -27,8 +27,8 @@ R_outer  >  (ring + 2 × thickness) × sec(180°/n)
 
 Below it the hole-cutter radius comes out zero or negative and there is no inner tube at all. For a
 25 mm ring in 3 mm that floor is **33.554 mm**, so this build's 90 is comfortably clear; a 60 mm
-ring in 6 mm needs more than **77.932 mm**. A 500 mm ring would need an outer radius past 547 mm —
-ask for it at R 10 and the arithmetic simply has nowhere to put the bore.
+ring in 6 mm needs more than **77.932 mm**. A 500 mm ring in that same 3 mm would need an outer radius past
+**547.690 mm** — ask for it at R 10 and the arithmetic simply has nowhere to put the bore.
 
 You will not get this wrong quietly: `torus-geometry-diagram.js` checks the floor before it draws
 anything and refuses, naming the minimum for your ring and thickness.
@@ -40,8 +40,8 @@ Everything else is derived. The worked numbers are a demonstration, not a constr
 torus with a 60 mm ring in 6 mm ply follows the same method, and only the arithmetic differs (that
 one comes out at R 128.562 inner, 381.552 across the flats).
 
-**TL;DR** — **[Part 11 — Another size](#part-11--another-size)** - A self-contained
-procedure for three numbers in ... (Magic) ... a cut file out, no other section required.
+**TL;DR** — **[Part 11 — Another size](#part-11--another-size)** — a self-contained
+procedure: three numbers in ... (Magic) ... a cut file out, no other section required.
 
 ![The verified geometry: a plan section through a plate showing the four octagon boundaries and the 25 mm ring, and a radial cross-section of the 25 × 25 cavity](torus-geometry-diagram.svg)
 
@@ -231,12 +231,17 @@ settled; the fit is not.
 
 ## Check before cutting
 
+Measure across the flats, not the corners. The rim and the hole each have two readings —
+the tabs stand 3 mm proud of the body line on both — so check the one you mean:
+
 | measure | should read |
 |---|---|
-| plate outer rim, across flats | **166.30** |
-| plate hole, across flats (tip to tip) | **110.30** |
-| inner panel | **50.130 × 31.200** |
-| outer panel | **73.326 × 31.200** |
+| plate rim, flat to flat between the tabs | **166.30** |
+| plate rim, tab tip to tab tip — the finished outside | **172.30** |
+| plate hole, tab tip to tab tip — its narrowest | **110.30** |
+| plate hole, notch bottom to notch bottom — its widest | **116.30** |
+| outer panels, long / short — 4 of each | **73.326** / **71.568** × 31.200 |
+| inner panels, long / short — 4 of each | **50.130** / **48.372** × 31.200 |
 
 ## Tooling
 
@@ -250,7 +255,7 @@ node verify.js BuildA1_90_25.svg RunA2_R59Point693.svg
 
 Checks a cut file end to end: contour inventory with each panel's implied radius, plate and hole
 count, hole eccentricity, every boundary line as apothem / R / across-flats, the **joint phase**,
-and nesting clearances. The second argument is the R 59.693 run — the disc the inner panels key to.
+nesting clearances, and whether all content sits inside the viewBox. The second argument is the R 59.693 run — the disc the inner panels key to.
 Without it the phase pattern still prints but cannot be judged, so pass it. A **COMPLEMENTARY ✓**
 verdict is the check that would have caught the first failed build; run it after any edit, including
 ones you believe were only cosmetic.
@@ -498,7 +503,7 @@ same widths; they differ by the wall's projection, `2t·tan(22.5°) = 2.485`:
 
 ## 6a. Why a panel looks too wide for its octagon
 
-Lay an inner panel against the plate's hole and it appears oversized by about 2 mm per end. It
+Lay an inner panel against the plate's hole and it appears oversized by 1.3–2.2 mm per end. It
 isn't. Two different faces are being compared.
 
 A face of the octagon has **two lengths**, because the wall is a trapezoid in plan:
@@ -509,19 +514,20 @@ at the wall's outside, apothem 58.149: 2 × 58.149 × tan(22.5°) = 48.172
 difference = 2t·tan(22.5°)                                     =  2.485
 ```
 
-Measured across one face, the hole's boundary spans **45.688** at its inner line — the face at the
+Measured across one face, the hole's boundary spans **45.687** at its inner line — the face at the
 **bore**. The panel is
 cut to the face at the wall's **outer surface**, 48.172. So laying one on the other compares a
 panel to the short end of the trapezoid:
 
-| | vs the hole segment (45.688) | per end |
+| | vs the hole segment (45.687) | per end |
 |---|---|---|
-| long panel 50.130 | +4.442 | **2.221** |
-| short panel 48.372 | +2.684 | **1.342** |
+| long panel 50.130 | +4.443 | **2.222** |
+| short panel 48.372 | +2.685 | **1.343** |
 
-Of both figures, **1.243 per end** is the same thing: the wall projecting outward as the face grows
-from bore radius to outer radius, `t·tan(22.5°)`. What remains differs by panel type — for the long
-panel it is the 0.979 corner lap (§6b), for the short panel it is just the 0.100 kerf.
+Those are Part 6's two corner allowances, 4.443 and 2.685, arriving from the other direction.
+**1.243 per end is common to both** — the wall projecting outward as the face grows from bore radius
+to outer radius, `t·tan(22.5°)`. What remains differs by panel type: for the long panel the 0.979
+corner lap (§6b), for the short panel just the 0.100 kerf.
 
 ## 6b. The corner lap
 
@@ -681,12 +687,12 @@ nonsense.
 
 ## Final verification, `BuildA1_90_25.svg`
 
-| feature | nominal apothem (mm) | R (mm) |
+| feature | nominal, body line → tab tips (mm) | R (mm) |
 |---|---|---|
-| Plate rim | 83.149 → 86.149 | 90.000 → 93.247 |
-| Plate hole | 55.149 → 58.149 | 59.693 → 62.940 |
-| Outer panels | 73.326 / 71.568 × 31.200 | R 90.000 |
-| Inner panels | 50.130 / 48.372 × 31.200 | R 59.693 |
+| Plate rim | apothem 83.149 → 86.149 | 90.000 → 93.247 |
+| Plate hole | apothem 55.149 → 58.149 | 59.693 → 62.940 |
+| Outer panels | 73.326 / 71.568 wide × 31.200 tall | 90.000 |
+| Inner panels | 50.130 / 48.372 wide × 31.200 tall | 59.693 |
 
 ```
 ring    = 83.149 − 58.149 = 25.000 ✓
