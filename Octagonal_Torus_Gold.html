@@ -378,7 +378,6 @@ holes   = one stitched contour per plate</code></pre>
 <p>Pick three numbers:</p>
 <div class='tw'><table><thead><tr><th></th><th></th><th>this build</th></tr></thead><tbody><tr><td><code>R_outer</code></td><td>outer octagon radius, corner to centre</td><td>90 mm</td></tr><tr><td><code>S</code></td><td>the side of the square channel</td><td>25 mm</td></tr><tr><td><code>t</code></td><td>material thickness</td><td>3 mm</td></tr></tbody></table></div>
 <p><strong><code>S</code> is one number used twice.</strong> It sets the <strong>radial</strong> width of the ring, and it is also what you enter as <code>h</code>, the box height — so the channel comes out as tall as it is wide. This build used <code>S = 25</code>, which is why the cross-section is 25 × 25.</p>
-<p>If you want a channel that is <em>not</em> square — say 25 wide and 40 tall — the procedure is unchanged: use 25 wherever <code>S</code> appears in the radius formulas, and enter 40 as <code>h</code>.</p>
 <p>For an octagon, <code>n = 8</code>.</p>
 <h3 id="1-get-your-three-radii">1. Get your three radii</h3>
 <pre><code>node torus-geometry-diagram.js &lt;R_outer&gt; &lt;S&gt; &lt;t&gt;

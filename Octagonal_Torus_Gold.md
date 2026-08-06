@@ -715,9 +715,6 @@ Pick three numbers:
 enter as `h`, the box height — so the channel comes out as tall as it is wide. This build used
 `S = 25`, which is why the cross-section is 25 × 25.
 
-If you want a channel that is *not* square — say 25 wide and 40 tall — the procedure is unchanged:
-use 25 wherever `S` appears in the radius formulas, and enter 40 as `h`.
-
 For an octagon, `n = 8`.
 
 ### 1. Get your three radii
