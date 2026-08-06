@@ -211,6 +211,7 @@ Cut it as-is.
 
 It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
 size or thickness use Route A, or Part 11 for the general formulas; none of the widths carry over.
+[Part 10](#part-10--file-record) says what every other file here is.
 
 ### Note — the red and green lines
 
@@ -256,8 +257,6 @@ hole it sits in, or a hole after its rim:
     4. cyan   x10  panels on the open sheet
     6 nested panels cut before their hole ✓   holes before rims ✓
 ```
-
-[Part 10](#part-10--file-record) says what every other file here is.
 
 ## Before cutting the full sheet
 
@@ -774,12 +773,12 @@ Nothing else in the repository is a part:
 
 ## Final verification, `BuildA1_90_25.svg`
 
-| feature | nominal, body line → tab tips (mm) | R (mm) |
+| feature | measurement (mm) | R (mm) |
 |---|---|---|
-| Plate rim | apothem 83.149 → 86.149 | 90.000 → 93.247 |
-| Plate hole | apothem 55.149 → 58.149 | 59.693 → 62.940 |
-| Outer panels | 73.326 / 71.568 wide × 31.200 tall | 90.000 |
-| Inner panels | 50.130 / 48.372 wide × 31.200 tall | 59.693 |
+| Plate rim | apothem 83.149 → 86.149, nominal | 90.000 → 93.247 |
+| Plate hole | apothem 55.149 → 58.149, nominal | 59.693 → 62.940 |
+| Outer panels | 73.326 / 71.568 wide × 31.200 tall, as drawn | 90.000 |
+| Inner panels | 50.130 / 48.372 wide × 31.200 tall, as drawn | 59.693 |
 
 ```
 ring    = 83.149 − 58.149 = 25.000 ✓
