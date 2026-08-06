@@ -206,14 +206,13 @@ colours, which is why it reports 20 contours rather than 52.
 |---|---|---|---|
 | 1 | blue `#0000ff` | 6 | the panels nested **inside the plate holes** |
 | 2 | orange `#ff8000` | 2 | the plate holes — frees the waste centre |
-| 3 | black — see below | 2 | the plate rims — frees the plates |
+| 3 | black `#000000` | 2 | the plate rims — frees the plates |
 | 4 | cyan `#00ffff` | 10 | the remaining panels, out on the open sheet |
 
-**The rims are not tagged black; they carry no stroke colour at all**, and render black by default.
-Select-same-colour will not find them and a colour-keyed job may not list them. Locate them by size
-instead — they are the two largest contours, 172.5 mm across — and assign them the third operation.
-`verify.js` treats an unset stroke and an explicit `#000000` as the same thing, so tagging them
-black explicitly is safe if that suits your software better.
+All four are explicit stroke colours, so select-same-colour finds each group and a colour-keyed job
+lists all four. (Earlier copies of this file left the rims with no stroke property at all — they
+rendered black but would not have been selectable that way. `verify.js` treats an unset stroke and
+an explicit `#000000` as the same operation, so a file of either vintage passes.)
 
 Six of the sixteen panels are nested in the middle of the plate holes, where they would otherwise be
 waste. That is what forces the sequence: **cut a part while its material is still held.** Cut the
