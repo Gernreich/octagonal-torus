@@ -288,16 +288,23 @@ settled; the fit is not.
 ## Check before cutting
 
 Measure across the flats, not the corners. The rim and the hole each have two readings —
-the tabs stand 3 mm proud of the body line on both — so check the one you mean:
+the tabs stand 3 mm proud of the body line on both — so check the one you mean.
 
-| measure | should read |
-|---|---|
-| plate rim, flat to flat between the tabs | **166.30** |
-| plate rim, tab tip to tab tip — the finished outside | **172.30** |
-| plate hole, tab tip to tab tip — its narrowest | **110.30** |
-| plate hole, notch bottom to notch bottom — its widest | **116.30** |
-| outer panels, long / short — 4 of each | **73.326** / **71.568** × 31.200 |
-| inner panels, long / short — 4 of each | **50.130** / **48.372** × 31.200 |
+**Two columns, because the kerf is already in the geometry.** Measuring the file in Inkscape gives
+the drawn contour; the cut part comes out **0.2 smaller** across every full width, because the beam
+takes 0.1 off each edge. Neither is an error — they are the same part before and after cutting.
+
+| measure | in the file | cut part |
+|---|---|---|
+| plate rim, flat to flat between the tabs | 166.50 | **166.30** |
+| plate rim, tab tip to tab tip — the finished outside | 172.50 | **172.30** |
+| plate hole, tab tip to tab tip — its narrowest | 110.50 | **110.30** |
+| plate hole, notch bottom to notch bottom — its widest | 116.50 | **116.30** |
+| outer panels, long / short — 4 of each | **73.326** / **71.568** × 31.200 | 73.126 / 71.368 × 31.000 |
+| inner panels, long / short — 4 of each | **50.130** / **48.372** × 31.200 | 49.930 / 48.172 × 31.000 |
+
+The bold figures are the ones quoted elsewhere in this document: octagon geometry is given nominal
+(§9), panel widths as drawn, since that is what boxes.py emits and what `verify.js` reports.
 
 ## Tooling
 
