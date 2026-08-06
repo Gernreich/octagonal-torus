@@ -94,7 +94,7 @@ boxes.py — Part 11's formula and the inversion offset, both done for you.
 
 # PART 0 — Build it
 
-### Get the files
+## Get the files
 
 - **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** — the cut file. On GitHub use the ⤓ *Download raw
   file* button; clicking the name only previews it.
@@ -207,7 +207,10 @@ Invert the 59.693 disc instead and it lands at 58.149 / 61.149 — a **22 mm** r
 **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** is those 18 pieces already laid out — assembled by
 exactly the Route A steps above, and verified: 20 contours, holes concentric with their plates,
 joint phase complementary, no overlaps, and a cut order that never frees a part before it is cut.
-Cut it as-is.
+
+**Two things before you send it**, both immediately below: the red and green lines are not part of
+the torus, and the four cut colours have to run in the right order. Do those and the file cuts
+as-is — no scaling, no kerf compensation, no edits.
 
 It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
 size or thickness use Route A, or Part 11 for the general formulas; none of the widths carry over.
@@ -338,7 +341,8 @@ node torus-geometry-diagram.js 90 25 3      # outer R, ring, thickness
 Redraws the figure at the top of this document and prints the resulting dimensions, labelled by
 generator run — see the note under the figure for what the three arguments mean. It refuses, without
 writing anything, if the numbers do not describe a torus (`R_outer` below
-`(ring + 2 × thickness) × sec(180°/n)`) or if any argument is not a positive number. Regenerate the
+`(ring + 2 × thickness) × sec(22.5°)` — it assumes an octagon) or if any argument is not a positive
+number. Regenerate the
 HTML afterwards to pick up the new drawing.
 
 Everything below is why.
@@ -377,7 +381,7 @@ octagon sit **8.24 % further from centre** than the flats.
 | 90.000 | 83.149 | 166.298 | 180.000 | 68.883 |
 | 62.940 | 58.149 | 116.298 | 125.880 | 48.172 |
 | 59.693 | 55.149 | 110.298 | 119.386 | 45.687 |
-| 56.446 | 52.149 | 104.298 | 112.892 | 43.202 |
+| 56.446 | 52.149 | 104.299 | 112.892 | 43.202 |
 
 ---
 
@@ -810,7 +814,7 @@ enter as `h`, the box height — so the channel comes out as tall as it is wide.
 
 For an octagon, `n = 8`.
 
-### 1. Get your three radii
+## 1. Get your three radii
 
 ```
 node torus-geometry-diagram.js <R_outer> <S> <t>
@@ -818,6 +822,11 @@ node torus-geometry-diagram.js <R_outer> <S> <t>
                                │         └───── the ring you want, face to face
                                └─────────────── outer octagon radius, corner to centre
 ```
+
+**The script is octagons only.** It hardcodes `n = 8`, in the radii it prints, the floor it checks
+and the figure it draws. For any other polygon skip it and use the formulas below — the method is
+identical, only `sec(180°/n)` changes. Run it for a hexagon and it will answer as though you had
+asked for an octagon, without saying so.
 
 It prints them, labelled by run. Worked through with this build's numbers:
 
@@ -848,7 +857,7 @@ dodecagon **1.0353**.
 `R_hole` comes out zero or negative and there is no inner tube. The script checks this and refuses,
 telling you the floor for your ring and thickness, rather than drawing something impossible.
 
-### 2. Generate three boxes.py runs
+## 2. Generate three boxes.py runs
 
 At **<https://boxes.hackerspace-bamberg.de/>**, generator **RegularBox**. Identical settings each
 time except the radius:
@@ -863,17 +872,17 @@ Everything else: `n` = your polygon, `top` and `bottom` = closed, `outside` **un
 `thickness` = `t`, `burn` = your kerf. Leave the finger-joint settings alone unless step 5 says
 otherwise.
 
-### 3. Invert run 3's disc
+## 3. Invert run 3's disc
 
 In Inkscape, break its octagon outline into its `n` segments — one per face — and flip each one. The
 flipped segments together are the hole.
 
-### 4. Build the plates
+## 4. Build the plates
 
 Place the inverted hole concentric on each of run 1's two discs and cut it out. Those two annular
 plates are the torus's top and bottom faces.
 
-### 5. Dry-fit before cutting the sheet
+## 5. Dry-fit before cutting the sheet
 
 One plate against one inner panel, in cardboard. The plate's tabs should drop into the panel's
 notches.
@@ -881,11 +890,11 @@ notches.
 - Land between the notches → change `surroundingspaces` and regenerate
 - Too tight → raise `play` to 0.05–0.1
 
-### Parts you end up with
+## Parts you end up with
 
 2 plates · n outer panels · n inner panels. Run 3's panels and run 2's discs are unused.
 
-### Three things that will bite you
+## Three things that will bite you
 
 **Run 3 is not optional, and it is not run 2.** Inverting shifts a disc outward by one thickness, so
 the cutter must be generated one thickness *inside* where the hole belongs. Invert run 2's disc
