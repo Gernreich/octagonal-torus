@@ -170,7 +170,8 @@ Each carries every setting — `thickness=3.0`, `burn=0.1`, `finger=2.0`, `space
 ### Why run 3 uses 56.446 and not 59.693
 
 Inverting moves a part outward by one tab depth — 3 mm — and never leaves it in place (Part 8a). So
-you type a radius 3 mm of apothem *smaller* than where you want it to land:
+you type the radius whose *apothem* is 3 mm short of where you want the band to land. In radius that
+is 3.247 smaller, since 3 mm of apothem is 3 × sec(22.5°):
 
 ```
 56.446  →  disc at apothem 52.149 / 55.149
@@ -843,7 +844,7 @@ notches.
 
 2 plates · n outer panels · n inner panels. Run 3's panels and run 2's discs are unused.
 
-### Two things that will bite you
+### Three things that will bite you
 
 **Run 3 is not optional, and it is not run 2.** Inverting shifts a disc outward by one thickness, so
 the cutter must be generated one thickness *inside* where the hole belongs. Invert run 2's disc
@@ -852,6 +853,13 @@ instead and you get a ring of `S − t`. Part 8a measures this.
 **A panel set belongs to the run that made it.** boxes.py sizes panels from the radius you type, and
 nothing tells them a disc was later moved. Run 2's panels go with the hole that run 3 produced —
 they are not interchangeable with run 1's or run 3's. Part 6 derives the widths.
+
+**Cut a part before the cut that frees the material holding it.** The middle of a plate hole is a
+tempting place to nest small panels, and the plate rims come last for the same reason: once a cut
+frees the waste or the plate, anything still to be cut in it can move. Order the job so nested parts
+go first, then the holes, then the rims. Colour is the usual way to tell a laser that sequence —
+`BuildA1_90_25.svg` does exactly this, and [Colour is the cut order](#colour-is-the-cut-order)
+describes the scheme. `verify.js` will tell you if a file gets it wrong.
 
 ---
 
