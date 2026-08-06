@@ -143,9 +143,12 @@ want the disc outline.)
 
 ### How the inversion was done
 
-In **Inkscape**: break the inner octagon outline into its **eight segments** — one per face — and
-flip each segment. The eight flipped segments together are the hole; place them concentric on each
-outer disc and cut.
+In **Inkscape**: take **run 3's disc, the R 56.446 one**, and break its outline into **eight
+segments** — one per face — then flip each segment. The eight flipped segments together are the
+hole; place them concentric on each outer disc and cut.
+
+Not run 2's disc. "Inner octagon" elsewhere in this document means R 59.693, the radius the inner
+*panels* are cut for; inverting that disc puts the hole 3 mm too far out and leaves a 22 mm ring.
 
 Flipping a segment does two things at once, and Part 8 is about both:
 
