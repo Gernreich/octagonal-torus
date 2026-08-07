@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="1000" height="600" role="img" aria-label="Placeholder for a photograph of the assembled octagonal torus, sliced along the green lines">
-<rect width="500" height="300" fill="#f8fafc"/>
-<rect x="8" y="8" width="484" height="284" rx="6" fill="none" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="7 5"/>
-<polygon points="309.87,117.2 274.8,82.13 225.2,82.13 190.13,117.2 190.13,166.8 225.2,201.87 274.8,201.87 309.87,166.8" fill="none" stroke="#cbd5e1" stroke-width="1.6"/>
-<polygon points="289.71,125.55 266.45,102.29 233.55,102.29 210.29,125.55 210.29,158.45 233.55,181.71 266.45,181.71 289.71,158.45" fill="none" stroke="#cbd5e1" stroke-width="1.6"/>
-<line x1="172" y1="142" x2="328" y2="142" stroke="#047857" stroke-width="1.8" stroke-dasharray="5 4" opacity="0.9"/>
-<text x="250" y="232" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a" font-family="ui-sans-serif,system-ui,Helvetica,Arial,sans-serif">Photograph to come</text>
-<text x="250" y="250" font-size="7.5" text-anchor="middle" fill="#475569" font-family="ui-sans-serif,system-ui,Helvetica,Arial,sans-serif">the assembled torus, sliced along the green lines</text>
-</svg>
