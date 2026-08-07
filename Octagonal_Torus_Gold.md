@@ -1,11 +1,11 @@
-# Octagonal_Torus — parametric, 90 mm radius, 25 × 25 mm cross-section
+# Octagonal_Torus — parametric, 90mm radius, 25 × 25mm cross-section
 
 Complete record: the trigonometry, the generator, and the verified cut list.
 
 **All dimensions are millimetres.**
 
-**Worked example:** an octagonal torus with a 25.000 × 25.000 mm square cross-section, outer octagon
-at R 90, cut from 3 mm material. Verified cut file: **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**,
+**Worked example:** an octagonal torus with a 25.000 × 25.000mm square cross-section, outer octagon
+at R 90, cut from 3mm material. Verified cut file: **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**,
 reproduced end to end from Route A —
 [note on the red and green lines in it](#note--the-red-and-green-lines).
 
@@ -15,14 +15,14 @@ reproduced end to end from Route A —
 [`BuildA1_90_25.svg`](BuildA1_90_25.svg) and then cut along the
 [green lines](#note--the-red-and-green-lines) that turn it into the simple trumpet.
 
-**Your own size.** Nothing here is fixed to 90, 25 or 3 mm material. The whole object follows from
+**Your own size.** Nothing here is fixed to 90, 25 or 3mm material. The whole object follows from
 **three numbers** you choose:
 
 | | this example | yours |
 |---|---|---|
-| Outer octagon radius, corner to centre | 90 mm | your choice |
-| Ring — the square cross-section | 25 mm | your choice |
-| Material thickness | 3 mm | whatever you are cutting |
+| Outer octagon radius, corner to centre | 90mm | your choice |
+| Ring — the square cross-section | 25mm | your choice |
+| Material thickness | 3mm | whatever you are cutting |
 
 They are not independent, though. The ring and the two walls have to fit inside the outer octagon,
 which puts a floor under the radius:
@@ -32,9 +32,9 @@ R_outer  >  (ring + 2 × thickness) × sec(180°/n)
 ```
 
 Below it the hole-cutter radius comes out zero or negative and there is no inner tube at all. For a
-25 mm ring in 3 mm that floor is **33.554 mm**, so this build's 90 is comfortably clear; a 60 mm
-ring in 6 mm needs more than **77.932 mm**. A 500 mm ring in that same 3 mm would need an outer radius past
-**547.690 mm** — ask for it at R 10 and the arithmetic simply has nowhere to put the bore.
+25mm ring in 3mm that floor is **33.554mm**, so this build's 90 is comfortably clear; a 60mm
+ring in 6mm needs more than **77.932mm**. A 500mm ring in that same 3mm would need an outer radius past
+**547.690mm** — ask for it at R 10 and the arithmetic simply has nowhere to put the bore.
 
 You will not get this wrong quietly: `torus-geometry-diagram.js` checks the floor before it draws
 anything and refuses, naming the minimum for your ring and thickness.
@@ -42,14 +42,14 @@ anything and refuses, naming the minimum for your ring and thickness.
 Very small inner octagons have a softer limit too: a short face may not fit a finger joint, and
 boxes.py's own advice there is to reduce `finger` and `surroundingspaces`.
 
-Everything else is derived. The worked numbers are a demonstration, not a constraint — an R 200 mm
-torus with a 60 mm ring in 6 mm ply follows the same method, and only the arithmetic differs (that
+Everything else is derived. The worked numbers are a demonstration, not a constraint — an R 200mm
+torus with a 60mm ring in 6mm ply follows the same method, and only the arithmetic differs (that
 one comes out at R 128.562 inner, 381.552 across the flats).
 
 **TL;DR** — **[Part 11 — Another size](#part-11--another-size)** — a self-contained
 procedure: three numbers in ... (Magic) ... a cut file out, no other section required.
 
-![The verified geometry: a plan section through a plate showing the four octagon boundaries and the 25 mm ring, and a radial cross-section of the 25 × 25 cavity](torus-geometry-diagram.svg)
+![The verified geometry: a plan section through a plate showing the four octagon boundaries and the 25mm ring, and a radial cross-section of the 25 × 25 cavity](torus-geometry-diagram.svg)
 
 **The above figure is generated, not drawn.** `torus-geometry-diagram.js` computes every line, label and
 dimension from three numbers, so it always agrees with the arithmetic in this document instead of
@@ -85,7 +85,7 @@ That is all three runs — run 1 is simply the outer radius you chose, and the o
 | 2 — inner panels | **81.034** | `R_outer − (ring + t) × sec(22.5°)` |
 | 3 — hole cutter | **74.540** | `R_inner − t × sec(22.5°)` — the pre-compensation of Part 8a |
 
-So a 120 mm octagon with a 30 mm ring in 6 mm material needs those three numbers typed into
+So a 120mm octagon with a 30mm ring in 6mm material needs those three numbers typed into
 boxes.py — Part 11's formula and the inversion offset, both done for you.
 
 **It draws a picture; it does not make cut files.** For parts, use Route A.
@@ -107,9 +107,9 @@ boxes.py — Part 11's formula and the inversion offset, both done for you.
 **18 pieces of material:** 2 plates + 8 outer panels + 8 inner panels. (That is 20 cut contours —
 each plate is a rim plus a stitched hole — which is why Part 10 verifies 20.)
 
-Assembled: **25.000 mm radial × 25.000 mm axial**, 172.298 across the flats outside, 110.298 bore.
+Assembled: **25.000mm radial × 25.000mm axial**, 172.298 across the flats outside, 110.298 bore.
 
-**What the parts are.** The two plates are the torus's top and bottom faces — annular, 25 mm wide.
+**What the parts are.** The two plates are the torus's top and bottom faces — annular, 25mm wide.
 The 8 outer panels form its outside wall, the 8 inner panels its bore wall. Each set of 8 is
 **4 long + 4 short, alternating**, because that is how a polygon tube closes with rectangular
 fingers (Part 6b).
@@ -149,12 +149,12 @@ segments** — one per face — then flip each segment. The eight flipped segmen
 hole; place them concentric on each outer disc and cut.
 
 Not run 2's disc. "Inner octagon" elsewhere in this document means R 59.693, the radius the inner
-*panels* are cut for; inverting that disc puts the hole 3 mm too far out and leaves a 22 mm ring.
+*panels* are cut for; inverting that disc puts the hole 3mm too far out and leaves a 22mm ring.
 
 Flipping a segment does two things at once, and Part 8 is about both:
 
 - it **mirrors the tab-and-notch pattern**, which is the phase swap the joint needs (Part 8b), and
-- it **lands the band one material thickness further out**, which is the ±3 mm shift you
+- it **lands the band one material thickness further out**, which is the ±3mm shift you
   pre-compensate for by generating run 3 at 56.446 rather than 59.693 (Part 8a).
 
 The eight flipped segments come out as eight separate contours, so the hole starts life as eight
@@ -163,13 +163,13 @@ open polylines rather than one closed outline.
 **Stitching them back together — optional.** In `BuildA1_90_25.svg` the eight were joined into a
 single closed loop per plate, which is why `verify.js` reports `hole contours: 2  (1 per plate)`
 rather than 16. **This is probably unnecessary.** Measured before stitching, the largest gap between
-one segment's endpoint and its neighbour's was **0.077 mm** — smaller than the 0.1 mm `burn`, and
+one segment's endpoint and its neighbour's was **0.077mm** — smaller than the 0.1mm `burn`, and
 smaller still than a real beam, so the cuts overlap and the waste drops out regardless.
 
 Stitch anyway if your laser software applies its *own* kerf compensation, since offsetting needs
 closed paths to know which side is inside. But if it does, turn that off: `burn = 0.1` is already in
-the geometry, and compensating twice loosens every joint by another 0.1–0.2 mm — a far worse problem
-than a 0.077 mm gap.
+the geometry, and compensating twice loosens every joint by another 0.1–0.2mm — a far worse problem
+than a 0.077mm gap.
 
 **This process is demonstrated step by step in the [video](https://www.youtube.com/@LaserMadeMusic).**
 
@@ -192,16 +192,16 @@ Each carries every setting — `thickness=3.0`, `burn=0.1`, `finger=2.0`, `space
 
 ### Why run 3 uses 56.446 and not 59.693
 
-Inverting moves a part outward by one tab depth — 3 mm — and never leaves it in place (Part 8a). So
-you type the radius whose *apothem* is 3 mm short of where you want the band to land. In radius that
-is 3.247 smaller, since 3 mm of apothem is 3 × sec(22.5°):
+Inverting moves a part outward by one tab depth — 3mm — and never leaves it in place (Part 8a). So
+you type the radius whose *apothem* is 3mm short of where you want the band to land. In radius that
+is 3.247 smaller, since 3mm of apothem is 3 × sec(22.5°):
 
 ```
 56.446  →  disc at apothem 52.149 / 55.149
 invert  →  lands at 55.149 / 58.149   ✓ exactly where the hole belongs
 ```
 
-Invert the 59.693 disc instead and it lands at 58.149 / 61.149 — a **22 mm** ring.
+Invert the 59.693 disc instead and it lands at 58.149 / 61.149 — a **22mm** ring.
 
 ## Route B — shortcut, cut the finished file
 
@@ -213,7 +213,7 @@ joint phase complementary, no overlaps, and a cut order that never frees a part 
 the torus, and the four cut colours have to run in the right order. Do those and the file cuts
 as-is — no scaling, no kerf compensation, no edits.
 
-It is specific to **this** build — R 90 outer, 25 × 25 mm cross-section, 3 mm material. At any other
+It is specific to **this** build — R 90 outer, 25 × 25mm cross-section, 3mm material. At any other
 size or thickness use Route A, or Part 11 for the general formulas; none of the widths carry over.
 [Part 10](#part-10--file-record) says what every other file here is.
 
@@ -224,7 +224,7 @@ cut contours; they mark possible cuts for turning the torus into the simple trum
 a plain torus — set them to a non-cutting layer, or delete them. `verify.js` skips exactly these two
 colours, which is why it reports 20 contours rather than 52.
 
-↩ [back to the top](#octagonaltorus--parametric-90-mm-radius-25--25-mm-cross-section)
+↩ [back to the top](#octagonaltorus--parametric-90mm-radius-25--25mm-cross-section)
 
 ## Colour is the cut order
 
@@ -271,7 +271,7 @@ into the panel's notches.
 - Land between the notches → change run 3's `surroundingspaces` and regenerate, but not by the value
   you would guess: it is a staircase, not a dial, and everything from 1.0 to 2.5 redraws the same
   face. [If the phase comes out wrong](#if-the-phase-comes-out-wrong) measures it
-- Too tight → set `play` to 0.05–0.1 — **multiples of thickness**, so 0.15–0.30 mm at t = 3
+- Too tight → set `play` to 0.05–0.1 — **multiples of thickness**, so 0.15–0.30mm at t = 3
 
 **What the dry-fit is actually for.** Registration *is* provable from coordinates — that is exactly
 what `verify.js`'s phase check does, and a `COMPLEMENTARY ✓` means the tabs and notches are in the
@@ -281,10 +281,10 @@ a hole in the wrong phase, and a panel set of 5/3/2/6 where an octagon needs 4/4
 What no measurement of the file can tell you is whether the joint fits **your material on your
 machine**:
 
-- **Material thickness.** Every width here assumes exactly 3.000 mm. Nominal 3 mm ply is commonly
-  2.7–3.2 mm, and the finger joints are cut for the nominal figure. Thin stock gives sloppy joints,
+- **Material thickness.** Every width here assumes exactly 3.000mm. Nominal 3mm ply is commonly
+  2.7–3.2mm, and the finger joints are cut for the nominal figure. Thin stock gives sloppy joints,
   thick stock gives joints that will not close.
-- **Your kerf.** `burn = 0.1` is baked into the geometry. If your beam removes 0.15 mm every joint
+- **Your kerf.** `burn = 0.1` is baked into the geometry. If your beam removes 0.15mm every joint
   is 0.05 loose; if it removes 0.08 they are tight. Across eight corners and two tubes that adds up.
 - **Assembly force.** A joint can be dimensionally perfect and still be unassemblable — too tight to
   push home without splitting a finger, or loose enough to need glue to hold alignment.
@@ -295,7 +295,7 @@ settled; the fit is not.
 ## Check before cutting
 
 Measure across the flats, not the corners. The rim and the hole each have two readings —
-the tabs stand 3 mm proud of the body line on both — so check the one you mean.
+the tabs stand 3mm proud of the body line on both — so check the one you mean.
 
 **Two columns, because the kerf is already in the geometry.** Measuring the file in Inkscape gives
 the drawn contour; the cut part comes out **0.2 smaller** across every full width, because the beam
@@ -345,7 +345,7 @@ generator run — see the note under the figure for what the three arguments mea
 writing anything, if the numbers do not describe a torus (`R_outer` below
 `(ring + 2 × thickness) × sec(22.5°)` — it assumes an octagon), if any argument is not a positive
 number, or if you give it one or two arguments instead of three. That last one matters: a missing
-thickness would otherwise be filled in from this build's 3 mm and answer confidently for the wrong
+thickness would otherwise be filled in from this build's 3mm and answer confidently for the wrong
 material. Give all three or none. Regenerate the
 HTML afterwards to pick up the new drawing.
 
@@ -405,7 +405,7 @@ which is what keeps the whole problem linear — no iteration, no trial fits.
 
 Two consequences that bite:
 
-**Trap 1 — corners open faster than flats.** For a 25 mm face gap the corners are
+**Trap 1 — corners open faster than flats.** For a 25mm face gap the corners are
 `25 × 1.0824 = 27.060` apart. Subtract 25 straight off the radius instead and you get
 `90 − 25 = 65`, apothem `60.052`, so only `83.149 − 60.052 = 23.097` at the flats — **1.903 short**.
 
@@ -465,16 +465,16 @@ Settings used:
 | Default | value | meaning |
 |---|---|---|
 | `thickness` | 3.0 | material thickness |
-| `burn` | 0.1 | kerf compensation — every contour is outset 0.1 mm |
+| `burn` | 0.1 | kerf compensation — every contour is outset 0.1mm |
 | `inner_corners` | loop | |
 
 | Finger joints | value | meaning |
 |---|---|---|
 | `style` | rectangular | |
-| `finger` | 2.0 | finger width in multiples of thickness → **6 mm** |
-| `space` | 2.0 | gap between fingers → **6 mm** (so a **12 mm pitch**) |
-| `surroundingspaces` | 1.0 | space at the start and end, in multiples of the normal space — so 1.0 is one 6 mm space — **this is the phase control** |
-| `play` | 0.0 | extra clearance, **in multiples of thickness** like `finger` and `space` — so 0.1 is 0.3 mm, not 0.1 mm; raise if joints are too tight |
+| `finger` | 2.0 | finger width in multiples of thickness → **6mm** |
+| `space` | 2.0 | gap between fingers → **6mm** (so a **12mm pitch**) |
+| `surroundingspaces` | 1.0 | space at the start and end, in multiples of the normal space — so 1.0 is one 6mm space — **this is the phase control** |
+| `play` | 0.0 | extra clearance, **in multiples of thickness** like `finger` and `space` — so 0.1 is 0.3mm, not 0.1mm; raise if joints are too tight |
 
 Each run produces: **2 discs** (top and bottom) and **8 side panels**. Which of them you keep
 depends on the run — see Route A.
@@ -504,7 +504,7 @@ This is the join between Parts 1–3 and the tool, and it is exact:
 
 | measured in the SVG | generator setting | relation |
 |---|---|---|
-| uniform +0.100 mm outset on every contour | `burn = 0.1` | direct |
+| uniform +0.100mm outset on every contour | `burn = 0.1` | direct |
 | disc body apothem 83.149 | `radius = 90` — run 1 | `83.149 = 90 × cos 22.5°` |
 | disc body apothem 55.149 | `radius = 59.693` — run 2 | `55.149 = 59.693 × cos 22.5°` |
 | disc body apothem 52.149 | `radius = 56.446` — run 3 | `52.149 = 56.446 × cos 22.5°` |
@@ -581,7 +581,7 @@ the rounding note in Part 9.)
 
 ## 6a. Why a panel looks too wide for its octagon
 
-Lay an inner panel against the plate's hole and it appears oversized by 1.3–2.2 mm per end. It
+Lay an inner panel against the plate's hole and it appears oversized by 1.3–2.2mm per end. It
 isn't. Two different faces are being compared.
 
 A face of the octagon has **two lengths**, because the wall is a trapezoid in plan:
@@ -650,7 +650,7 @@ third generator run at R 56.446 rather than reusing the R 59.693 discs.
 
 Two things at once, and they must be handled separately.
 
-## 8a. It shifts the part ±3 mm
+## 8a. It shifts the part ±3mm
 
 You can read this straight off the finished build. **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**'s
 hole was made by inverting a disc generated at **R 56.446**, whose own boundaries sit at apothem
@@ -667,7 +667,7 @@ part in place.** It moves by exactly one tab depth, and it moves outward.
 
 That is also why typing 56.446 is a legitimate route to a hole at R 59.693: the inverted disc lands
 in the identical position a disc generated at 59.693 would occupy. Inverting *that* one instead
-would put the hole at 58.149 / 61.149 and leave a 22 mm ring.
+would put the hole at 58.149 / 61.149 and leave a 22mm ring.
 
 **Rule:** if you pre-compensate the radius for an inversion, take the panels from the run whose
 radius equals where the part *ended up*, not where you typed it. boxes.py sizes panels from the
@@ -726,8 +726,8 @@ That makes it a staircase, not a dial. Measured on run 2's disc at R 59.693:
 | 3.0 | 2 | finger |
 
 Everything from 1.0 to 2.5 is one tread of that staircase and regenerates an identical face —
-including **2.0**, which is exactly what "the pitch is 12 mm, so half a pitch is 6 mm" tempts you
-into typing, since the parameter counts in 6 mm spaces. To move the joint at all you have to step
+including **2.0**, which is exactly what "the pitch is 12mm, so half a pitch is 6mm" tempts you
+into typing, since the parameter counts in 6mm spaces. To move the joint at all you have to step
 off the tread: **0.5 or below, or 3.0**.
 
 Where the treads fall depends on the face length, so one value does not act on all three runs alike.
@@ -753,16 +753,16 @@ values reveals the boundary lines directly.
 0.2 high across a full width. All nominal figures here have that backed out. A measured 83.249
 is a nominal 83.149.
 
-**Rounding.** Every figure is the exact value rounded to 0.001 mm, and every sum, difference and
+**Rounding.** Every figure is the exact value rounded to 0.001mm, and every sum, difference and
 halving was computed at full precision before rounding. So a decomposition can disagree with its own
 displayed parts in the last digit — the long panel stands 1.957 proud of its face and 0.979 per end,
-and 0.979 doubled looks like 1.958. Nothing is wrong; 0.001 mm is four times finer than a laser
+and 0.979 doubled looks like 1.958. Nothing is wrong; 0.001mm is four times finer than a laser
 holds anyway. Where a printed identity would visibly fail to add up, it is given to four decimals
 instead.
 
 **Cross-check.** All four cardinal faces (top / bottom / left / right) are measured independently.
-On plate rims they agreed to 0.001 mm in every file. A hole sitting slightly off its rim's centre
-shows up as a spread across the four — up to 0.17 mm in one earlier file, and zero in the shipped
+On plate rims they agreed to 0.001mm in every file. A hole sitting slightly off its rim's centre
+shows up as a spread across the four — up to 0.17mm in one earlier file, and zero in the shipped
 one. That spread is the eccentricity, not measurement error: averaging the four recovers the true
 apothem, while a single face can be off by half of it.
 
@@ -778,7 +778,7 @@ Five pitfalls cost real time and are worth recording:
 4. **Group transforms.** Every `<g transform>` on the path's ancestor chain must be composed and
    applied, `translate()` included. Skipping them does not fail loudly — it silently reports parts
    at their pre-transform coordinates. Here it produced a confident, wrong claim that a correctly
-   centred hole sat 98 mm off its plate. If a part looks displaced by a round number, suspect the
+   centred hole sat 98mm off its plate. If a part looks displaced by a round number, suspect the
    measuring tool before the file.
 5. **Filtering by colour.** `verify.js` skips the trumpet lines by stroke colour, and its ignore
    list once included blue. When the cut contours were recoloured for cutting order, six intact
@@ -845,9 +845,9 @@ Pick three numbers:
 
 | | | this build |
 |---|---|---|
-| `R_outer` | outer octagon radius, corner to centre | 90 mm |
-| `S` | the side of the square channel | 25 mm |
-| `t` | material thickness | 3 mm |
+| `R_outer` | outer octagon radius, corner to centre | 90mm |
+| `S` | the side of the square channel | 25mm |
+| `t` | material thickness | 3mm |
 
 **`S` is one number used twice.** It sets the **radial** width of the ring, and it is also what you
 enter as `h`, the box height — so the channel comes out as tall as it is wide. This build used
@@ -881,7 +881,7 @@ outside flats  172.298   bore flats 110.298
 ```
 
 So `90 25 3` gives you **90**, **59.693** and **56.446** — the three radii to type into boxes.py in
-step 2. The last two lines are the finished object: 172.298 mm across the flats outside, 110.298 mm
+step 2. The last two lines are the finished object: 172.298mm across the flats outside, 110.298mm
 across the bore.
 
 **It also rewrites the figure.** Every successful run overwrites `torus-geometry-diagram.svg` — the
@@ -942,7 +942,7 @@ notches.
 - Land between the notches → change **run 3's** `surroundingspaces` and regenerate. It changes how
   many fingers fit on a face, not where they sit, so small nudges do nothing at all — from 1.0 you
   have to reach 0.5 or 3.0. [Part 8b](#if-the-phase-comes-out-wrong) measures it
-- Too tight → raise `play` to 0.05–0.1 — **multiples of thickness**, so 0.15–0.30 mm at t = 3
+- Too tight → raise `play` to 0.05–0.1 — **multiples of thickness**, so 0.15–0.30mm at t = 3
 
 ## Parts you end up with
 
@@ -973,5 +973,5 @@ describes the scheme. `verify.js` will tell you if a file gets it wrong.
 2. **sec(22.5°) = 1.0824 MULTIPLIES**, only to turn a face-to-face figure into a radius.
 
 Corners always open up 8.24 % more than flats. Miscount the walls by one and you are out by
-3.247 mm of radius. Mismatch a panel set by one generator run and you are out by 2.485 mm of width.
+3.247mm of radius. Mismatch a panel set by one generator run and you are out by 2.485mm of width.
 Get the phase backwards and the dimensions are all perfect and nothing fits.

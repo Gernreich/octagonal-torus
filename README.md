@@ -1,15 +1,15 @@
-# Octagonal torus — parametric, 90 mm radius, 25 × 25 mm cross-section
+# Octagonal torus — parametric, 90mm radius, 25 × 25mm cross-section
 
 A laser-cut octagonal torus: two nested octagonal tubes joined by annular plates, leaving a
-**square channel** all the way round. The cut file here is a 25 × 25 mm channel with an outer
-octagon of R 90 in 3 mm material — but those are three numbers you choose, and everything else
+**square channel** all the way round. The cut file here is a 25 × 25mm channel with an outer
+octagon of R 90 in 3mm material — but those are three numbers you choose, and everything else
 derives from them, within one constraint. [Build it at your own size](#build-it-at-your-own-size).
 
 **[Read the build writeup](https://gernreich.github.io/octagonal-torus/)** — the
 trigonometry, the generator settings, and how every number was verified against the cut
 files. Also here as markdown: [`Octagonal_Torus_Gold.md`](Octagonal_Torus_Gold.md).
 
-![Plan section through a plate showing the four octagon boundaries and the 25 mm ring, with a radial cross-section of the 25 × 25 mm cavity](torus-geometry-diagram.svg)
+![Plan section through a plate showing the four octagon boundaries and the 25mm ring, with a radial cross-section of the 25 × 25mm cavity](torus-geometry-diagram.svg)
 
 **[Download everything as a ZIP](https://github.com/Gernreich/octagonal-torus/archive/refs/heads/main.zip)** — the cut file, the writeup, the diagram and the verification tools.
 
@@ -26,7 +26,7 @@ files. Also here as markdown: [`Octagonal_Torus_Gold.md`](Octagonal_Torus_Gold.m
 
 *Above, the cut file — colour is the cut order, not decoration. Below, two of the three
 generator runs it was assembled from. Click any to download. The pictures are display
-renderings with the stroke thickened; the real files draw 0.2646 mm, which a browser shows
+renderings with the stroke thickened; the real files draw 0.2646mm, which a browser shows
 almost invisibly against a transparency checkerboard.*
 
 ---
@@ -37,11 +37,11 @@ almost invisibly against a transparency checkerboard.*
 
 | | |
 |---|---|
-| Material | 3 mm |
-| Kerf (`burn`) | 0.1 mm |
-| Sheet | 483 × 181 mm |
+| Material | 3mm |
+| Kerf (`burn`) | 0.1mm |
+| Sheet | 483 × 181mm |
 | Pieces | 2 plates · 8 outer panels · 8 inner panels |
-| Result | 25.000 mm radial × 25.000 mm axial · 172.3 across flats · 110.3 bore |
+| Result | 25.000mm radial × 25.000mm axial · 172.3 across flats · 110.3 bore |
 
 Dry-fit one plate against one inner panel in cardboard before committing a sheet. The plate's tabs
 around the hole should drop into the panel's notches.
@@ -72,14 +72,14 @@ outer disc and cut. **The [video](https://www.youtube.com/@LaserMadeMusic) shows
 joint.
 
 The eight segments in `BuildA1_90_25.svg` have been stitched into one closed loop per plate, but
-that is **probably unnecessary** — the gaps between segments measured 0.077 mm against a 0.1 mm
+that is **probably unnecessary** — the gaps between segments measured 0.077mm against a 0.1mm
 kerf, so the cuts overlap anyway. It only matters if your laser software applies its own kerf
 compensation, which needs closed paths — and if it does, switch it off, because `burn = 0.1` is
 already baked into these files.
 
 Run 3 uses a *smaller* radius on purpose: flipping shifts the band outward by one material
-thickness. So you type the radius whose *apothem* is 3 mm short of where the band should land —
-3.247 smaller in radius, since 3 mm of apothem is 3 × sec(22.5°) — and the inversion carries it
+thickness. So you type the radius whose *apothem* is 3mm short of where the band should land —
+3.247 smaller in radius, since 3mm of apothem is 3 × sec(22.5°) — and the inversion carries it
 exactly into place. Details in Part 8a of the writeup.
 
 The size relationship is fixed by one constant:
@@ -98,8 +98,8 @@ octagon, which puts a floor under the radius:
 R_outer  >  (ring + 2 × thickness) × sec(180°/n)
 ```
 
-For a 25 mm ring in 3 mm that floor is 33.554 mm, so R 90 is comfortably clear. Below it the hole
-cutter comes out zero or negative and there is no bore at all — ask for a 500 mm ring at R 10 and
+For a 25mm ring in 3mm that floor is 33.554mm, so R 90 is comfortably clear. Below it the hole
+cutter comes out zero or negative and there is no bore at all — ask for a 500mm ring at R 10 and
 the arithmetic has nowhere to put it. `torus-geometry-diagram.js` checks this before it draws
 anything and refuses, naming the minimum for your ring and thickness.
 
