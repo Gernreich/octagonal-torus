@@ -7,6 +7,19 @@ derives from them, within one constraint. [Build it at your own size](#build-it-
 
 ![Plan section through a plate showing the four octagon boundaries and the 25 mm ring, with a radial cross-section of the 25 × 25 mm cavity](torus-geometry-diagram.svg)
 
+## The files, at a glance
+
+<p>
+<a href="BuildA1_90_25.svg"><img src="previews/BuildA1_90_25.svg" alt="The finished cut sheet: two annular plates with octagonal holes, sixteen wall panels nested inside and around them, coloured by cut order" width="47%"></a>
+<a href="RunA1_R90.svg"><img src="previews/RunA1_R90.svg" alt="Generator run 1 at R 90: two discs and eight side panels as boxes.py emits them" width="24%"></a>
+<a href="RunA2_R59Point693.svg"><img src="previews/RunA2_R59Point693.svg" alt="Generator run 2 at R 59.693: the run the inner panels come from" width="24%"></a>
+</p>
+
+*Left, the cut file — colour is the cut order, not decoration. Right, two of the three
+generator runs it was assembled from. Click any to download. The pictures are display
+renderings with the stroke thickened; the real files draw 0.20 mm, which a browser shows
+almost invisibly against a transparency checkerboard.*
+
 **Full writeup:** [`Octagonal_Torus_Gold.md`](Octagonal_Torus_Gold.md) — the trigonometry, the
 generator settings, and how each number was verified against the cut files.
 
