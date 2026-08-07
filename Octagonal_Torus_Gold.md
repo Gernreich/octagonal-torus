@@ -428,7 +428,7 @@ one wall intrudes  →  nominal gap = ring + wall = 25 + 3 = 28
 R_inner = R_outer − nominal × sec(22.5°)
         = 90 − 28 × 1.082392
         = 90 − 30.307
-        = 59.693 mm
+        = 59.693mm
 ```
 
 **Wall allowances ADD, in face-to-face units. sec(22.5°) MULTIPLIES, and only to convert a

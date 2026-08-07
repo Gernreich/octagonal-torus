@@ -104,7 +104,7 @@ pre,.tw{break-inside:avoid}h1{break-after:avoid}}
 <rect width="500" height="300" fill="#fbfcfd"/>
 <g font-family="ui-sans-serif,system-ui,Helvetica,Arial,sans-serif">
 <text x="18" y="22" font-size="9" font-weight="700" fill="#0f172a">25 × 25 octagonal torus — verified geometry</text>
-<text x="18" y="32" font-size="5.4" fill="#475569">R_inner = R_outer − (ring + t) × sec(22.5°) = 90 − 28 × 1.082392 = 59.693   ·   nominal values, before the 0.1 mm kerf outset</text>
+<text x="18" y="32" font-size="5.4" fill="#475569">R_inner = R_outer − (ring + t) × sec(22.5°) = 90 − 28 × 1.082392 = 59.693   ·   nominal values, before the 0.1mm kerf outset</text>
 <path d="M208.149,122.316L157.684,71.851L86.316,71.851L35.851,122.316L35.851,193.684L86.316,244.149L157.684,244.149L208.149,193.684Z M205.149,192.442L156.442,241.149L87.55799999999999,241.149L38.851,192.442L38.851,123.55799999999999L87.55799999999999,74.851L156.442,74.851L205.149,123.55799999999999Z" fill="#bfdbfe" fill-rule="evenodd" opacity="0.95"/>
 <path d="M205.149,123.55799999999999L156.442,74.851L87.55799999999999,74.851L38.851,123.55799999999999L38.851,192.442L87.55799999999999,241.149L156.442,241.149L205.149,192.442Z M180.149,182.086L146.086,216.149L97.914,216.149L63.851,182.086L63.851,133.914L97.914,99.851L146.086,99.851L180.149,133.914Z" fill="#e2e8f0" fill-rule="evenodd" opacity="0.9"/>
 <path d="M180.149,133.914L146.086,99.851L97.914,99.851L63.851,133.914L63.851,182.086L97.914,216.149L146.086,216.149L180.149,182.086Z M177.149,180.844L144.844,213.149L99.156,213.149L66.851,180.844L66.851,135.156L99.156,102.851L144.844,102.851L177.149,135.156Z" fill="#bbf7d0" fill-rule="evenodd" opacity="0.95"/>
@@ -304,7 +304,7 @@ tan(22.5°) = √2 − 1      = 0.414214</code></pre>
 R_inner = R_outer − nominal × sec(22.5°)
         = 90 − 28 × 1.082392
         = 90 − 30.307
-        = 59.693 mm</code></pre>
+        = 59.693mm</code></pre>
 <p><strong>Wall allowances ADD, in face-to-face units. sec(22.5°) MULTIPLIES, and only to convert a face-to-face figure into a radius.</strong> Two operations, two domains, in that order.</p>
 <p>Getting this backwards is the classic error. If you come up short and "scale up by the ratio you missed by", you leave a residual of <code>L²/(gap − L)</code>:</p>
 <div class='tw'><table><thead><tr><th>nominal gap (mm)</th><th>real ring (mm, L = 3)</th><th>implied "ratio"</th><th>error if you scale by it (mm)</th></tr></thead><tbody><tr><td>10</td><td>7</td><td>1.4286</td><td>+1.29</td></tr><tr><td>25</td><td>22</td><td>1.1364</td><td>+0.41</td></tr><tr><td>50</td><td>47</td><td>1.0638</td><td>+0.19</td></tr><tr><td>100</td><td>97</td><td>1.0309</td><td>+0.09</td></tr></tbody></table></div>

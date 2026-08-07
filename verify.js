@@ -100,7 +100,7 @@ function collect(file) {
 }
 function f(x){ return Math.round(x*1000)/1000; }
 
-// A panel is specifically a ~31.2 mm tall rectangle. Anything else lying wholly inside a plate's
+// A panel is specifically a ~31.2mm tall rectangle. Anything else lying wholly inside a plate's
 // rim is hole geometry — whether drawn as one loop or as 8 segments.
 function isPanel(p) { return p.h > 28 && p.h < 34 && p.w > 40 && p.w < 90; }
 function holePartsFor(plate, all) {
@@ -193,7 +193,7 @@ function fmtPattern(runs) {
 }
 // Complementary = the same runs along the face, but on opposite boundary lines.
 // Compare run midpoints with tolerance: the hole is kerf-offset from the disc, so the
-// interval ends legitimately differ by ~0.1 mm and an exact match would never fire.
+// interval ends legitimately differ by ~0.1mm and an exact match would never fire.
 function complementary(a, b, tol) {
   if (a.length !== b.length || !a.length) return false;
   for (var i = 0; i < a.length; i++) {
@@ -238,9 +238,9 @@ if (plates.length) {
 }
 
 // ─── nesting clearances ───────────────────────────────────────────────────────
-// Bounding boxes are useless here: the plates have a 110 mm hole and panels are legitimately
+// Bounding boxes are useless here: the plates have a 110mm hole and panels are legitimately
 // nested in that waste. Classify each panel by the octagon support function instead.
-var panels = P.filter(isPanel);   // strictly ~31.2 mm tall rectangles — not hole loops
+var panels = P.filter(isPanel);   // strictly ~31.2mm tall rectangles — not hole loops
 if (plates.length && panels.length) {
   var bad = 0, tight = 1e9, tightWho = '';
   panels.forEach(function (pn) {
@@ -266,8 +266,8 @@ if (plates.length && panels.length) {
   console.log('\n  NESTING');
   console.log('    panels crossing plate material : ' + bad + (bad ? '  ✗' : '  ✓'));
   console.log('    panel-to-panel overlaps        : ' + ov + (ov ? '  ✗' : '  ✓'));
-  console.log('    tightest panel↔plate margin    : ' + f(tight) + ' mm   (' + tightWho + ')');
-  console.log('    tightest panel↔panel gap       : ' + f(mg) + ' mm   (' + mgWho + ')');
+  console.log('    tightest panel↔plate margin    : ' + f(tight) + 'mm   (' + tightWho + ')');
+  console.log('    tightest panel↔panel gap       : ' + f(mg) + 'mm   (' + mgWho + ')');
 }
 
 // ─── cut order ────────────────────────────────────────────────────────────────
@@ -350,7 +350,7 @@ var y0 = Math.min.apply(null, ally), y1 = Math.max.apply(null, ally);
 var vbm = /viewBox="([^"]+)"/.exec(fs.readFileSync(file, 'utf8'));
 console.log('\n  SHEET');
 console.log('    content : x ' + f(x0) + ' … ' + f(x1) + '   y ' + f(y0) + ' … ' + f(y1) +
-            '   (' + f(x1 - x0) + ' × ' + f(y1 - y0) + ' mm)');
+            '   (' + f(x1 - x0) + ' × ' + f(y1 - y0) + 'mm)');
 if (vbm) {
   var vb = vbm[1].trim().split(/[\s,]+/).map(Number);
   var outside = x0 < vb[0] - 0.01 || x1 > vb[0] + vb[2] + 0.01 || y0 < vb[1] - 0.01 || y1 > vb[1] + vb[3] + 0.01;

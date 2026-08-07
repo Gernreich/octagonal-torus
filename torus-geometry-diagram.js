@@ -7,7 +7,7 @@
 // Every coordinate is computed; nothing is typed by hand.
 
 // All three or none. Filling a missing argument from the defaults would answer a question
-// nobody asked: `... 200 60` would silently compute in 3 mm and print a plausible, wrong
+// nobody asked: `... 200 60` would silently compute in 3mm and print a plausible, wrong
 // R_inner of 131.809 instead of 128.562.
 var given = process.argv.slice(2);
 if (given.length !== 0 && given.length !== 3) {
@@ -89,7 +89,7 @@ s.push('<text x="18" y="22" font-size="9" font-weight="700" fill="' + INK + '">'
   f(RING) + ' × ' + f(RING) + ' octagonal torus — verified geometry</text>');
 s.push('<text x="18" y="32" font-size="5.4" fill="' + MUT + '">R_inner = R_outer − (ring + t) × sec(22.5°) = ' +
   f(Ro) + ' − ' + f(RING + T) + ' × 1.082392 = ' + f(Ri) +
-  '   ·   nominal values, before the 0.1 mm kerf outset</text>');
+  '   ·   nominal values, before the 0.1mm kerf outset</text>');
 
 // ── plan view ─────────────────────────────────────────────────────────────────
 s.push(ring(aOut, aRim, CX, CY, '#bfdbfe', '0.95'));
