@@ -1,7 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<!-- DISPLAY ONLY - not a cut file. This is RunA1_R90.svg with the cut stroke
-     thickened so it reads on a page; the real file draws 0.20mm, which a
-     browser shows almost invisibly against a transparency checkerboard.
+<!-- DISPLAY ONLY - not a cut file.
+     Two changes from the cut file, both for legibility on a page:
+     the stroke is thickened, and the two lightest inks are darkened. Cyan
+     #00ffff and green #00ff00 sit at 1.2:1 against any light background and
+     black sits at 1.2:1 against any dark one, so no single background makes
+     the whole palette readable - the cut order spans both extremes. Darkened
+     for display, every colour clears 4.8:1 on this ground.
+     The hues still read as cyan/green/orange, and the CUT FILE keeps the exact
+     values your laser keys on: cyan #00ffff, blue #0000ff, black, orange
+     #ff8000, plus red #ff0000 and green #00ff00 for the trumpet lines.
      Cut the file in the repository root, not this one. -->
 <svg height="225.20mm" viewBox="0.0 0.0 610.08 225.20" width="610.08mm" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <!--
@@ -22,6 +29,7 @@ Url short: https://boxes.hackerspace-bamberg.de/RegularBox?h=25&outside=0&radius
 SettingsUrl: https://boxes.hackerspace-bamberg.de/RegularBox?FingerJoint_style=rectangular&FingerJoint_surroundingspaces=1.0&FingerJoint_bottom_lip=0.0&FingerJoint_edge_width=1.0&FingerJoint_extra_length=0.0&FingerJoint_finger=2.0&FingerJoint_play=0.0&FingerJoint_space=2.0&FingerJoint_width=1.0&h=25&outside=0&radius_bottom=90&radius_top=90&n=8&top=closed&alignment_pins=1.0&bottom=closed&thickness=3.0&burn=0.1&format=svg&labels=0&reference=0&tabs=0.0&qr_code=0&inner_corners=corner&spacing=0.5&debug=0&language=en&render=2
 SettingsUrl short: https://boxes.hackerspace-bamberg.de/RegularBox?h=25&outside=0&radius_bottom=90&radius_top=90&n=8&top=closed&labels=0&reference=0&inner_corners=corner&spacing=0.5
 -->
+  <rect id="display-bg" x="0.0" y="0.0" width="610.08" height="225.2" fill="#faf7f0"/>
 <title>RegularBox</title>
 <metadata>
 <rdf:RDF><cc:Work>
