@@ -5,7 +5,9 @@ A laser-cut octagonal torus: two nested octagonal tubes joined by annular plates
 octagon of R 90 in 3 mm material — but those are three numbers you choose, and everything else
 derives from them, within one constraint. [Build it at your own size](#build-it-at-your-own-size).
 
-**[Read the build writeup](https://gernreich.github.io/octagonal-torus/)** — the trigonometry, the generator settings, and the verified cut list.
+**[Read the build writeup](https://gernreich.github.io/octagonal-torus/)** — the
+trigonometry, the generator settings, and how every number was verified against the cut
+files. Also here as markdown: [`Octagonal_Torus_Gold.md`](Octagonal_Torus_Gold.md).
 
 ![Plan section through a plate showing the four octagon boundaries and the 25 mm ring, with a radial cross-section of the 25 × 25 mm cavity](torus-geometry-diagram.svg)
 
@@ -23,9 +25,6 @@ derives from them, within one constraint. [Build it at your own size](#build-it-
 generator runs it was assembled from. Click any to download. The pictures are display
 renderings with the stroke thickened; the real files draw 0.20 mm, which a browser shows
 almost invisibly against a transparency checkerboard.*
-
-**Full writeup:** [`Octagonal_Torus_Gold.md`](Octagonal_Torus_Gold.md) — the trigonometry, the
-generator settings, and how each number was verified against the cut files.
 
 ---
 
