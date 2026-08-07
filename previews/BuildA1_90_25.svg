@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- DISPLAY ONLY - not a cut file. This is BuildA1_90_25.svg with the cut stroke
-     thickened so it reads on a page; the real file draws 0.20mm, which a
-     browser shows almost invisibly against a transparency checkerboard.
+     thickened so it reads on a page; the real file draws 0.2646mm (the style
+     attribute's stroke-width, which overrides the 0.20 presentation attribute
+     beside it), which a browser shows almost invisibly against a transparency
+     checkerboard.
      Cut the file in the repository root, not this one. -->
 <svg
    height="181.02643mm"
