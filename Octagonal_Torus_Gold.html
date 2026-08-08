@@ -255,7 +255,7 @@ invert  →  lands at 55.149 / 58.149   ✓ exactly where the hole belongs</code
 <p><strong>Two things before you send it</strong>, both immediately below: the violet lines are not part of the torus, and the four cut colours have to run in the right order. Do those and the file cuts as-is — no scaling, no kerf compensation, no edits.</p>
 <p>It is specific to <strong>this</strong> build — R 90 outer, 25 × 25mm cross-section, 3mm material. At any other size or thickness use Route A, or Part 11 for the general formulas; none of the widths carry over. <a href="#part-10--file-record">Part 10</a> says what every other file here is.</p>
 <h3 id="note--the-violet-lines">Note — the violet lines</h3>
-<p><strong>They are not part of the torus.</strong> The file carries 64 violet paths alongside the 26 cut contours, and they are all one family: <strong>16 on each of the two plates and two rings</strong>, one at the middle of every flat and one at every corner. Each is a single straight line from the hole edge out to the rim — apothem 55.2 to 83.2 on the plates, 55.2 to 86.2 on the rings — so together they divide each wall into sixteen segments.</p>
+<p><strong>They are not part of the torus.</strong> The file carries 64 violet paths alongside the 26 cut contours, and they are all one family: <strong>16 on each of the two plates and two rings</strong>, one at the middle of every flat and one at every corner. Each is a single straight line from the hole edge out to the rim — apothem 55.2 to 83.2 on the plates, whose fingers stand proud of that line, and 55.2 to 86.2 on the rings, which have none — so together they divide each wall into sixteen segments. None overruns its octagon.</p>
 <p>They are the optional cuts. Take them and the torus comes apart into sections, which is how you reach the simple trumpet; the segments they define are also the patches for joining sections back together. Turn one green to cut it, and leave the rest violet.</p>
 <p>Ignore all of them for a plain torus — set the colour to a non-cutting layer, or delete it. <code>verify.js</code> skips exactly this one colour, which is why it reports 26 contours rather than 90.</p>
 <p>↩ <a href="#octagonaltorus--parametric-90mm-radius-25--25mm-cross-section">back to the top</a></p>
@@ -267,7 +267,7 @@ invert  →  lands at 55.149 / 58.149   ✓ exactly where the hole belongs</code
 <p>The sequence is shared by every LaserMadeMusic repository: blue engraves, then green → orange → cyan → black, black always the cut that frees the part, violet always skip. A file uses only the stages it needs — the bullroarers and buzz discs run green then black and nothing else — so learning it once covers all of them.</p>
 <p>Eight of the sixteen panels are nested in the middle of the plate and ring holes, where they would otherwise be waste, and so are the two square patches. That is what forces the sequence: <strong>cut a part while its material is still held.</strong> Cut the orange hole first and the whole centre drops away, taking the uncut pieces on it with it — into the machine, if you are unlucky. Holes before rims for the same reason: once the black rim is through, the plate is loose and anything still to be cut in it will move.</p>
 <p>So set your laser to run <strong>green → orange → cyan → black</strong>, and give every one of those four a cutting operation. Leave violet unmapped, or delete it. A job set up per-colour silently skips any colour you leave unmapped, which is a hazard for the four and exactly what you want for the fifth.</p>
-<p><code>verify.js</code> checks all of this. It prints the palette, marks each colour counted or ignored, lists the four in order with what each one is, and fails loudly if a nested panel is scheduled after the hole it sits in, or a hole after its rim. It also counts the skip lines per octagon, so the sixteen claimed above are read out of the file rather than asserted here:</p>
+<p><code>verify.js</code> checks all of this. It prints the palette, marks each colour counted or ignored, lists the four in order with what each one is, and fails loudly if a nested panel is scheduled after the hole it sits in, or a hole after its rim. It also counts the skip lines per octagon and checks that none runs past that octagon's outer edge, so the sixteen claimed above are read out of the file rather than asserted here:</p>
 <pre><code>  CUT ORDER
     1. green  x10  mixed — 8 panel(s), 2 patch(es), 0 hole(s), 0 rim(s)
     2. orange x4   plate holes
@@ -277,10 +277,11 @@ invert  →  lands at 55.149 / 58.149   ✓ exactly where the hole belongs</code
     8 nested panels and 2 patches cut before their hole ✓   holes before rims ✓
 
   SKIP LINES  (violet — carried, not cut)
-    plate 0: 16 line(s), apothem 55.249 … 83.407
-    plate 1: 16 line(s), apothem 55.249 … 83.25
-    plate 2: 16 line(s), apothem 55.249 … 86.664
-    plate 3: 16 line(s), apothem 55.249 … 86.664
+    plate 0: 16 line(s), apothem 55.249 … 83.407   edge at 86.25
+    plate 1: 16 line(s), apothem 55.249 … 83.25   edge at 86.25
+    plate 2: 16 line(s), apothem 55.249 … 86.25   edge at 86.25
+    plate 3: 16 line(s), apothem 55.249 … 86.25   edge at 86.25
+    none reaches past its octagon's outer edge ✓
     every plate carries the same 16 ✓</code></pre>
 <h2 id="before-cutting-the-full-sheet">Before cutting the full sheet</h2>
 <p>Dry-fit <strong>one plate and one inner panel</strong> in cardboard. The plate's tabs around the hole should drop into the panel's notches.</p>

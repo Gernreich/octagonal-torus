@@ -482,14 +482,31 @@ if (plates.length) {
     if (bd > 110) { loose++; return; }
     per[best].push(apoRange(s, plates[best].cx, plates[best].cy));
   });
-  var counts = per.map(function (g) { return g.length; });
+  // How far out the octagon itself is drawn, measured rather than assumed: the plates
+  // carry finger joints and the rings do not, so their outer edges are not the same
+  // number and neither is the constant a skip line should stop at.
+  var edge = plates.map(function (pl) { return apoRange(pl, pl.cx, pl.cy).hi; });
+
+  var counts = per.map(function (g) { return g.length; }), over = 0;
   per.forEach(function (g, i) {
     if (!g.length) { console.log('    plate ' + i + ': none'); return; }
     var lo = Math.min.apply(null, g.map(function (r) { return r.lo; }));
     var hi = Math.max.apply(null, g.map(function (r) { return r.hi; }));
     console.log('    plate ' + i + ': ' + g.length + ' line(s), apothem ' +
-                f(lo) + ' … ' + f(hi));
+                f(lo) + ' … ' + f(hi) + '   edge at ' + f(edge[i]));
+    // A skip line is a division of the wall, so it belongs between the hole and the
+    // edge. One running past the edge sticks out into the waste, where it marks a cut
+    // through nothing -- two did, by 0.414mm, and only a reading of the picture caught
+    // them. Half the drawn stroke is the tolerance; anything more is real geometry.
+    g.forEach(function (r) {
+      if (r.hi > edge[i] + 0.15) {
+        over++;
+        console.log('      *** one reaches ' + f(r.hi) + ', ' + f(r.hi - edge[i]) +
+                    'mm past the edge — it overshoots into the waste');
+      }
+    });
   });
+  if (!over) console.log('    none reaches past its octagon\'s outer edge ✓');
   if (loose) console.log('    ' + loose + ' not associated with any plate');
   var same = counts.every(function (c) { return c === counts[0]; });
   console.log('    ' + (same ? 'every plate carries the same ' + counts[0] + ' ✓'

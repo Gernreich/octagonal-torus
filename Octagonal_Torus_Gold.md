@@ -227,8 +227,9 @@ size or thickness use Route A, or Part 11 for the general formulas; none of the 
 **They are not part of the torus.** The file carries 64 violet paths alongside the 26 cut contours,
 and they are all one family: **16 on each of the two plates and two rings**, one at the middle of
 every flat and one at every corner. Each is a single straight line from the hole edge out to the
-rim — apothem 55.2 to 83.2 on the plates, 55.2 to 86.2 on the rings — so together they divide each
-wall into sixteen segments.
+rim — apothem 55.2 to 83.2 on the plates, whose fingers stand proud of that line, and 55.2 to 86.2
+on the rings, which have none — so together they divide each wall into sixteen segments. None
+overruns its octagon.
 
 They are the optional cuts. Take them and the torus comes apart into sections, which is how you
 reach the simple trumpet; the segments they define are also the patches for joining sections back
@@ -276,8 +277,9 @@ colour you leave unmapped, which is a hazard for the four and exactly what you w
 
 `verify.js` checks all of this. It prints the palette, marks each colour counted or ignored, lists
 the four in order with what each one is, and fails loudly if a nested panel is scheduled after the
-hole it sits in, or a hole after its rim. It also counts the skip lines per octagon, so the sixteen
-claimed above are read out of the file rather than asserted here:
+hole it sits in, or a hole after its rim. It also counts the skip lines per octagon and checks that
+none runs past that octagon's outer edge, so the sixteen claimed above are read out of the file
+rather than asserted here:
 
 ```
   CUT ORDER
@@ -289,10 +291,11 @@ claimed above are read out of the file rather than asserted here:
     8 nested panels and 2 patches cut before their hole ✓   holes before rims ✓
 
   SKIP LINES  (violet — carried, not cut)
-    plate 0: 16 line(s), apothem 55.249 … 83.407
-    plate 1: 16 line(s), apothem 55.249 … 83.25
-    plate 2: 16 line(s), apothem 55.249 … 86.664
-    plate 3: 16 line(s), apothem 55.249 … 86.664
+    plate 0: 16 line(s), apothem 55.249 … 83.407   edge at 86.25
+    plate 1: 16 line(s), apothem 55.249 … 83.25   edge at 86.25
+    plate 2: 16 line(s), apothem 55.249 … 86.25   edge at 86.25
+    plate 3: 16 line(s), apothem 55.249 … 86.25   edge at 86.25
+    none reaches past its octagon's outer edge ✓
     every plate carries the same 16 ✓
 ```
 
