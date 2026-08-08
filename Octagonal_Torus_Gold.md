@@ -237,7 +237,7 @@ colours, which is why it reports 20 contours rather than 52.
 |---|---|---|---|
 | 1 | blue `#0000ff` | 6 | the panels nested **inside the plate holes** |
 | 2 | orange `#ff8000` | 2 | the plate holes — frees the waste centre |
-| 3 | black `#000000` | 2 | the plate rims — frees the plates |
+| 3 | black `#000000` | 6 | the two plate rims, and the two stiffening rings — both edges of each |
 | 4 | cyan `#00ffff` | 10 | the remaining panels, out on the open sheet |
 
 All four are explicit stroke colours, so select-same-colour finds each group and a colour-keyed job
@@ -950,7 +950,23 @@ notches.
 
 ## Parts you end up with
 
-2 plates · n outer panels · n inner panels. Run 3's panels and run 2's discs are unused.
+2 plates · n outer panels · n inner panels · **2 stiffening rings, optional**. Run 3's panels and
+run 2's discs are unused.
+
+### The two stiffening rings
+
+Two plain octagonal rings sit on the lower half of the sheet. They are **optional** — the torus
+closes without them — and they exist to stiffen it if it needs it.
+
+They are not plates and carry no joinery: no fingers, no notches, just an outer octagon and an inner
+one. Measured off the sheet, both are **172.258mm across the flats outside** and **110.298mm across
+the hole**, which is the finished torus's own outside and bore. So a ring laid on a face sits flush
+at both edges, adding a layer of material without changing any dimension you have to fit to.
+
+Note what that means at the bore: the plate hole is 116.298 across the flats, because it has to clear
+the inner tube's **outer** surface. The ring's hole is 110.298, the bore itself. A ring therefore
+reaches 3mm further in than the plate beneath it and covers the inner tube's wall thickness — which
+is the join it is bracing.
 
 ## Three things that will bite you
 

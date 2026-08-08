@@ -54,6 +54,11 @@ holes, so they have to be cut before the hole that frees that waste; the holes h
 the rims that free the plates. Give all four colours a cutting operation and run them in that order.
 `verify.js` checks the sequence and will tell you if it is wrong.
 
+**Two optional stiffening rings** sit on the lower half of the sheet — plain octagons, no joinery,
+172.258mm across the flats with a 110.298mm hole, which is the finished torus's own outside and bore.
+Lay one on a face and it sits flush at both edges, adding material without changing any dimension you
+have to fit to. The torus closes without them; cut them if it needs stiffening.
+
 ## Build it at your own size
 
 Made with **[boxes.py](https://boxes.hackerspace-bamberg.de/)** by Hackerspace Bamberg — generator
