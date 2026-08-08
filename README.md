@@ -59,6 +59,10 @@ holes have to be cut before the rims that free the plates. Give all four a cutti
 slices that would turn the torus into the simple trumpet. Leave it unmapped or delete it. Blue does
 not appear at all: blue means engrave across these repositories and never cuts.
 
+The sequence is shared by every LaserMadeMusic repository — blue engraves, then
+green → orange → cyan → black, with black always the cut that frees the part and violet always
+skip. A file uses only the stages it needs.
+
 **Two optional stiffening rings** sit on the lower half of the sheet — plain octagons, no joinery,
 172.258mm across the flats with a 110.298mm hole, which is the finished torus's own outside and bore.
 Lay one on a face and it sits flush at both edges, adding material without changing any dimension you

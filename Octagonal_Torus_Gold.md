@@ -249,7 +249,12 @@ Marking them explicitly is the point, so "not cut" is a decision recorded in the
 a colour someone forgot to map.
 
 **Blue does not appear here, and that is deliberate.** Blue means *engrave* across these
-repositories and never cuts.
+repositories and never cuts, and this file has nothing to engrave.
+
+The sequence is shared by every LaserMadeMusic repository: blue engraves, then
+green → orange → cyan → black, black always the cut that frees the part, violet always
+skip. A file uses only the stages it needs — the bullroarers and buzz discs run green then
+black and nothing else — so learning it once covers all of them.
 
 Eight of the sixteen panels are nested in the middle of the plate and ring holes, where they would
 otherwise be waste, and so are the two square patches. That is what forces the sequence: **cut a
