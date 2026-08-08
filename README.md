@@ -27,7 +27,7 @@ here as markdown: [`Octagonal_Torus_Gold.md`](Octagonal_Torus_Gold.md).
 *Above, the cut file — colour is the cut order, not decoration. Below, two of the three
 generator runs it was assembled from. Click any to download. The pictures are display
 renderings with the stroke thickened; the real files draw 0.2646mm, which a browser shows
-almost invisibly against a transparency checkerboard.*
+almost invisibly against a transparency checkerboard. Green, orange and cyan are darkened in the picture — at full strength they are too pale to read against a light ground. The cut file keeps the exact values.*
 
 ---
 
