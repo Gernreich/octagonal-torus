@@ -440,6 +440,63 @@ if (plates.length) {
                                ' patches cut before their hole ✓   holes before rims ✓'));
 }
 
+// ─── the skip lines ───────────────────────────────────────────────────────────
+// collect() drops ignored colours before they ever become contours, which is right for
+// counting cut geometry and useless for describing what is skipped. So re-read the file
+// for them here.
+//
+// This exists because the writeup twice described these lines wrongly -- once as 42
+// trumpet slices plus 22 patch lines, when they are one family of 16 per octagon -- and
+// nothing could contradict it. A count printed from the file can.
+(function () {
+  var src = fs.readFileSync(file, 'utf8'), stack = [[1,0,0,1,0,0]], skip = [];
+  var re = /<(\/?)(g|path)\b([^>]*?)(\/?)>/g, m;
+  while ((m = re.exec(src))) {
+    var close = m[1], tag = m[2], attrs = m[3], self = m[4];
+    if (tag === 'g') {
+      if (close) { stack.pop(); continue; }
+      var tm = /transform="([^"]+)"/.exec(attrs);
+      stack.push(tm ? mul(stack[stack.length-1], parseT(tm[1])) : stack[stack.length-1]);
+      if (self) stack.pop();
+      continue;
+    }
+    if (close) continue;
+    var dm = /(?:^|\s)d="([^"]+)"/.exec(attrs);
+    if (!dm || !Object.prototype.hasOwnProperty.call(IGNORE, strokeOf(attrs))) continue;
+    var pm = /transform="([^"]+)"/.exec(attrs);
+    var M = pm ? mul(stack[stack.length-1], parseT(pm[1])) : stack[stack.length-1];
+    var q = pts_(dm[1]).map(function (t) { return apply(M, t); });
+    if (q.length) skip.push({ pts: q, n: q.length });
+  }
+  if (!skip.length || !plates.length) return;
+
+  console.log('\n  SKIP LINES  (violet — carried, not cut)');
+  var per = plates.map(function () { return []; });
+  var loose = 0;
+  skip.forEach(function (s) {
+    var best = -1, bd = 1e9;
+    plates.forEach(function (pl, i) {
+      var hi = apoRange(s, pl.cx, pl.cy).hi;
+      if (hi < bd) { bd = hi; best = i; }
+    });
+    if (bd > 110) { loose++; return; }
+    per[best].push(apoRange(s, plates[best].cx, plates[best].cy));
+  });
+  var counts = per.map(function (g) { return g.length; });
+  per.forEach(function (g, i) {
+    if (!g.length) { console.log('    plate ' + i + ': none'); return; }
+    var lo = Math.min.apply(null, g.map(function (r) { return r.lo; }));
+    var hi = Math.max.apply(null, g.map(function (r) { return r.hi; }));
+    console.log('    plate ' + i + ': ' + g.length + ' line(s), apothem ' +
+                f(lo) + ' … ' + f(hi));
+  });
+  if (loose) console.log('    ' + loose + ' not associated with any plate');
+  var same = counts.every(function (c) { return c === counts[0]; });
+  console.log('    ' + (same ? 'every plate carries the same ' + counts[0] + ' ✓'
+                              : '*** plates carry different counts: ' + counts.join(', ') +
+                                ' — deliberate, or a line missed on one of them?'));
+})();
+
 // ─── sheet bounds ─────────────────────────────────────────────────────────────
 var allx = [], ally = [];
 P.forEach(function (p) { p.pts.forEach(function (q) { allx.push(q[0]); ally.push(q[1]); }); });

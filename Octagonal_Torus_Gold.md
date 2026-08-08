@@ -225,15 +225,17 @@ size or thickness use Route A, or Part 11 for the general formulas; none of the 
 ### Note — the violet lines
 
 **They are not part of the torus.** The file carries 64 violet paths alongside the 26 cut contours,
-and they are two different things drawn in the same colour because this build cuts neither:
+and they are all one family: **16 on each of the two plates and two rings**, one at the middle of
+every flat and one at every corner. Each is a single straight line from the hole edge out to the
+rim — apothem 55.2 to 83.2 on the plates, 55.2 to 86.2 on the rings — so together they divide each
+wall into sixteen segments.
 
-- **42 trumpet lines** — the slices that would turn the torus into the simple trumpet.
-- **22 patch lines**, straight, each running from a hole edge out across the wall to the rim: 4 on
-  plate 0, 2 on plate 1, and 8 on each ring. They divide the wall into patches for joining sliced
-  torus sections. Turn one green if you want it cut.
+They are the optional cuts. Take them and the torus comes apart into sections, which is how you
+reach the simple trumpet; the segments they define are also the patches for joining sections back
+together. Turn one green to cut it, and leave the rest violet.
 
-Ignore both for a plain torus — set them to a non-cutting layer, or delete them. `verify.js` skips
-exactly this one colour, which is why it reports 26 contours rather than 90.
+Ignore all of them for a plain torus — set the colour to a non-cutting layer, or delete it.
+`verify.js` skips exactly this one colour, which is why it reports 26 contours rather than 90.
 
 ↩ [back to the top](#octagonaltorus--parametric-90mm-radius-25--25mm-cross-section)
 
@@ -249,10 +251,10 @@ exactly this one colour, which is why it reports 26 contours rather than 90.
 | 4 | black `#000000` | the plate and ring rims — frees them |
 
 All four are explicit stroke colours, so select-same-colour finds each group and a colour-keyed job
-lists all four. **Violet is the fifth colour in the file and takes no operation at all**: those lines
-mark cuts this build does not make — the slices that would turn the torus into the simple trumpet,
-and the patch lines across the plate and ring walls. Marking them explicitly is the point, so "not
-cut" is a decision recorded in the drawing rather than a colour someone forgot to map.
+lists all four. **Violet is the fifth colour in the file and takes no operation at all**: those 64
+lines are the optional cuts across the plate and ring walls, sixteen per octagon, which this build
+does not make. Marking them explicitly is the point, so "not cut" is a decision recorded in the
+drawing rather than a colour someone forgot to map.
 
 **Blue does not appear here, and that is deliberate.** Blue means *engrave* across these
 repositories and never cuts, and this file has nothing to engrave.
@@ -274,7 +276,8 @@ colour you leave unmapped, which is a hazard for the four and exactly what you w
 
 `verify.js` checks all of this. It prints the palette, marks each colour counted or ignored, lists
 the four in order with what each one is, and fails loudly if a nested panel is scheduled after the
-hole it sits in, or a hole after its rim:
+hole it sits in, or a hole after its rim. It also counts the skip lines per octagon, so the sixteen
+claimed above are read out of the file rather than asserted here:
 
 ```
   CUT ORDER
@@ -284,6 +287,13 @@ hole it sits in, or a hole after its rim:
     4. black  x4   plate rims — frees the plates
     tightest nested piece to its hole: 1.152mm  (76.066 x 76.066 patch in plate 3) — kerf comes off both sides of that
     8 nested panels and 2 patches cut before their hole ✓   holes before rims ✓
+
+  SKIP LINES  (violet — carried, not cut)
+    plate 0: 16 line(s), apothem 55.249 … 83.407
+    plate 1: 16 line(s), apothem 55.249 … 83.25
+    plate 2: 16 line(s), apothem 55.249 … 86.664
+    plate 3: 16 line(s), apothem 55.249 … 86.664
+    every plate carries the same 16 ✓
 ```
 
 ## Before cutting the full sheet
