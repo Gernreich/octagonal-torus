@@ -2,7 +2,7 @@
 
 A laser-cut octagonal torus: two nested octagonal tubes joined by annular plates, leaving a
 **square channel** all the way round. The cut file here is a 25 × 25mm channel with an outer
-octagon of R 90 in 3mm material — but those are three numbers you choose, and everything else
+octagon of R 90 in 3mm Baltic birch plywood — but those are three numbers you choose, and everything else
 derives from them, within one constraint. [Build it at your own size](#build-it-at-your-own-size).
 
 **[Read the build writeup](https://gernreich.github.io/octagonal-torus/)** — the
@@ -37,7 +37,7 @@ almost invisibly against a transparency checkerboard.*
 
 | | |
 |---|---|
-| Material | 3mm |
+| Material | 3mm Baltic birch ply |
 | Kerf (`burn`) | 0.1mm |
 | Sheet | 483 × 181mm |
 | Pieces | 2 plates · 8 outer panels · 8 inner panels |

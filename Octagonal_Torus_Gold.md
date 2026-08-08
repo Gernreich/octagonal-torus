@@ -5,7 +5,7 @@ Complete record: the trigonometry, the generator, and the verified cut list.
 **All dimensions are millimetres.**
 
 **Worked example:** an octagonal torus with a 25.000 × 25.000mm square cross-section, outer octagon
-at R 90, cut from 3mm material. Verified cut file: **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**,
+at R 90, cut from 3mm Baltic birch plywood. Verified cut file: **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**,
 reproduced end to end from Route A —
 [note on the red and green lines in it](#note--the-red-and-green-lines).
 
