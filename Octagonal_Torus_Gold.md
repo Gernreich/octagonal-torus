@@ -224,10 +224,16 @@ size or thickness use Route A, or Part 11 for the general formulas; none of the 
 
 ### Note — the violet lines
 
-**They are not part of the torus.** The file carries 42 violet paths alongside the 26 cut contours;
-they mark possible cuts for turning the torus into the simple trumpet. Ignore them for a plain
-torus — set them to a non-cutting layer, or delete them. `verify.js` skips exactly this one colour,
-which is why it reports 26 contours rather than 68.
+**They are not part of the torus.** The file carries 64 violet paths alongside the 26 cut contours,
+and they are two different things drawn in the same colour because this build cuts neither:
+
+- **42 trumpet lines** — the slices that would turn the torus into the simple trumpet.
+- **22 patch lines**, straight, each running from a hole edge out across the wall to the rim: 4 on
+  plate 0, 2 on plate 1, and 8 on each ring. They divide the wall into patches for joining sliced
+  torus sections. Turn one green if you want it cut.
+
+Ignore both for a plain torus — set them to a non-cutting layer, or delete them. `verify.js` skips
+exactly this one colour, which is why it reports 26 contours rather than 90.
 
 ↩ [back to the top](#octagonaltorus--parametric-90mm-radius-25--25mm-cross-section)
 
@@ -237,16 +243,16 @@ which is why it reports 26 contours rather than 68.
 
 | | colour | what, and why there |
 |---|---|---|
-| 1 | green `#00ff00` | everything nested **inside a plate or ring hole** — 8 panels and 2 patches — plus the patch lines across the plates and rings |
+| 1 | green `#00ff00` | everything nested **inside a plate or ring hole** — 8 panels and 2 patches |
 | 2 | orange `#ff8000` | the 4 plate and ring holes — frees the waste centres |
 | 3 | cyan `#00ffff` | the remaining 8 panels, out on the open sheet |
 | 4 | black `#000000` | the plate and ring rims — frees them |
 
 All four are explicit stroke colours, so select-same-colour finds each group and a colour-keyed job
 lists all four. **Violet is the fifth colour in the file and takes no operation at all**: those lines
-mark cuts this build does not make — the ones that would slice the torus into the simple trumpet.
-Marking them explicitly is the point, so "not cut" is a decision recorded in the drawing rather than
-a colour someone forgot to map.
+mark cuts this build does not make — the slices that would turn the torus into the simple trumpet,
+and the patch lines across the plate and ring walls. Marking them explicitly is the point, so "not
+cut" is a decision recorded in the drawing rather than a colour someone forgot to map.
 
 **Blue does not appear here, and that is deliberate.** Blue means *engrave* across these
 repositories and never cuts, and this file has nothing to engrave.

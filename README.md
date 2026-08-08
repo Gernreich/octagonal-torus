@@ -47,17 +47,19 @@ almost invisibly against a transparency checkerboard.*
 Dry-fit one plate against one inner panel in cardboard before committing a sheet. The plate's tabs
 around the hole should drop into the panel's notches.
 
-**Cut everything except the violet.** Those paths in the file mark possible cuts for making
-the simple trumpet, not the torus — move them to a non-cutting layer or delete them first.
+**Cut everything except the violet.** Those paths mark cuts this build does not make: the slices
+that would turn the torus into the simple trumpet, and 22 straight patch lines across the plate and
+ring walls, for joining sliced sections. Move them to a non-cutting layer or delete them first —
+or turn one green if you do want it cut.
 
 **Colour is the cut order: green → orange → cyan → black.** Eight panels and both patches are nested
 inside the plate and ring holes, so they have to be cut before the hole that frees that waste; the
 holes have to be cut before the rims that free the plates. Give all four a cutting operation and run them in that order.
 `verify.js` checks the sequence and will tell you if it is wrong.
 
-**Violet `#8000ff` is skip** — lines carried in the file that this build does not cut, marking the
-slices that would turn the torus into the simple trumpet. Leave it unmapped or delete it. Blue does
-not appear at all: blue means engrave across these repositories and never cuts.
+**Violet `#8000ff` is skip** — 64 lines carried in the file that this build does not cut: the
+trumpet slices, and the patch lines across the plate and ring walls. Leave it unmapped or delete it.
+Blue does not appear at all: blue means engrave across these repositories and never cuts.
 
 The sequence is shared by every LaserMadeMusic repository — blue engraves, then
 green → orange → cyan → black, with black always the cut that frees the part and violet always
