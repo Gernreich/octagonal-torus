@@ -68,8 +68,22 @@ var palette = {};   // every stroke colour seen -> { n, ignored }
 
 // An explicit #000000 and no stroke at all are the same operation on the machine,
 // so they must collapse to one key or the cut order sees an unknown colour.
+//
+// An element may declare its stroke twice — once in style="", once as a presentation
+// attribute stroke="". The CSS cascade says style wins, and browsers and Inkscape both
+// agree, so that is what this reads. Not every laser importer applies the cascade, and
+// one that takes the attribute instead reads a different cut stage for the same part.
+// Anywhere the two disagree is recorded and reported rather than silently resolved.
+var strokeClash = [];
 function strokeOf(attrs) {
-  var m = /stroke:\s*(#[0-9a-fA-F]{6})/.exec(attrs);
+  var sm = /style="[^"]*?stroke:\s*(#[0-9a-fA-F]{6})/.exec(attrs);
+  var am = /(?:^|\s)stroke="(#[0-9a-fA-F]{6})"/.exec(attrs);
+  if (sm && am && sm[1].toLowerCase() !== am[1].toLowerCase()) {
+    var id = /\bid="([^"]+)"/.exec(attrs);
+    strokeClash.push({ id: id ? id[1] : '(no id)',
+                       style: sm[1].toLowerCase(), attr: am[1].toLowerCase() });
+  }
+  var m = sm || /stroke:\s*(#[0-9a-fA-F]{6})/.exec(attrs) || am;
   if (!m) return 'black';
   var c = m[1].toLowerCase();
   return c === '#000000' ? 'black' : c;
@@ -102,22 +116,44 @@ function collect(file) {
     var xs=p.map(function(q){return q[0];}), ys=p.map(function(q){return q[1];});
     var x0=Math.min.apply(null,xs), x1=Math.max.apply(null,xs);
     var y0=Math.min.apply(null,ys), y1=Math.max.apply(null,ys);
-    parts.push({ pts:p, w:x1-x0, h:y1-y0, cx:(x0+x1)/2, cy:(y0+y1)/2, col:col });
+    var idm = /\bid="([^"]+)"/.exec(attrs);
+    parts.push({ pts:p, w:x1-x0, h:y1-y0, cx:(x0+x1)/2, cy:(y0+y1)/2, col:col,
+                 id: idm ? idm[1] : '(no id)' });
   }
   return parts;
 }
 function f(x){ return Math.round(x*1000)/1000; }
 
-// A panel is specifically a ~31.2mm tall rectangle. Anything else lying wholly inside a plate's
-// rim is hole geometry — whether drawn as one loop or as 8 segments.
-function isPanel(p) { return p.h > 28 && p.h < 34 && p.w > 40 && p.w < 90; }
+var KERF = 0.1, A_HOLE_IN = 55.149, A_HOLE_OUT = 58.149, A_RIM_OUT = 86.149;
+
+// A panel is a ~31.2mm-deep rectangle 40–90mm long. Either orientation: nesting rotates
+// panels to fit the sheet, and a test that only accepted the wide one reclassified five
+// rotated panels as unidentified hole geometry the moment they were turned.
+function isPanel(p) {
+  var lo = Math.min(p.w, p.h), hi = Math.max(p.w, p.h);
+  return lo > 28 && lo < 34 && hi > 40 && hi < 90;
+}
+
+// Apothem range of a contour measured about a given centre — the octagon's own metric,
+// which is what separates "at the hole boundary" from "adrift in the waste inside it".
+function apoRange(p, cx, cy) {
+  var lo = 1e9, hi = -1e9;
+  p.pts.forEach(function (q) { var a = apo(q[0] - cx, q[1] - cy); if (a < lo) lo = a; if (a > hi) hi = a; });
+  return { lo: lo, hi: hi };
+}
+
+// The hole boundary sits AT the hole apothem, whether drawn as one loop or as 8 segments,
+// so every point of it is out at 55.149 or beyond. A contour that reaches further in than
+// that is not the hole: it is a piece being harvested from the waste disc the hole frees.
+// Until patches were added to the waste this distinction did not exist and anything inside
+// the rim counted as hole geometry — which quietly reported 6 holes across 4 plates.
+function isHolePartOf(plate, p) {
+  if (p === plate || isPanel(p)) return false;
+  var r = apoRange(p, plate.cx, plate.cy);
+  return r.hi <= 83.0 && r.lo >= A_HOLE_IN - 0.5;
+}
 function holePartsFor(plate, all) {
-  return all.filter(function (p) {
-    if (p === plate || isPanel(p)) return false;
-    var inside = true;
-    p.pts.forEach(function (q) { if (apo(q[0] - plate.cx, q[1] - plate.cy) > 83.0) inside = false; });
-    return inside;
-  });
+  return all.filter(function (p) { return isHolePartOf(plate, p); });
 }
 
 var file = process.argv[2];
@@ -136,12 +172,27 @@ if (cols.filter(function (c) { return !palette[c].ignored; }).length > 2) {
   console.log('    note: cut contours span several colours. All are counted; make sure your');
   console.log('          laser software assigns every one of them a cutting operation.');
 }
+if (strokeClash.length) {
+  var byPair = {};
+  strokeClash.forEach(function (s) { var k = s.style + ' / ' + s.attr; byPair[k] = (byPair[k] || 0) + 1; });
+  console.log('\n    *** ' + strokeClash.length + ' path(s) declare their stroke twice, with different ' +
+              'colours.\n        style="" wins in a browser and in Inkscape, and is what is counted above.\n' +
+              '        A laser importer that reads the presentation attribute instead puts these\n' +
+              '        parts in a different cut stage:');
+  Object.keys(byPair).sort().forEach(function (k) {
+    var pair = k.split(' / ');
+    console.log('          x' + String(byPair[k]).padEnd(3) + ' style ' + pair[0] +
+                '  vs  attribute ' + pair[1] + '   (counted as ' + pair[0] + ')');
+  });
+  console.log('        Deleting the redundant stroke="" attribute removes the ambiguity.');
+}
 
 var agg = {};
 P.forEach(function (p) { var k=f(p.w)+' x '+f(p.h); agg[k]=(agg[k]||0)+1; });
 console.log('\n  inventory');
 Object.keys(agg).sort(function(a,b){return parseFloat(b)-parseFloat(a);}).forEach(function (k) {
-  var W=parseFloat(k), H=parseFloat(k.split('x')[1]), ex='';
+  var w0=parseFloat(k), h0=parseFloat(k.split('x')[1]), ex='';
+  var W=Math.max(w0,h0), H=Math.min(w0,h0);   // a rotated panel is the same panel
   if (W>40 && W<80 && H>28 && H<34) {
     var aA=(W-4.443)/(2*TAN), aB=(W-2.685)/(2*TAN);
     ex = '   -> panel for R ' + f(aA*SEC) + ' | ' + f(aB*SEC);
@@ -211,7 +262,7 @@ function complementary(a, b, tol) {
   return true;
 }
 
-var KERF = 0.1, A_HOLE_IN = 55.149, A_HOLE_OUT = 58.149, A_RIM_OUT = 86.149;
+// KERF and the apothem constants are declared once, above isPanel.
 
 if (plates.length) {
   var pl0 = plates[0];
@@ -303,16 +354,27 @@ if (plates.length) {
   });
   var rank = {}; CUT_ORDER.forEach(function (c, i) { rank[c] = i; });
 
-  // which panels sit inside a plate's hole, and therefore drop out with the waste?
+  // Which contours sit inside a plate's hole, and therefore drop out with the waste?
+  // Not only panels: patches harvested from the waste disc are nested in exactly the same
+  // sense and carry exactly the same ordering obligation. Restricting this to panels let
+  // two 76mm patches be added inside the ring holes and cut a stage AFTER the hole that
+  // frees the disc they are drawn on, with the check still printing a tick.
   var nested = [];
   plates.forEach(function (pl, pi) {
     P.forEach(function (p) {
-      if (!isPanel(p)) return;
-      var allIn = true;
-      p.pts.forEach(function (q) { if (apo(q[0] - pl.cx, q[1] - pl.cy) > A_HOLE_IN) allIn = false; });
-      if (allIn) nested.push({ part: p, plate: pi });
+      if (p === pl || isHolePartOf(pl, p)) return;
+      var r = apoRange(p, pl.cx, pl.cy);
+      if (r.hi <= A_HOLE_IN) {
+        nested.push({ part: p, plate: pi, kind: isPanel(p) ? 'panel' : 'patch',
+                      web: A_HOLE_IN + 0.1 - r.hi });
+      }
     });
   });
+  // How much material is left between a nested piece and the hole cut that surrounds it.
+  // The NESTING block above measures panels only, so a patch tucked hard against the hole
+  // does not show up there.
+  var thin = nested.length
+    ? nested.slice().sort(function (a, b) { return a.web - b.web; })[0] : null;
 
   CUT_ORDER.forEach(function (c, i) {
     var g = P.filter(function (p) { return p.col === c; });
@@ -328,9 +390,13 @@ if (plates.length) {
     }
     var nPan = g.filter(function (p) { return isPanel(p); }).length;
     var nRim = g.filter(function (p) { return p.w > 160 && Math.abs(p.w - p.h) < 1; }).length;
-    var nHole = g.length - nPan - nRim;
+    var nPatch = g.filter(function (p) {
+      return nested.some(function (nn) { return nn.part === p && nn.kind === 'patch'; });
+    }).length;
+    var nHole = g.length - nPan - nRim - nPatch;
     var role;
-    if (nPan === g.length) {
+    if (nPatch === g.length) role = 'patches harvested from the waste — cut before the waste is freed';
+    else if (nPan === g.length) {
       role = g.every(function (p) { return nested.some(function (nn) { return nn.part === p; }); })
         ? 'panels nested in the plate holes — cut before the waste is freed'
         : (nested.some(function (nn) { return nn.part.col === c; })
@@ -338,21 +404,29 @@ if (plates.length) {
             : 'panels on the open sheet');
     } else if (nRim === g.length) role = 'plate rims — frees the plates';
     else if (nHole === g.length) role = 'plate holes';
-    else role = 'mixed — ' + nPan + ' panel(s), ' + nHole + ' hole(s), ' + nRim + ' rim(s)';
+    else role = 'mixed — ' + nPan + ' panel(s), ' + nPatch + ' patch(es), ' +
+                nHole + ' hole(s), ' + nRim + ' rim(s)';
     console.log('    ' + (i + 1) + '. ' + CUT_NAME[c].padEnd(7) + 'x' + String(g.length).padEnd(4) + role);
   });
 
+  if (thin) {
+    console.log('    tightest nested piece to its hole: ' + f(thin.web) + 'mm  (' +
+                f(thin.part.w) + ' x ' + f(thin.part.h) + ' ' + thin.kind +
+                ' in plate ' + thin.plate + ') — kerf comes off both sides of that');
+  }
   var viol = 0;
   var holeCol = null, rimCol = null;
   P.forEach(function (p) {
     if (p.w > 160 && Math.abs(p.w - p.h) < 1) rimCol = p.col;
-    else if (!isPanel(p) && p.w > 100) holeCol = p.col;
+    else if (plates.some(function (pl) { return isHolePartOf(pl, p); })) holeCol = p.col;
   });
   nested.forEach(function (nn) {
     if (holeCol !== null && rank[nn.part.col] > rank[holeCol]) {
       viol++;
-      console.log('    *** ' + f(nn.part.w) + ' panel sits inside plate ' + nn.plate + "'s hole but is cut " +
-                  CUT_NAME[nn.part.col] + ', AFTER the ' + CUT_NAME[holeCol] + ' hole — it would drop with the waste');
+      console.log('    *** ' + f(nn.part.w) + 'mm ' + nn.kind + ' ' + nn.part.id +
+                  ' sits inside plate ' + nn.plate + "'s hole but is cut " + CUT_NAME[nn.part.col] +
+                  ', AFTER the ' + CUT_NAME[holeCol] + ' hole — the waste it is drawn on is ' +
+                  'already loose by then');
     }
   });
   if (holeCol !== null && rimCol !== null && rank[holeCol] > rank[rimCol]) {
@@ -360,8 +434,10 @@ if (plates.length) {
     console.log('    *** holes (' + CUT_NAME[holeCol] + ') are cut after rims (' + CUT_NAME[rimCol] +
                 ') — the plate is loose before its hole is made');
   }
+  var nP = nested.filter(function (n) { return n.kind === 'panel'; }).length;
   console.log('    ' + (viol ? '*** ' + viol + ' ordering problem(s) ***'
-                             : nested.length + ' nested panels cut before their hole ✓   holes before rims ✓'));
+                             : nP + ' nested panels and ' + (nested.length - nP) +
+                               ' patches cut before their hole ✓   holes before rims ✓'));
 }
 
 // ─── sheet bounds ─────────────────────────────────────────────────────────────

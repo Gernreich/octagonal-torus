@@ -33,25 +33,26 @@ almost invisibly against a transparency checkerboard.*
 
 ## Just cut it
 
-**[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** — 18 pieces, 20 contours, verified.
+**[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** — the torus's 18 pieces plus 4 optional extras, 26 contours, verified.
 
 | | |
 |---|---|
 | Material | 3mm Baltic birch ply |
 | Kerf (`burn`) | 0.1mm |
-| Sheet | 483 × 181mm |
+| Sheet | 484 × 375mm |
 | Pieces | 2 plates · 8 outer panels · 8 inner panels |
+| Optional extras | 2 single-piece stiffening rings · 2 square patches for joining sliced sections |
 | Result | 25.000mm radial × 25.000mm axial · 172.3 across flats · 110.3 bore |
 
 Dry-fit one plate against one inner panel in cardboard before committing a sheet. The plate's tabs
 around the hole should drop into the panel's notches.
 
-**Cut everything except the red and green.** Those paths in the file mark possible cuts for making
+**Cut everything except the violet.** Those paths in the file mark possible cuts for making
 the simple trumpet, not the torus — move them to a non-cutting layer or delete them first.
 
-**Colour is the cut order: green → orange → cyan → black.** Six panels are nested inside the plate
-holes, so they have to be cut before the hole that frees that waste; the holes have to be cut before
-the rims that free the plates. Give all four a cutting operation and run them in that order.
+**Colour is the cut order: green → orange → cyan → black.** Eight panels and both patches are nested
+inside the plate and ring holes, so they have to be cut before the hole that frees that waste; the
+holes have to be cut before the rims that free the plates. Give all four a cutting operation and run them in that order.
 `verify.js` checks the sequence and will tell you if it is wrong.
 
 **Violet `#8000ff` is skip** — lines carried in the file that this build does not cut, marking the

@@ -7,7 +7,7 @@ Complete record: the trigonometry, the generator, and the verified cut list.
 **Worked example:** an octagonal torus with a 25.000 × 25.000mm square cross-section, outer octagon
 at R 90, cut from 3mm Baltic birch plywood. Verified cut file: **[`BuildA1_90_25.svg`](BuildA1_90_25.svg)**,
 reproduced end to end from Route A —
-[note on the red and green lines in it](#note--the-red-and-green-lines).
+[note on the violet lines in it](#note--the-violet-lines).
 
 ![A three-quarter view of the finished octagonal torus: a closed eight-sided ring with a square section, 172.298mm across the outside flats and 110.298mm across the bore, drawn from the measurements rather than photographed](torus-3quarter-view.svg)
 
@@ -16,7 +16,7 @@ measures out to: computed by [`torus-3d-view.js`](torus-3d-view.js) from the sam
 numbers Part 11 takes, so it cannot drift from the geometry described here. It shows the
 object assembled from [`BuildA1_90_25.svg`](BuildA1_90_25.svg) and stopped there. The
 photograph still to come shows the next step, after the cut along the
-[green lines](#note--the-red-and-green-lines) that turns it into the simple trumpet.
+[violet lines](#note--the-violet-lines) that turns it into the simple trumpet.
 
 **Your own size.** Nothing here is fixed to 90, 25 or 3mm material. The whole object follows from
 **three numbers** you choose:
@@ -208,11 +208,13 @@ Invert the 59.693 disc instead and it lands at 58.149 / 61.149 — a **22mm** ri
 
 ## Route B — shortcut, cut the finished file
 
-**[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** is those 18 pieces already laid out — assembled by
-exactly the Route A steps above, and verified: 20 contours, holes concentric with their plates,
-joint phase complementary, no overlaps, and a cut order that never frees a part before it is cut.
+**[`BuildA1_90_25.svg`](BuildA1_90_25.svg)** is those 18 pieces already laid out, plus four extras
+the torus itself does not need — two single-piece rings that stiffen it, and two square patches
+harvested from the waste inside those rings, for joining sliced sections. Assembled by exactly the
+Route A steps above, and verified: 26 contours, holes concentric with their plates, joint phase
+complementary, no overlaps, and a cut order that never frees a part before it is cut.
 
-**Two things before you send it**, both immediately below: the red and green lines are not part of
+**Two things before you send it**, both immediately below: the violet lines are not part of
 the torus, and the four cut colours have to run in the right order. Do those and the file cuts
 as-is — no scaling, no kerf compensation, no edits.
 
@@ -220,12 +222,12 @@ It is specific to **this** build — R 90 outer, 25 × 25mm cross-section, 3mm m
 size or thickness use Route A, or Part 11 for the general formulas; none of the widths carry over.
 [Part 10](#part-10--file-record) says what every other file here is.
 
-### Note — the red and green lines
+### Note — the violet lines
 
-**They are not part of the torus.** The file carries 28 red paths and 4 green ones alongside the 20
-cut contours; they mark possible cuts for turning the torus into the simple trumpet. Ignore them for
-a plain torus — set them to a non-cutting layer, or delete them. `verify.js` skips exactly these two
-colours, which is why it reports 20 contours rather than 52.
+**They are not part of the torus.** The file carries 42 violet paths alongside the 26 cut contours;
+they mark possible cuts for turning the torus into the simple trumpet. Ignore them for a plain
+torus — set them to a non-cutting layer, or delete them. `verify.js` skips exactly this one colour,
+which is why it reports 26 contours rather than 68.
 
 ↩ [back to the top](#octagonaltorus--parametric-90mm-radius-25--25mm-cross-section)
 
@@ -235,9 +237,9 @@ colours, which is why it reports 20 contours rather than 52.
 
 | | colour | what, and why there |
 |---|---|---|
-| 1 | green `#00ff00` | the 6 panels nested **inside the plate holes**, and the patch lines across the plates and rings |
+| 1 | green `#00ff00` | everything nested **inside a plate or ring hole** — 8 panels and 2 patches — plus the patch lines across the plates and rings |
 | 2 | orange `#ff8000` | the 4 plate and ring holes — frees the waste centres |
-| 3 | cyan `#00ffff` | the remaining 10 panels, out on the open sheet |
+| 3 | cyan `#00ffff` | the remaining 8 panels, out on the open sheet |
 | 4 | black `#000000` | the plate and ring rims — frees them |
 
 All four are explicit stroke colours, so select-same-colour finds each group and a colour-keyed job
@@ -249,10 +251,10 @@ a colour someone forgot to map.
 **Blue does not appear here, and that is deliberate.** Blue means *engrave* across these
 repositories and never cuts.
 
-Six of the sixteen panels are nested in the middle of the plate holes, where they would otherwise be
-waste. That is what forces the sequence: **cut a part while its material is still held.** Cut the
-orange hole first and the whole centre drops away, taking three uncut panels per plate with it —
-into the machine, if you are unlucky. Holes before rims for the same reason: once the black rim is
+Eight of the sixteen panels are nested in the middle of the plate and ring holes, where they would
+otherwise be waste, and so are the two square patches. That is what forces the sequence: **cut a
+part while its material is still held.** Cut the orange hole first and the whole centre drops away,
+taking the uncut pieces on it with it — into the machine, if you are unlucky. Holes before rims for the same reason: once the black rim is
 through, the plate is loose and anything still to be cut in it will move.
 
 So set your laser to run **green → orange → cyan → black**, and give every one of those four a
@@ -265,11 +267,12 @@ hole it sits in, or a hole after its rim:
 
 ```
   CUT ORDER
-    1. blue   x6   panels nested in the plate holes — cut before the waste is freed
-    2. orange x2   plate holes
-    3. black  x2   plate rims — frees the plates
-    4. cyan   x10  panels on the open sheet
-    6 nested panels cut before their hole ✓   holes before rims ✓
+    1. green  x10  mixed — 8 panel(s), 2 patch(es), 0 hole(s), 0 rim(s)
+    2. orange x4   plate holes
+    3. cyan   x8   panels on the open sheet
+    4. black  x4   plate rims — frees the plates
+    tightest nested piece to its hole: 1.152mm  (76.066 x 76.066 patch in plate 3) — kerf comes off both sides of that
+    8 nested panels and 2 patches cut before their hole ✓   holes before rims ✓
 ```
 
 ## Before cutting the full sheet
@@ -810,7 +813,7 @@ nonsense.
 | `RunA1_R90.svg` | Route A run 1 | discs 83.149→86.149, panels 73.326 / 71.568 |
 | `RunA2_R59Point693.svg` | Route A run 2 | discs 55.149→58.149, panels 50.130 / 48.372 |
 | `RunA3_R56Point446.svg` | Route A run 3 | discs 52.149→55.149; only its disc is used, as the hole cutter |
-| **`BuildA1_90_25.svg`** | **final — cut this** | **20 contours, holes stitched and concentric, phase and cut order confirmed ✓** |
+| **`BuildA1_90_25.svg`** | **final — cut this** | **26 contours, holes stitched and concentric, phase and cut order confirmed ✓** |
 
 Nothing else in the repository is a part:
 
