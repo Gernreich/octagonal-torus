@@ -231,17 +231,23 @@ colours, which is why it reports 20 contours rather than 52.
 
 ## Colour is the cut order
 
-**Everything that is not red or green is a cut**, and the colour says *when*:
+**Violet `#8000ff` is skip — it is never cut.** Everything else is, and the colour says *when*:
 
-| | colour | contours | what, and why there |
-|---|---|---|---|
-| 1 | blue `#0000ff` | 6 | the panels nested **inside the plate holes** |
-| 2 | orange `#ff8000` | 2 | the plate holes — frees the waste centre |
-| 3 | black `#000000` | 6 | the two plate rims, and the two stiffening rings — both edges of each |
-| 4 | cyan `#00ffff` | 10 | the remaining panels, out on the open sheet |
+| | colour | what, and why there |
+|---|---|---|
+| 1 | green `#00ff00` | the 6 panels nested **inside the plate holes**, and the patch lines across the plates and rings |
+| 2 | orange `#ff8000` | the 4 plate and ring holes — frees the waste centres |
+| 3 | cyan `#00ffff` | the remaining 10 panels, out on the open sheet |
+| 4 | black `#000000` | the plate and ring rims — frees them |
 
 All four are explicit stroke colours, so select-same-colour finds each group and a colour-keyed job
-lists all four.
+lists all four. **Violet is the fifth colour in the file and takes no operation at all**: those lines
+mark cuts this build does not make — the ones that would slice the torus into the simple trumpet.
+Marking them explicitly is the point, so "not cut" is a decision recorded in the drawing rather than
+a colour someone forgot to map.
+
+**Blue does not appear here, and that is deliberate.** Blue means *engrave* across these
+repositories and never cuts.
 
 Six of the sixteen panels are nested in the middle of the plate holes, where they would otherwise be
 waste. That is what forces the sequence: **cut a part while its material is still held.** Cut the
@@ -249,8 +255,9 @@ orange hole first and the whole centre drops away, taking three uncut panels per
 into the machine, if you are unlucky. Holes before rims for the same reason: once the black rim is
 through, the plate is loose and anything still to be cut in it will move.
 
-So set your laser to run **blue → orange → black → cyan**, and give every one of those four a
-cutting operation. A job set up per-colour silently skips any colour you leave unmapped.
+So set your laser to run **green → orange → cyan → black**, and give every one of those four a
+cutting operation. Leave violet unmapped, or delete it. A job set up per-colour silently skips any
+colour you leave unmapped, which is a hazard for the four and exactly what you want for the fifth.
 
 `verify.js` checks all of this. It prints the palette, marks each colour counted or ignored, lists
 the four in order with what each one is, and fails loudly if a nested panel is scheduled after the

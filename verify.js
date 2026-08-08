@@ -51,11 +51,19 @@ function apo(dx, dy) {
   for (var k = 0; k < 8; k++) { var t=k*Math.PI/4, v=dx*Math.cos(t)+dy*Math.sin(t); if (v>m) m=v; }
   return m;
 }
-// Only these two are documented as non-cut geometry: the trumpet lines in
-// BuildA1_90_25.svg. Everything else is treated as a cut contour and counted.
-// Widening this list is how a recolour silently loses parts — an earlier
-// version skipped #0000ff too, and reported 14 contours for an intact file.
-var IGNORE = { '#ff0000': 'red — trumpet cut lines', '#00ff00': 'green — trumpet cut lines' };
+// Non-cut geometry. Widening this list is how a recolour silently loses parts —
+// an earlier version skipped #0000ff too, and reported 14 contours for an intact
+// file — so each entry has to earn its place.
+//
+//   #8000ff  the only skip colour. Lines carried in the file that this build does
+//            not cut -- here, the trumpet lines that slice the torus into the
+//            simple trumpet. Explicit, so "not cut" is a decision recorded in the
+//            drawing rather than a colour someone forgot to map.
+//
+// Red and green were listed here until the trumpet lines were recoloured. They are
+// gone deliberately: red means CUT in every repository alongside this one, and a
+// verifier that quietly ignores it would pass a file whose parts never get cut.
+var IGNORE = { '#8000ff': 'violet — skip, not cut in this build' };
 var palette = {};   // every stroke colour seen -> { n, ignored }
 
 // An explicit #000000 and no stroke at all are the same operation on the machine,
@@ -275,19 +283,24 @@ if (plates.length && panels.length) {
 // is cut while its material is still held: anything nested inside a piece of waste
 // goes before the cut that frees that waste. Here that means the panels sitting in
 // the plate holes precede the holes, and the holes precede the rims.
-var CUT_ORDER = ['#0000ff', '#ff8000', 'black', '#00ffff'];
-var CUT_NAME = { '#0000ff': 'blue', '#ff8000': 'orange', 'black': 'black', '#00ffff': 'cyan' };
+// green -> orange -> cyan -> black, and blue is not here at all: blue means ENGRAVE
+// across these repositories and never cuts. Green goes first because it carries both
+// the panels nested in the plate holes and the patch lines, and each has to be cut
+// while its material is still held — the panels before the orange hole drops the
+// waste they sit in, the patch lines before the black rim frees the plate.
+var CUT_ORDER = ['#00ff00', '#ff8000', '#00ffff', 'black'];
+var CUT_NAME = { '#00ff00': 'green', '#ff8000': 'orange', '#00ffff': 'cyan', 'black': 'black' };
 
 if (plates.length) {
   console.log('\n  CUT ORDER');
-  var known = P.filter(function (p) { return CUT_ORDER.indexOf(p.col) >= 0; });
-  if (known.length !== P.length) {
-    var odd = {};
-    P.forEach(function (p) { if (CUT_ORDER.indexOf(p.col) < 0) odd[p.col] = (odd[p.col] || 0) + 1; });
-    Object.keys(odd).forEach(function (c) {
-      console.log('    *** ' + c + ' (x' + odd[c] + ') is not in the cut order — sequence unknown for it');
-    });
-  }
+  // Check every colour the file uses, not just the closed contours. The patch lines
+  // are open paths, so a check that walked contours alone reported a clean order
+  // while twenty cut-coloured segments had no place in it.
+  Object.keys(palette).forEach(function (c) {
+    if (palette[c].ignored || CUT_ORDER.indexOf(c) >= 0) return;
+    console.log('    *** ' + c + ' (x' + palette[c].n + ') is a cut colour with no place in the ' +
+                'cut order — sequence unknown for it');
+  });
   var rank = {}; CUT_ORDER.forEach(function (c, i) { rank[c] = i; });
 
   // which panels sit inside a plate's hole, and therefore drop out with the waste?
@@ -303,7 +316,16 @@ if (plates.length) {
 
   CUT_ORDER.forEach(function (c, i) {
     var g = P.filter(function (p) { return p.col === c; });
-    if (!g.length) return;
+    // A stage may be open paths only — the patch lines are — in which case there is
+    // no contour to describe, but the stage still has to appear in the sequence.
+    if (!g.length) {
+      if (palette[c] && !palette[c].ignored) {
+        console.log('    ' + (i + 1) + '. ' + CUT_NAME[c].padEnd(7) + 'x' +
+                    String(palette[c].n).padEnd(4) +
+                    'open cut lines — patch cuts, no closed contour of their own');
+      }
+      return;
+    }
     var nPan = g.filter(function (p) { return isPanel(p); }).length;
     var nRim = g.filter(function (p) { return p.w > 160 && Math.abs(p.w - p.h) < 1; }).length;
     var nHole = g.length - nPan - nRim;

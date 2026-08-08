@@ -49,10 +49,14 @@ around the hole should drop into the panel's notches.
 **Cut everything except the red and green.** Those paths in the file mark possible cuts for making
 the simple trumpet, not the torus — move them to a non-cutting layer or delete them first.
 
-**Colour is the cut order: blue → orange → black → cyan.** Six panels are nested inside the plate
+**Colour is the cut order: green → orange → cyan → black.** Six panels are nested inside the plate
 holes, so they have to be cut before the hole that frees that waste; the holes have to be cut before
-the rims that free the plates. Give all four colours a cutting operation and run them in that order.
+the rims that free the plates. Give all four a cutting operation and run them in that order.
 `verify.js` checks the sequence and will tell you if it is wrong.
+
+**Violet `#8000ff` is skip** — lines carried in the file that this build does not cut, marking the
+slices that would turn the torus into the simple trumpet. Leave it unmapped or delete it. Blue does
+not appear at all: blue means engrave across these repositories and never cuts.
 
 **Two optional stiffening rings** sit on the lower half of the sheet — plain octagons, no joinery,
 172.258mm across the flats with a 110.298mm hole, which is the finished torus's own outside and bore.
